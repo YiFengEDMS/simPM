@@ -1,13 +1,17 @@
 ## Welcome to the home page of `simPM`!
 
-This R package was written by Yi Feng & Gregory R. Hancock from the University of Maryland.
+This R package was written and maintained by [Yi Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R. Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the University of Maryland.
 
 #### How to install the simPM R package 
 
 The package is made public on Github. To install the R package from Github, you will need to first install the `devtools` R package.
 
 ```markdown
-Syntax highlighted code block
+install.packages("devtools")
+
+```
+
+```
 
 # Header 1
 ## Header 2
