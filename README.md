@@ -1,12 +1,10 @@
-## Welcome to GitHub Pages
+## Welcome to the home page of `simPM`!
 
-You can use the [editor on GitHub](https://github.com/YiFengEDMS/simPM/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This R package was written by Yi Feng & Gregory R. Hancock from the University of Maryland.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+#### How to install the simPM R package 
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The package is made public on Github. To install the R package from Github, you will need to first install the `devtools` R package.
 
 ```markdown
 Syntax highlighted code block
