@@ -1,0 +1,11 @@
+Package: simPM
+Title: SIMulation-based power analysis for Planned Missing designs
+Version: 0.0.0.9000
+Authors@R: c(
+            person(given="Yi", family="Feng", email = "yifeng94@umd.edu", role = c("aut", "cre")),person(given="Gregory",middle="R.",family="Hancock",role=c("aut")))
+Description: The package is being developed to automate the simulation-based power analysis for planned missing designs in the context of longitudinal studies. More specifically, this package is featured with a direct application to the scenarios where an unexpected funding cut occurs during the course of a study. Users can use this package to search for PM designs with sufficient power for testing focal parameters.
+Depends: MplusAutomation, lavaan, simsem, pheatmap, RColorBrewer
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
