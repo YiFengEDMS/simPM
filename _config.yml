@@ -1,1 +1,3 @@
 theme: jekyll-theme-slate
+title: Welcome to the homepage of simPM!
+description: An R package that automates the search for optimal 'post hoc' planned missing designs
