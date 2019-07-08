@@ -51,7 +51,6 @@ summary.opt(wave.ex1)
 
 To view the missing data patterns in the optimal PHPM design, use the `plotPM` function.
 ```r
-summary.opt(wave.ex1)
 plotPM(wave.ex1,Time=4,k=1)
 ```
 
