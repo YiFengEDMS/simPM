@@ -6,7 +6,7 @@
 
 The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
 
-```ruby
+```rouge
 
 install.packages("devtools")
 library(devtools)
@@ -18,7 +18,7 @@ devtools::intall_github("YiFengEDMS/simPM")
 
 - The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures.
 
-```ruby
+```rouge
 wave.ex1=simPM(popModel=popModel,                          #supply the population model using lavaan language
         analyzeModel=analyzeModel,                         #supply the analysis model using lavaan language
         VarNAMES=c("se1","se2","se3","se4"),               #specify the observed variable names, in chronological order
