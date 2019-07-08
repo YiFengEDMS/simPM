@@ -18,7 +18,7 @@ install.packages("devtools")
 library(devtools)
 devtools::intall_github("YiFengEDMS/simPM")
 
-``` . 
+``` 
 
 #### How to use _simPM_? 
 
@@ -45,24 +45,24 @@ wave.ex1=simPM(
         seed=12345,                                        #random seed
         engine="l",                                        #use lavaan to fit the models
         methods="wave")                                    #type of PHPM designs, "wave" indicates wave-level missing
-``` . 
+``` 
 
 
 To view the results, use the `summary.opt` function.
 ```r
 summary.opt(wave.ex1)
-``` . 
+``` 
 
 To view the missing data patterns in the optimal PHPM design, use the `plotPM` function.
 ```r
 plotPM(wave.ex1,Time=4,k=1)
-``` . 
+```
 
 
 To view more details of the optimal PHPM design, use the following code:
 ```r
 summary(wave.ex1$opt.output)
-``` . 
+```
 
 More details are available in the [package manual](). More examples will be available on this page soon.
 
