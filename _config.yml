@@ -2,3 +2,4 @@ theme: jekyll-theme-slate
 title: simPM
 description: An R package that automates the search for optimal 'post hoc' planned missing designs
 authors: Yi Feng & Gregory R. Hancock
+show_downloads: ["true"]
