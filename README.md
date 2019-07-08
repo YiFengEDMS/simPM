@@ -44,14 +44,14 @@ wave.ex1=simPM(popModel=popModel,                          #supply the populatio
 
 
 - To view the results, use the `summary.opt` function:
-```ruby
+```rouge
 summary.opt(wave.ex1)
 ```
 
 
 
 - To view the missing data patterns in the optimal PHPM design, use the `plotPM` function:
-```
+```rouge
 plotPM(wave.ex1,Time=4,k=1)
 ```
 
@@ -59,7 +59,7 @@ plotPM(wave.ex1,Time=4,k=1)
 
 - To view more details of the optimal PHPM design, use the following code:
 
-```
+```rouge
 summary(wave.ex1$opt.output)
 ```
 
