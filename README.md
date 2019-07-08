@@ -3,9 +3,9 @@
 `simPM` is an R package that automates the search for optimal 'post hoc' planned missing (PHPM) designs. This R package is developed and maintained by [Yi Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R. Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the University of Maryland.
 
 #### The story behind _simPM_
+funding cut....
 
-
-#### How to install _`simPM`_? 
+#### How to install _simPM_? 
 
 The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
 
@@ -19,10 +19,11 @@ devtools::intall_github("YiFengEDMS/simPM")
 
 #### How to use _simPM_? 
 
-The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures.
+The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures. 
 
 ```r
-wave.ex1=simPM(popModel=popModel,                          #supply the population model using lavaan language
+wave.ex1=simPM(
+        popModel=popModel,                                 #supply the population model using lavaan language
         analyzeModel=analyzeModel,                         #supply the analysis model using lavaan language
         VarNAMES=c("se1","se2","se3","se4"),               #specify the observed variable names, in chronological order
         Time=4,                                            #total number of waves
