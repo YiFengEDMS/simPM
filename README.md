@@ -5,7 +5,7 @@
 #### The story behind _simPM_
 
 
-#### How to install the _simPM_ R package? 
+#### How to install _`simPM`_? 
 
 The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
 
