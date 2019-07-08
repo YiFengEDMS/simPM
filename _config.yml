@@ -1,4 +1,7 @@
 theme: jekyll-theme-slate
 title: simPM
-description: An R package that automates the search for optimal 'post hoc' planned missing designs
-authors:Yi Feng
+description: SIMulation-based power analysis for Planned Missing designs
+authors: Yi Feng & Gregory R. Hancock
+show_downloads: true
+markdown: kramdown
+highlighter: rouge
