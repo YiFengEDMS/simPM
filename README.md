@@ -6,7 +6,7 @@
 
 The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
 
-```python
+```r
 
 install.packages("devtools")
 library(devtools)
@@ -68,15 +68,3 @@ More details are available in the [package manual](). More examples will be avai
 #### Questions or Suggestions?
 Send an email to yifeng94@umd.edu. We are happy to hear about your thoughts!
 
-
-```
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
