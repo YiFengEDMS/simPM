@@ -55,7 +55,7 @@ plotPM(wave.ex1,Time=4,k=1)
 ```
 
 
-- To view more details of the optimal PHPM design, use the following code:
+To view more details of the optimal PHPM design, use the following code:
 ```r
 summary(wave.ex1$opt.output)
 ```
