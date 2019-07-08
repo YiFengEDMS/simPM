@@ -32,12 +32,12 @@ plotPM=function(object,
   
   if (labels==T){
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = 14, fontsize_col=14,fontsize=14,drop_levels=T,annotation = annotation,annotation_colors = mat_colors,angle_col=45)
+             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = 14, fontsize_col=20,fontsize=14,drop_levels=T,annotation = annotation,annotation_colors = mat_colors,angle_col=45)
   }
   
   if (labels==F){
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = 14, fontsize_col=14,fontsize=14,drop_levels=T,angle_col=45)
+             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),fontsize_row = 14,legend_labels=c("complete","missing"), fontsize_col=20,fontsize=14,drop_levels=T,angle_col=45)
   }
 }
 
