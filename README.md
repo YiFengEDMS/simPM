@@ -6,7 +6,7 @@
 
 The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
 
-```markdown
+```python
 
 install.packages("devtools")
 library(devtools)
@@ -44,14 +44,14 @@ wave.ex1=simPM(popModel=popModel,                          #supply the populatio
 
 
 - To view the results, use the `summary.opt` function:
-```rouge
+```r
 summary.opt(wave.ex1)
 ```
 
 
 
 - To view the missing data patterns in the optimal PHPM design, use the `plotPM` function:
-```rouge
+```r
 plotPM(wave.ex1,Time=4,k=1)
 ```
 
@@ -59,7 +59,7 @@ plotPM(wave.ex1,Time=4,k=1)
 
 - To view more details of the optimal PHPM design, use the following code:
 
-```rouge
+```r
 summary(wave.ex1$opt.output)
 ```
 
