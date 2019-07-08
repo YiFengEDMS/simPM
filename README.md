@@ -41,16 +41,20 @@ wave.ex1=simPM(popModel=popModel,                          #supply the populatio
 
 ```
 
+
+
 - To view the results, use the `summary.opt` function:
 ```
 summary.opt(wave.ex1)
 ```
 
 
+
 - To view the missing data patterns in the optimal PHPM design, use the `plotPM` function:
 ```
 plotPM(wave.ex1,Time=4,k=1)
 ```
+
 
 
 - To view more details of the optimal PHPM design, use the following code:
