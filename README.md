@@ -3,7 +3,7 @@
 `simPM` is an R package that automates the search for optimal 'post hoc' planned missing (PHPM) designs. This R package is developed and maintained by [Yi Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R. Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the University of Maryland.
 
 #### The story behind _simPM_
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `*"What should I do when they cut my research funding after my longitudinal study is already underway?"*` 
+*"What should I do when they cut my research funding after my longitudinal study is already underway?"*
 
 `simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal PHPM design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing focal parameters. 
 
@@ -18,11 +18,11 @@ install.packages("devtools")
 library(devtools)
 devtools::intall_github("YiFengEDMS/simPM")
 
-```
+``` . 
 
 #### How to use _simPM_? 
 
-The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures. 
+The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures.       
 
 ```r
 wave.ex1=simPM(
@@ -45,24 +45,24 @@ wave.ex1=simPM(
         seed=12345,                                        #random seed
         engine="l",                                        #use lavaan to fit the models
         methods="wave")                                    #type of PHPM designs, "wave" indicates wave-level missing
-```
+``` . 
 
 
 To view the results, use the `summary.opt` function.
 ```r
 summary.opt(wave.ex1)
-```
+``` . 
 
 To view the missing data patterns in the optimal PHPM design, use the `plotPM` function.
 ```r
 plotPM(wave.ex1,Time=4,k=1)
-```
+``` . 
 
 
 To view more details of the optimal PHPM design, use the following code:
 ```r
 summary(wave.ex1$opt.output)
-```
+``` . 
 
 More details are available in the [package manual](). More examples will be available on this page soon.
 
