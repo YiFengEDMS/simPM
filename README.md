@@ -65,16 +65,11 @@ summary(wave.ex1$opt.output)
 
 More details are available in the [package manual](). More examples will be available on this page soon.
 
-
-```
 #### Questions or Suggestions?
 Send an email to yifeng94@umd.edu. We are happy to hear about your thoughts!
 
 
-# Header 1
-## Header 2
-### Header 3
-
+```
 - Bulleted
 - List
 
@@ -85,5 +80,3 @@ Send an email to yifeng94@umd.edu. We are happy to hear about your thoughts!
 
 [Link](url) and ![Image](src)
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
