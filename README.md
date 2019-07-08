@@ -16,9 +16,7 @@ devtools::intall_github("YiFengEDMS/simPM")
 
 #### How to use _simPM_? 
 
-The main function in package `simPM` is `simPM()`.
-
-As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures.
+-The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures.
 
 ```
 wave.ex1=simPM(popModel=popModel,                          #supply the population model using lavaan language
@@ -43,19 +41,19 @@ wave.ex1=simPM(popModel=popModel,                          #supply the populatio
 
 ```
 
-To view the results, use the `summary.opt` function:
+-To view the results, use the `summary.opt` function:
 ```
 summary.opt(wave.ex1)
 ```
 
 
-To view the missing data patterns in the optimal PHPM design, use the `plotPM` function:
+-To view the missing data patterns in the optimal PHPM design, use the `plotPM` function:
 ```
 plotPM(wave.ex1,Time=4,k=1)
 ```
 
 
-To view more details of the optimal PHPM design, use the following code:
+-To view more details of the optimal PHPM design, use the following code:
 
 ```
 summary(wave.ex1$opt.output)
