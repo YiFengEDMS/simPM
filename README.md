@@ -6,10 +6,12 @@
 
 The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
 
-```install simPM
+```markdown
+
 install.packages("devtools")
 library(devtools)
 devtools::intall_github("YiFengEDMS/simPM")
+
 ```
 
 #### How to use _simPM_? 
@@ -48,9 +50,8 @@ plotPM(wave.ex1,Time=4,k=1)
 
 More details are available in the [package manual]().
 
+
 ```
-
-
 #### Questions or Suggestions?
 Send an email to yifeng94@umd.edu. We are happy to hear about your thoughts!
 
