@@ -1,4 +1,4 @@
-## Welcome to the homepage of _simPM_!
+# Welcome to the homepage of _simPM_!
 
 `simPM` is an R package that automates the search for optimal 'post hoc' planned missing (PHPM) designs. This R package is developed and maintained by [Yi Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R. Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the University of Maryland.
 
@@ -7,6 +7,9 @@
 
 `simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal PHPM design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing focal parameters. 
 
+#### What does simPM do?
+map out PM designs
+Monte Carlo simulation based power analysis
 
 #### How to install _simPM_? 
 
