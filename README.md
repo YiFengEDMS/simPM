@@ -13,7 +13,7 @@ By automizing the simulation-based power analysis for planned missing designs in
 
 #### How to install _simPM_? 
 
-The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
+The source code of this R package is made public on the author's [Github page](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please run the following code:
 
 ```r
 
