@@ -7,7 +7,7 @@
 
 `simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal 'post hoc' planned missing design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing the focal parameters. 
 
-#### What does simPM do?
+#### What does _simPM_ do?
 By automizing the simulation-based power analysis for planned missing designs in longitudinal context, `simPM` can free the researchers from manually configuring the possible PM designs, determining their eligibility, setting up the simulations, and summarizing the results over replications, which can be tedious and time-consuming work especially when there is a large number of plausible PHPM designs to be evaluated.
 
 
