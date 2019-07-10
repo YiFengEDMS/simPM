@@ -1,15 +1,15 @@
-# Welcome to the homepage of _simPM_!
+## Welcome to the homepage of _simPM_!
 
 `simPM` is an R package that automates the search for optimal 'post hoc' planned missing (PHPM) designs. This R package is developed and maintained by [Yi Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R. Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the University of Maryland.
 
 #### The story behind _simPM_
 *"What should I do when they cut my research funding after my longitudinal study is already underway?"*
 
-`simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal PHPM design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing focal parameters. 
+`simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal 'post hoc' planned missing design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing the focal parameters. 
 
 #### What does simPM do?
-map out PM designs
-Monte Carlo simulation based power analysis
+By automizing the simulation-based power analysis for planned missing designs in longitudinal context, `simPM` can free the researchers from manually configuring the possible PM designs, determining their eligibility, setting up the simulations, and summarizing the results over replications, which can be tedious and time-consuming work especially when there is a large number of plausible PHPM designs to be evaluated.
+
 
 #### How to install _simPM_? 
 
@@ -67,7 +67,7 @@ To view more details of the optimal PHPM design, use the following code:
 summary(wave.ex1$opt.output)
 ```
 
-More details are available in the [package manual](). More examples will be available on this page soon.
+More details are available in the [package manual](). More examples will be available on this page soon. Stay tuned!
 
 #### Questions or Suggestions?
 Send an email to [yifeng94@umd.edu](yifeng94@umd.edu). We are happy to hear about your thoughts!
