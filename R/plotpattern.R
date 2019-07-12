@@ -30,20 +30,15 @@ plotPM=function(object,
   mat_colors <- list(Wave = brewer.pal(Time, colbr))
   names(mat_colors$Wave) <- paste0("W",1:Time)
   
+  gaps=seq(k,(Time-1)*k,by=k)
+  
   if (labels==T){
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = 14, fontsize_col=20,fontsize=14,drop_levels=T,annotation = annotation,annotation_colors = mat_colors,angle_col=45)
+             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = 14, fontsize_col=20,fontsize=14,drop_levels=T,annotation = annotation,annotation_colors = mat_colors,angle_col=45,gaps_col=gaps)
   }
   
   if (labels==F){
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),fontsize_row = 14,legend_labels=c("complete","missing"), fontsize_col=20,fontsize=14,drop_levels=T,angle_col=45)
+             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),fontsize_row = 14,legend_labels=c("complete","missing"), fontsize_col=20,fontsize=14,drop_levels=T,angle_col=45,gaps_col=gaps)
   }
 }
-
-
-
-
-
-
-
