@@ -23,7 +23,7 @@ plotPM=function(object,
                 labels=T){
   data=object$opt.pattern
   if (row.names==T){
-    row.names(data)=paste0(paste0("pt",1:nrow(data),":",sep=""),"n=",object$opt.ns)
+    row.names(data)=paste0(paste0("pat",1:nrow(data),":",sep=""),"n=",object$opt.ns)
   }
   annotation=data.frame(Wave=factor(rep(c(1:Time),each=k), labels = paste0("W",1:Time)))
   rownames(annotation) <- colnames(data)
