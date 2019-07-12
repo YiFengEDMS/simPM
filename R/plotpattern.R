@@ -20,7 +20,10 @@ plotPM=function(object,
                 colbr="PRGn",
                 col=c("antiquewhite1","firebrick"),
                 row.names=T,
-                labels=T){
+                labels=T,
+                fontsize_col=20,
+                fontsize_row=14,
+                fontsize=14){
   data=object$opt.pattern
   if (row.names==T){
     row.names(data)=paste0(paste0("pat",1:nrow(data),":",sep=""),"n=",object$opt.ns)
@@ -34,11 +37,11 @@ plotPM=function(object,
   
   if (labels==T){
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = 14, fontsize_col=20,fontsize=14,drop_levels=T,annotation = annotation,annotation_colors = mat_colors,angle_col=45,gaps_col=gaps)
+             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),legend_labels=c("complete","missing"),fontsize_row = fontsize_row, fontsize_col=fontsize_col,fontsize=fontsize,drop_levels=T,annotation = annotation,annotation_colors = mat_colors,angle_col=45,gaps_col=gaps)
   }
   
   if (labels==F){
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),fontsize_row = 14,legend_labels=c("complete","missing"), fontsize_col=20,fontsize=14,drop_levels=T,angle_col=45,gaps_col=gaps)
+             cluster_rows = F, cluster_cols = F,legend=T,legend_breaks=c(0,1),fontsize_row = fontsize_row,legend_labels=c("complete","missing"), fontsize_col=fontsize_col,fontsize=fontsize,drop_levels=T,angle_col=45,gaps_col=gaps)
   }
 }
