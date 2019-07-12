@@ -5,12 +5,15 @@
 #### The story behind _simPM_
 *"What should I do when they cut my research funding after my longitudinal study is already underway?"*
 
-`simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal PHPM design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing focal parameters. 
+`simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal 'post hoc' planned missing design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing the focal parameters. 
+
+#### What does _simPM_ do?
+By automizing the simulation-based power analysis for planned missing designs in longitudinal context, `simPM` can free the researchers from manually configuring the possible PM designs, determining their eligibility, setting up the simulations, and summarizing the results over replications, which can be tedious and time-consuming work especially when there is a large number of plausible PHPM designs to be evaluated.
 
 
 #### How to install _simPM_? 
 
-The source code of this R package is made public on [Github](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please use the following code:
+The source code of this R package is made public on the author's [Github page](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please run the following code:
 
 ```r
 
@@ -64,7 +67,7 @@ To view more details of the optimal PHPM design, use the following code:
 summary(wave.ex1$opt.output)
 ```
 
-More details are available in the [package manual](). More examples will be available on this page soon.
+More details are available in the [package manual](). More examples will be available on this page soon. Please stay tuned!
 
 #### Questions or Suggestions?
 Send an email to [yifeng94@umd.edu](yifeng94@umd.edu). We are happy to hear about your thoughts!
