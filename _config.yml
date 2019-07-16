@@ -3,5 +3,6 @@ title: simPM
 description: SIMulation-based power analysis for Planned Missing designs
 authors: Yi Feng & Gregory R. Hancock
 show_downloads: true
+baseurl: /simPM
 markdown: kramdown
 highlighter: rouge
