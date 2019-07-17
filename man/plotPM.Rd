@@ -2,29 +2,43 @@
 % Please edit documentation in R/plotpattern.R
 \name{plotPM}
 \alias{plotPM}
-\title{Plot the missing data patterns}
+\title{Plot the missing data patterns for the optimal PM design.}
 \usage{
-plotPM(object, Time, k, colbr = "PRGn", col = c("antiquewhite1",
-  "firebrick"), row.names = T)
+plotPM(object, colbr = "PRGn", col = c("antiquewhite1", "firebrick"),
+  row.names = T, labels = T, fontsize_col = 20, fontsize_row = 14,
+  fontsize = 14, angle_col = 45, legend = T, main = "")
 }
 \arguments{
 \item{object}{The simPM object}
 
-\item{Time}{The total number of waves}
+\item{colbr}{colors for waves. Default is "PRGn".}
 
-\item{k}{The number of observed variables at each wave}
+\item{col}{colors for complete vs. missing data. Default is c("antiquewhite1","firebrick").}
 
-\item{colbr}{colors for waves}
+\item{labels}{logical, indicating whether the label for waves is needed. Default is T.}
 
-\item{col}{colors for complete vs. missing data}
+\item{fontsize_col}{specify the font size for the column labels. Default is 20.}
+
+\item{fontsize_row}{specify the font size for the row labels. Default is 14.}
+
+\item{fontsize}{specify the font size for the legend. Default is 14.}
+
+\item{angle_col}{specify the angle of how the column labels are displayed}
+
+\item{legend}{logical, indicating whether the legend is shown. Default is T.}
+
+\item{main}{specify the plot title}
 }
 \description{
-Plot the missing data patterns
+Plot the missing data patterns for the optimal PM design.
 }
 \examples{
 \dontrun{
-plotPM(wave.out,Time=5,k=3)
-plotPM(indicator.out,Time=5,k=3)
-plotPM(forward.out,Time=5,k=3)
+plotPM(wave.out)
+plotPM(indicator.out)
+plotPM(forward.out,labels=F,col=c("gray96","gray35"),fontsize_row=26,fontsize=18,fontsize_col=26)
 }
+}
+\seealso{
+\code{\link[pheatmap]{pheatmap}}
 }

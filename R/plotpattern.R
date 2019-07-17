@@ -1,22 +1,29 @@
-#' Plot the missing data patterns for the optimal PM design
+#' Plot the missing data patterns for the optimal PM design.
+#' 
 #' @param object The simPM object
-#' @param Time The total number of waves
-#' @param k The number of observed variables at each wave
-#' @param colbr colors for waves
-#' @param col colors for complete vs. missing data
+#' @param colbr colors for waves. Default is "PRGn".
+#' @param col colors for complete vs. missing data. Default is c("antiquewhite1","firebrick").
+#' @param labels logical, indicating whether the label for waves is needed. Default is T.
+#' @param fontsize_col specify the font size for the column labels. Default is 20.
+#' @param fontsize_row specify the font size for the row labels. Default is 14.
+#' @param fontsize specify the font size for the legend. Default is 14.
+#' @param angle_col specify the angle of how the column labels are displayed
+#' @param legend logical, indicating whether the legend is shown. Default is T.
+#' @param main specify the plot title
+
+#' @seealso \code{\link[pheatmap]{pheatmap}} 
 #' @import pheatmap
 #' @import RColorBrewer
 #' @export plotPM
+#' 
 #' @examples
 #' \dontrun{
-#' plotPM(wave.out,Time=5,k=3)
-#' plotPM(indicator.out,Time=5,k=3)
-#' plotPM(forward.out,Time=5,k=3)
+#' plotPM(wave.out)
+#' plotPM(indicator.out)
+#' plotPM(forward.out,labels=F,col=c("gray96","gray35"),fontsize_row=26,fontsize=18,fontsize_col=26)
 #' }
 
 plotPM=function(object,
-                Time,
-                k,
                 colbr="PRGn",
                 col=c("antiquewhite1","firebrick"),
                 row.names=T,
@@ -28,6 +35,10 @@ plotPM=function(object,
                 legend=T,
                 main=""){
   data=object$opt.pattern
+  
+  Time=object$misc$time
+  k=object$misc$k
+  
   if (row.names==T){
     row.names(data)=paste0(paste0("pat",1:nrow(data),":",sep=""),"n=",object$opt.ns)
   }

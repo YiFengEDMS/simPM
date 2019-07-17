@@ -13,6 +13,3 @@ focal parameters, compared with other PM designs
 \description{
 A summary function to extract the important information of the output object.
 }
-\seealso{
-\code{\link{simPM}} which wraps this function
-}

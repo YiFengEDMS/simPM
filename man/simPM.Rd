@@ -13,49 +13,49 @@ simPM(popModel, analyzeModel, design0.out = NULL, VarNAMES, Time,
 \arguments{
 \item{popModel}{The data generation model (population model) specified using lavaan script}
 
-\item{analyzeModel}{The analysis model, which can be different from the population model, using lavaan script}
+\item{analyzeModel}{The analysis model,specified using lavaan script. The analysis model can be different from the population model.}
 
 \item{design0.out}{Mplus output file which contains the a priori power analysis/sample size planning (simulation) results for this
 specific model assuming a complete data design. Theoretically, such analysis was supposed to be conducted before the study began.}
 
-\item{VarNAMES}{The names of the observed variables, ordered by the time they are measured}
+\item{VarNAMES}{A vector containing the names of the observed variables. The variable names must be ordered chronologically, by the time (wave) they are measured.}
 
-\item{Time}{The total number of time points (waves of data collection)}
+\item{Time}{The total number of time points (or waves of data collection).}
 
-\item{Time.complete}{Number of waves of data collection that have been completed before the funding cut occured}
+\item{Time.complete}{Number of waves of data collection that have been completed before the funding cut occurs.}
 
-\item{k}{The number of observed variables collected at each wave}
+\item{k}{The number of observed variables collected at each wave.}
 
-\item{pc}{The proportion of subjects that will participate in all of the following waves of data collection and provide complete data (must be greater than 0)}
+\item{pc}{Proportion of completers. The proportion of subjects that will participate in all of the following waves of data collection and provide complete data. This must be greater than 0.}
 
-\item{pd}{The proportion of subjects that will not participate in any of the following waves of data collection (i.e., attritors). This can be 0.}
+\item{pd}{The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.}
 
-\item{costmx}{The vector containing the unit cost of each observed variable which has no data collected yet. They are constant across subjects, but they can vary across variables and across time.}
+\item{costmx}{A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.}
 
-\item{n}{The total sample size as initially planned}
+\item{n}{The total sample size as initially planned.}
 
-\item{nreps}{Number of replications for Monte Carlo simulation for each possible design}
+\item{nreps}{Number of replications for Monte Carlo simulations.}
 
 \item{focal.param}{The parameters of focal interest. If engine="l", the focal parameters should be specified using
 the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.}
 
-\item{complete.wave}{Specify if there are any waves that need to have complete data collected across all the participating subjects}
+\item{complete.wave}{Specify the wave(s) if there are any waves that need to have complete data collected across all the participants.}
 
-\item{complete.var}{Specify if there are any variables that need to have complete data collected across all the participating subjects}
+\item{complete.var}{Specify the names of the variable(s) if there are any variable(s) that need to have complete data collected across all the participating subjects.}
 
-\item{max.mk}{If using forward selection, specify the maximum number of unique missing data patterns in the design}
+\item{max.mk}{Specify the maximum number of unique missing data patterns in the selected design. Only applicable if forward selection is used.}
 
-\item{eval.budget}{Budget constraints. If the researcher wishes to search for designs under the budget limit, you to provide the remaining available budget that can be used for data collection}
+\item{eval.budget}{Logical, indicating whether there is any budget constraint. If the user wishes to search for PM designs under the budget limit, they need to specify the amount of the remaining available budget that can be used for future data collection.}
 
-\item{rm.budget}{The amount of remaining budget avaialbe for data collection}
+\item{rm.budget}{The amount of remaining budget avaialbe for future data collection.}
 
-\item{distal.var}{Any distal variables included in the model that would have complete data}
+\item{distal.var}{Specify the names of the variables, if there are any time-independent distal variables included in the model that are not subject planned missingness.}
 
-\item{seed}{Random seet for simulation}
+\item{seed}{seed for random number generation.}
 
-\item{engine}{Specify the whether the simulation should be completed using lavaan/simsem (engine="l") or Mplus (engine="m")}
+\item{engine}{Specify the whether the simulations should be conducted using lavaan/simsem (engine="l") or Mplus (engine="m").}
 
-\item{methods}{Specify which searching method should be used ("wave","indicator","forward")}
+\item{methods}{Specify which searching strategy should be used ("wave","indicator","forward").}
 }
 \value{
 An object containing the information of the optimal PM design, with highest power for testing the
@@ -63,7 +63,4 @@ focal parameters, compared with other PM designs
 }
 \description{
 The wrapper function for all the searching strategies
-}
-\seealso{
-\code{\link{simPM}} which wraps this function
 }
