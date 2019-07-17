@@ -67,7 +67,7 @@ To view more details of the optimal PHPM design, use the following code:
 summary(wave.ex1$opt.output)
 ```
 
-More details are available in the [package manual](). More examples will be available on this page soon. Please stay tuned!
+More details are available in the [package manual](https://yifengedms.github.io/simPM/manual/simPM_0.0.0.9000.pdf). More examples will be available on this page soon. Please stay tuned!
 
 #### Questions or Suggestions?
 Send an email to [yifeng94@umd.edu](yifeng94@umd.edu). We are happy to hear about your thoughts!
