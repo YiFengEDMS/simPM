@@ -13,8 +13,7 @@
 #' @param costmx  A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.
 #' @param n The total sample size as initially planned.
 #' @param nreps Number of replications for Monte Carlo simulations.
-#' @param focal.param The parameters of focal interest. If engine="l", the focal parameters should be specified using
-#' the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.
+#' @param focal.param The parameters of focal interest. The focal parameters should be specified #' using the lavaan script. 
 #' @param complete.wave Specify the wave(s) if there are any waves that need to have complete data collected across all the participants.
 #' @param eval.budget Logical, indicating whether there is any budget constraint. If the user wishes to search for PM designs under the budget limit, they need to specify the amount of the remaining available budget that can be used for future data collection.
 #' @param rm.budget The amount of remaining budget avaialbe for future data collection.

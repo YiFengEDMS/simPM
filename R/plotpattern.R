@@ -11,10 +11,11 @@
 #' @param legend logical, indicating whether the legend is shown. Default is T.
 #' @param main specify the plot title
 
-#' @seealso \code{\link[pheatmap]{pheatmap}} 
 #' @import pheatmap
 #' @import RColorBrewer
 #' @export plotPM
+#' 
+#' @seealso \code{\link[pheatmap]{pheatmap}}
 #' 
 #' @examples
 #' \dontrun{

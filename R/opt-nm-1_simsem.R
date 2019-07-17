@@ -11,8 +11,7 @@
 #' @param costmx  A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.
 #' @param n The total sample size as initially planned.
 #' @param nreps Number of replications for Monte Carlo simulations.
-#' @param focal.param The parameters of focal interest. If engine="l", the focal parameters should be specified using
-#' the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.
+#' @param focal.param The parameters of focal interest. The focal parameters should be specified #' using the lavaan script.
 #' @param complete.var Specify the names of the variable(s) if there are any variable(s) that need to have complete data collected across all the participating subjects.
 #' @param distal.var Specify the names of the variables, if there are any time-independent distal variables included in the model that are not subject planned missingness.
 #' @param seed Random seet for simulation

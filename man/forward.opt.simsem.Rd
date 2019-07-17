@@ -35,8 +35,7 @@ forward.opt.simsem(popModel, analyzeModel, NAMES, distal.var, n, nreps,
 
 \item{pd}{The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.}
 
-\item{focal.param}{The parameters of focal interest. If engine="l", the focal parameters should be specified using
-the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.}
+\item{focal.param}{The parameters of focal interest. The focal parameters should be specified #' using the lavaan script.}
 
 \item{max.mk}{Specify the maximum number of unique missing data patterns in the selected design. Only applicable if forward selection is used.}
 

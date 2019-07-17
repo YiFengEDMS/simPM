@@ -35,8 +35,7 @@ opt1.simsem(popModel, analyzeModel, NAMES, distal.var, n, nreps, seed,
 
 \item{pd}{The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.}
 
-\item{focal.param}{The parameters of focal interest. If engine="l", the focal parameters should be specified using
-the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.}
+\item{focal.param}{The parameters of focal interest. The focal parameters should be specified #' using the lavaan script.}
 
 \item{complete.var}{Specify the names of the variable(s) if there are any variable(s) that need to have complete data collected across all the participating subjects.}
 }

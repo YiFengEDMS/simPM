@@ -31,8 +31,7 @@ wave.miss.l(popModel, analyzeModel, NAMES, Time, Time.complete, k, pc, pd,
 
 \item{nreps}{Number of replications for Monte Carlo simulations.}
 
-\item{focal.param}{The parameters of focal interest. If engine="l", the focal parameters should be specified using
-the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.}
+\item{focal.param}{The parameters of focal interest. The focal parameters should be specified #' using the lavaan script.}
 
 \item{complete.wave}{Specify the wave(s) if there are any waves that need to have complete data collected across all the participants.}
 

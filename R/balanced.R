@@ -1,23 +1,23 @@
-#' Function to search for the indicator planned missing designs using Mplus
+#' Function to search for the item-level planned missing designs (via Mplus)
 
-#' @param design0.out Mplus output file which contains the a priori power analysis/sample size planning (simulation) results for this
+#' @param design0.out Mplus output file which contains the a priori power analysis (i.e., simulations for sample size planning) results for this
 #' specific model assuming a complete data design. Theoretically, such analysis was supposed to be conducted before the study began.
-#' @param VNAMES The names of the observed variables, ordered by the time they are measured
-#' @param Time The total number of time points (waves of data collection)
-#' @param Time.complete Number of waves of data collection that have been completed before the funding cut occured
-#' @param k The number of observed variables collected at each wave
-#' @param pc The proportion of subjects that will participate in all of the following waves of data collection and provide complete data (must be greater than 0)
-#' @param pd The proportion of subjects that will not participate in any of the following waves of data collection (i.e., attritors). This can be 0.
-#' @param costmx  The vector containing the unit cost of each observed variable which has no data collected yet. They are constant across subjects, but they can vary across variables and across time.
-#' @param n The total sample size as initially planned
-#' @param nreps Number of replications for Monte Carlo simulation for each possible design
-#' @param focal.param The parameters of focal interest. If engine="l", the focal parameters should be specified using
-#' the lavaan script. If engine="m", the focal parameters should be specified based on the Mplus output file design0.out.
-#' @param complete.var Specify if there are any variables that need to have complete data collected across all the participating subjects
-#' @param eval.budget Budget constraints. If the researcher wishes to search for designs under the budget limit, you to provide the remaining available budget that can be used for data collection
-#' @param rm.budget The amount of remaining budget avaialbe for data collection
-#' @param distal.var Any distal variables included in the model that would have complete data
-#' @param seed Random seet for simulation
+#' @param VNAMES A vector containing the names of the observed variables. The variable names must be ordered chronologically, by the time (wave) they are measured.d
+#' @param Time The total number of time points (or waves of data collection).
+#' @param Time.complete Number of waves of data collection that have been completed before the funding cut occurs.
+#' @param k The number of observed variables collected at each wave.
+#' @param pc Proportion of completers. The proportion of subjects that will participate in all of the following waves of data collection and provide complete data. This must be greater than 0.
+#' @param pd The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.
+#' @param costmx  A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.
+#' @param n The total sample size as initially planned.
+#' @param nreps Number of replications for Monte Carlo simulations.
+#' @param focal.param The parameters of focal interest. The focal parameters should be specified based on the Mplus output file design0.out.
+#' @param complete.var Specify the names of the variable(s) if there are any variable(s) that need to have complete data collected across all the participating subjects.
+#' @param eval.budget Logical, indicating whether there is any budget constraint. If the user wishes to search for PM designs under the budget limit, they need to specify the amount of the remaining available budget that can be used for future data collection.
+#' @param rm.budget The amount of remaining budget avaialbe for future data collection.
+#' @param distal.var Specify the names of the variables, if there are any time-independent distal variables included in the model that are not subject planned missingness.
+#' @param seed seed for random number generation.
+#' 
 #' @return An object containing the information of the optimal PM design, with highest power for testing the
 #' focal parameters, compared with other PM designs
 #' @seealso \code{\link{simPM}} which wraps this function
@@ -27,8 +27,6 @@
 #' @export balance.miss
 #' @examples
 
-# str_length(letters)
-# str_length(c("i", "like", "programming", NA))
 
 balance.miss=function(
   VNAMES,
@@ -379,7 +377,9 @@ balance.miss=function(
   opt.pattern=designs2[[op]]
   colnames(opt.pattern)=VNAMES
   opt.probs=probs2[[op]]
+  
+  misc=list(time=Time,k=k,focal.param=focal.param)
 
-  re.ob=list("results"=sim.results.out,"opt.design"=opt.design,"opt.pattern"=opt.pattern,"opt.probs"=opt.probs,"n.miss.point"=opt.design$miss.point)
+  re.ob=list("results"=sim.results.out,"opt.design"=opt.design,"opt.pattern"=opt.pattern,"opt.probs"=opt.probs,"n.miss.point"=opt.design$miss.point,"misc"=misc)
 
 }
