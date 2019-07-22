@@ -22,7 +22,7 @@ summary.opt=function(object){
   print(object$results)
   print("=================Optimal design=================")
   print(object$opt.design)
-  print("=================Optimal design powers=================")
+  print("=================Optimal design for focal parameters=================")
   print(opt.powers)
   print("=================Optimal patterns===============")
   print(object$opt.pattern)
