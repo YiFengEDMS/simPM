@@ -19,7 +19,7 @@ The source code of this R package is made public on the author's [Github page](h
 
 install.packages("devtools")
 library(devtools)
-devtools::intall_github("YiFengEDMS/simPM")
+intall_github("YiFengEDMS/simPM")
 
 ``` 
 
