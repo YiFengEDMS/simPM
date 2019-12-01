@@ -7,6 +7,7 @@ Author: Yi Feng [aut, cre],
 Maintainer: Yi Feng<yifeng94@umd.edu>
 Description: The package is developed to automate the simulation-based power analysis for planned missing designs in the context of longitudinal studies. More specifically, this package is featured with a direct application to the scenarios where an unexpected funding cut occurs during the course of a longitudinal study. Users can use this package to search for PM designs that yield sufficient power for testing focal parameters.
 URL: https://yifengedms.github.io/simPM/
+BugReports: https://github.com/YiFengEDMS/simPM/issues
 Depends:
     R (>= 3.5.1),
     lavaan (>= 0.6-3),
