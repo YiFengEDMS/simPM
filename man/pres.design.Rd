@@ -2,17 +2,18 @@
 % Please edit documentation in R/pres-design.R
 \name{pres.design}
 \alias{pres.design}
-\title{To check the simulation results for lower level designs in forward selection}
+\title{Check the simulation results for lower level designs in forward assembly. 
+\code{pres.design} is only applicable when Mplus is used for simulations.}
 \usage{
 pres.design(opt.results, max.mk)
 }
-\value{
-An object containing the information of the optimal PM design, with highest power for testing the
-focal parameters, compared with other PM designs
+\arguments{
+\item{opt.results}{The object returned from forward assembly.}
+
+\item{max.mk}{The maximum number of unique missing data
+patterns in the selected design.}
 }
 \description{
-To check the simulation results for lower level designs in forward selection
-}
-\seealso{
-\code{\link{simPM}} which wraps this function
+Check the simulation results for lower level designs in forward assembly. 
+\code{pres.design} is only applicable when Mplus is used for simulations.
 }

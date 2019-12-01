@@ -1,8 +1,11 @@
-#' To examine the lower level designs in forward selection
-
-#' @return An object containing the information of the optimal PM design, with highest power for testing the
-#' focal parameters, compared with other PM designs
-#' @seealso \code{\link{simPM}} which wraps this function
+#' Examine the cost of lower level designs in forward assembly (deprecated).
+#'
+#' \code{pres.cost} returns the cost of PM designs obtained in the process 
+#'    of forward assembly. For example, the users may want to know the cost
+#'    of the designs with fewer number of missing data patterns than the 
+#'    one obtained using forward assembly.   
+#' 
+#' @inheritParams balance.miss.l
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
@@ -11,7 +14,7 @@
 
 
 
-pres.cost=function(opt.pattern,   # the obtained opt.pattern from the forward.opt command
+pres.cost <- function(opt.pattern,   # the obtained opt.pattern from the forward.opt command
                    costmx,        # should be exactly the same as
                    max.mk,
                    pc,
@@ -19,27 +22,27 @@ pres.cost=function(opt.pattern,   # the obtained opt.pattern from the forward.op
                    n,
                    k,
                    Time,
-                   Time.complete){
-  if (pd==0){
-    if ((max.mk+1)==nrow(opt.pattern)){
-      usematrix=opt.pattern
-    }else{
-      usematrix=opt.pattern[-(nrow(opt.pattern)-(max.mk+1)),]}
-    ms.range=c((Time.complete*k+1):(Time*k))
+                   Time.complete) {
+  if (pd==0) {
+    if ((max.mk+1)==nrow(opt.pattern)) {
+      usematrix <- opt.pattern
+    } else {
+    usematrix <- opt.pattern[-(nrow(opt.pattern)-(max.mk+1)), ]}
+    ms.range <- c((Time.complete*k+1):(Time*k))
 
-    cost=sum(c(rep(n*(1-pc)/max.mk,max.mk),pc*n)*((1-usematrix[,ms.range])%*%costmx))
-    opt.probs=c(rep(round((1-pc)/(nrow(usematrix)-1),6),max.mk),pc)
+    cost <- sum(c(rep(n*(1-pc)/max.mk,max.mk),pc*n)*((1-usematrix[, ms.range]) %*% costmx))
+    opt.probs <- c(rep(round((1-pc)/(nrow(usematrix)-1),6),max.mk), pc)
   }
-  if(pd!=0){
-    if ((max.mk+2)==nrow(opt.pattern)){
-      usematrix=opt.pattern
-    }else{
-      usematrix=opt.pattern[-(nrow(opt.pattern)-(max.mk+2)),]}
-    ms.range=c((Time.complete*k+1):(Time*k))
-    cost=sum(c(rep(n*(1-pc-pd)/max.mk,max.mk),pc*n,pd*n)*((1-usematrix[,ms.range])%*%costmx))
-    opt.probs=c(rep(round((1-pc-pd)/(nrow(usematrix)-2),6),max.mk),pc,pd)
+  if (pd!=0) {
+    if ((max.mk+2)==nrow(opt.pattern)) {
+      usematrix <- opt.pattern
+    } else {
+    usematrix <- opt.pattern[-(nrow(opt.pattern)-(max.mk+2)), ]}
+    ms.range <- c((Time.complete*k+1):(Time*k))
+    cost <- sum(c(rep(n*(1-pc-pd)/max.mk, max.mk), pc*n, pd*n)*((1-usematrix[, ms.range]) %*% costmx))
+    opt.probs <- c(rep(round((1-pc-pd)/(nrow(usematrix)-2), 6), max.mk), pc, pd)
   }
-  obj=list("design.matrix"=usematrix,"probs"=opt.probs,"cost"=cost)
+  obj <- list("design.matrix" = usematrix, "probs" = opt.probs, "cost" = cost)
 
   return(obj)
 }

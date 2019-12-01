@@ -1,21 +1,22 @@
-#' A summary function to extract the important information of the output object.
-
-
-#' @return An object containing the information of the optimal PM design, with highest power for testing the
-#' focal parameters, compared with other PM designs
+#' Extract the summary information of the simpm object.
+#'
+#' \code{summary.simpm} summarizes and extracts the important information about the optimal PM design.
+#' 
+#' @param object The output object returned by \code{\link{simPM}}.
+#' @return The information about the optimal PM design.
 #' 
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
-#' @export summary.opt
+#' @export summary.simpm
 #' @examples
 
 
 
-summary.opt=function(object){
+summary.simpm <- function(object) {
   
-  focal.param=object$misc$focal.param
-  opt.powers=summaryParam(object$opt.output)[focal.param,]
+  focal.param <- object$misc$focal.param
+  opt.powers <- summaryParam(object$opt.output)[focal.param, ]
   
   
   print("=================results summary================")

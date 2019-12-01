@@ -2,54 +2,81 @@
 % Please edit documentation in R/wave-missing-simsem.R
 \name{wave.miss.l}
 \alias{wave.miss.l}
-\title{Searching for optimal wave-level PM designs (simsem/lavaan-based)}
+\title{Search for the optimal wave-level PM designs.}
 \usage{
 wave.miss.l(popModel, analyzeModel, NAMES, Time, Time.complete, k, pc, pd,
   costmx, n, nreps, focal.param, complete.wave = NULL, eval.budget = T,
   rm.budget = NULL, distal.var = NULL, seed = 1234)
 }
 \arguments{
-\item{popModel}{The data generation model (population model) specified using lavaan script}
+\item{popModel}{The data generation model (population model) specified #'    using lavaan script.}
 
-\item{analyzeModel}{The analysis model,specified using lavaan script. The analysis model can be different from the population model.}
+\item{analyzeModel}{The analysis model, specified using lavaan script. #'    The analysis model can be different from the population model.}
 
-\item{NAMES}{A vector containing the names of the observed variables. The variable names must be ordered chronologically, by the time (wave) they are measured.}
+\item{NAMES}{A character vector containing the names of the observed
+variables. The variable names must be ordered chronologically, by
+the time (wave) they are measured.}
 
-\item{Time}{The total number of time points (or waves of data collection).}
+\item{Time}{Numeric. The total number of time points (or total number
+of waves of data collection).}
 
-\item{Time.complete}{Number of waves of data collection that have been completed before the funding cut occurs.}
+\item{Time.complete}{Numeric. Number of waves of data collection that
+have been completed before the funding cut occurs.}
 
-\item{k}{The number of observed variables collected at each wave.}
+\item{k}{Numeric. The number of observed variables collected at each
+wave.}
 
-\item{pc}{Proportion of completers. The proportion of subjects that will participate in all of the following waves of data collection and provide complete data. This must be greater than 0.}
+\item{pc}{Numeric. Proportion of completers: the proportion of subjects
+that will participate in all of the following waves of data
+collection and provide complete data. This must be greater than 0.}
 
-\item{pd}{The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.}
+\item{pd}{Numeric. The proportion of subjects that will not participate
+in any of the following waves of data collection (i.e., people who
+will drop from the longitudinal study). This value can be 0.}
 
-\item{costmx}{A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.}
+\item{costmx}{A numeric vector containing the unit cost of each
+observed variable that is yet to be measured (post the funding cut).
+The cost is assumed to be constant across subjects, but it is
+allowed to vary across variables and across waves.}
 
 \item{n}{The total sample size as initially planned.}
 
 \item{nreps}{Number of replications for Monte Carlo simulations.}
 
-\item{focal.param}{The parameters of focal interest. The focal parameters should be specified #' using the lavaan script.}
+\item{focal.param}{Character vector. The parameters of focal interest.
+The focal parameters should be specified in the format of 
+\code{lavaan} script.}
 
-\item{complete.wave}{Specify the wave(s) if there are any waves that need to have complete data collected across all the participants.}
+\item{complete.wave}{Numeric vector. Specify which wave(s) that the
+user wish to have complete data collected from all the participants.}
 
-\item{eval.budget}{Logical, indicating whether there is any budget constraint. If the user wishes to search for PM designs under the budget limit, they need to specify the amount of the remaining available budget that can be used for future data collection.}
+\item{eval.budget}{Logical scalar (TRUE or FALSE), indicating whether
+there is any budget constraint. If the user wishes to search for PM
+designs under the budget limit, they need to specify the amount of
+the remaining available budget that can be used for future data
+collection.}
 
-\item{rm.budget}{The amount of remaining budget avaialbe for future data collection.}
+\item{rm.budget}{Numeric. The amount of remaining budget avaialbe for
+future data collection. User must supply a value for this argument
+if \code{eval.budget = TRUE}.}
 
-\item{distal.var}{Specify the names of the variables, if there are any time-independent distal variables included in the model that are not subject planned missingness.}
+\item{distal.var}{Char vector. Specify the name(s) of the distal
+variables. User needs to specify this argument if there are any 
+time-independent distal variables included in the model that are not
+subject to planned missingness.}
 
-\item{seed}{seed for random number generation.}
+\item{seed}{The random seed for random number generation.}
 }
 \value{
-An object containing the information of the optimal wave-level PM design, with highest power for testing the
-focal parameters, compared with other PM designs
+An object containing the information of the optimal
+   wave-level missing design. The optimal design is the one that yields
+   highest power for testing the focal parameters, compared to other
+   plausible candidate PM designs.
 }
 \description{
-Searching for optimal wave-level PM designs (simsem/lavaan-based)
+\code{wave.miss.l} runs simulations using \code{lavaan} and \code{simsem}. It returns the search results for optimal wave-level PM designs.
 }
 \seealso{
-\code{\link{simPM}} which wraps this function
+\code{\link{simPM}} which is a warpper function for this
+   function.
 }

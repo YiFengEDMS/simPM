@@ -2,17 +2,38 @@
 % Please edit documentation in R/pres-cost.R
 \name{pres.cost}
 \alias{pres.cost}
-\title{To examine the lower level designs in forward selection}
+\title{Examine the cost of lower level designs in forward assembly (deprecated).}
 \usage{
 pres.cost(opt.pattern, costmx, max.mk, pc, pd, n, k, Time, Time.complete)
 }
-\value{
-An object containing the information of the optimal PM design, with highest power for testing the
-focal parameters, compared with other PM designs
+\arguments{
+\item{costmx}{A numeric vector containing the unit cost of each
+observed variable that is yet to be measured (post the funding cut).
+The cost is assumed to be constant across subjects, but it is
+allowed to vary across variables and across waves.}
+
+\item{pc}{Numeric. Proportion of completers: the proportion of subjects
+that will participate in all of the following waves of data
+collection and provide complete data. This must be greater than 0.}
+
+\item{pd}{Numeric. The proportion of subjects that will not participate
+in any of the following waves of data collection (i.e., people who
+will drop from the longitudinal study). This value can be 0.}
+
+\item{n}{The total sample size as initially planned.}
+
+\item{k}{Numeric. The number of observed variables collected at each
+wave.}
+
+\item{Time}{Numeric. The total number of time points (or total number
+of waves of data collection).}
+
+\item{Time.complete}{Numeric. Number of waves of data collection that
+have been completed before the funding cut occurs.}
 }
 \description{
-To examine the lower level designs in forward selection
-}
-\seealso{
-\code{\link{simPM}} which wraps this function
+\code{pres.cost} returns the cost of PM designs obtained in the process 
+   of forward assembly. For example, the users may want to know the cost
+   of the designs with fewer number of missing data patterns than the 
+   one obtained using forward assembly.
 }

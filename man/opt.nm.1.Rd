@@ -2,47 +2,73 @@
 % Please edit documentation in R/opt-nm-1.R
 \name{opt.nm.1}
 \alias{opt.nm.1}
-\title{Function to search for the optimal missing pattern with one missing indicator. An internal function for forward selection.}
+\title{Search for the optimal missing pattern with only one missing measured variable. An internal function for forward assembly.}
 \usage{
 opt.nm.1(VNAMES, distal.var, n, nreps, seed, Time, k, Time.complete,
   costmx, pc, pd, design0.out, focal.param, complete.var = NULL)
 }
 \arguments{
-\item{VNAMES}{A vector containing the names of the observed variables. The variable names must be ordered chronologically, by the time (wave) they are measured.}
+\item{VNAMES}{A character vector containing the names of the observed
+variables. The variable names must be ordered chronologically, 
+by the time (wave) they are measured.}
 
-\item{distal.var}{Specify the names of the variables, if there are any time-independent distal variables included in the model that are not subject planned missingness.}
+\item{distal.var}{Char vector. Specify the names of the variables, if
+there are any time-independent distal variables included in the
+model that are not subject to planned missingness.}
 
 \item{n}{The total sample size as initially planned.}
 
 \item{nreps}{Number of replications for Monte Carlo simulations.}
 
-\item{seed}{Random seet for simulation}
+\item{seed}{The seed for random number generation.}
 
-\item{Time}{The total number of time points (or waves of data collection).}
+\item{Time}{The total number of time points (i.e., the total number 
+of data collection waves).}
 
 \item{k}{The number of observed variables collected at each wave.}
 
-\item{Time.complete}{Number of waves of data collection that have been completed before the funding cut occurs.}
+\item{Time.complete}{Number of data collection waves that have been
+completed before the funding cut occurs.}
 
-\item{costmx}{A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.}
+\item{costmx}{A numeric vector containing the unit cost of each
+observed variable that is yet to be measured (post the funding cut).
+The cost is assumed to be constant across subjects, but it is
+allowed to vary across variables and across waves.}
 
-\item{pc}{Proportion of completers. The proportion of subjects that will participate in all of the following waves of data collection and provide complete data. This must be greater than 0.}
+\item{pc}{Numeric. Proportion of completers: the proportion of subjects
+that will participate in all of the following waves of data
+collection and provide complete data. This must be greater than 0.}
 
-\item{pd}{The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.}
+\item{pd}{Numeric. The proportion of subjects that will not participate
+in any of the following waves of data collection (i.e., drop from
+the longitudinal study). This value can be 0.}
 
-\item{design0.out}{Mplus output file which contains the a priori power analysis (i.e., simulations for sample size planning) results for this specific model assuming a complete data design. Theoretically, such analysis was supposed to be conducted before the study began.}
+\item{design0.out}{An object returned by \code{\link[MplusAutomation]{r#'    eadModels}}. To obtain this object, the user need to have a Mplus 
+output file which contains the \emph{a priori} power analysis 
+results for this specific model assuming a complete data design 
+(i.e., simulation-based power analysis for sample size planning). 
+In principle, \emph{a priori} power analysis is supposed to be 
+conducted before the study began.}
 
-\item{focal.param}{The parameters of focal interest. The focal parameters should be specified based on the Mplus output file design0.out.}
+\item{focal.param}{Char vector. The parameters of focal interest. The
+focal parameters should be specified in the specific format based on
+the Mplus output object \code{design0.out}.}
 
-\item{complete.var}{Specify the names of the variable(s) if there are any variable(s) that need to have complete data collected across all the participating subjects.}
+\item{complete.var}{Char Vector. Specify the name(s) of the variable
+(s) if there are any variable(s) that need to have complete data 
+collected from all the participating subjects.}
 }
 \value{
-An object containing the information of the optimal PM design, with highest power for testing the
-focal parameters, compared with other PM designs
+An object containing the information of the optimal missing
+   data pattern containing only one missing observed variable. The
+   optimal pattern is the one that yields highest statistical power for
+   testing the focal parameters, compared to other patterns with only
+   one missing observed variable.
 }
 \description{
-Function to search for the optimal missing pattern with one missing indicator. An internal function for forward selection.
+\code{opt.nm.1} is an internal function that runs simulations using M\emph{plus}. It returns the optimal missing pattern that only contains one missing measured variable. This is the first step of forward assembly.
 }
 \seealso{
-\code{\link{simPM}} which wraps this function
+\code{\link{simPM}} which is a warpper function for this
+   function.
 }

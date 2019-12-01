@@ -6,31 +6,40 @@
 \usage{
 plotPM(object, colbr = "PRGn", col = c("antiquewhite1", "firebrick"),
   row.names = T, labels = T, fontsize_col = 20, fontsize_row = 14,
-  fontsize = 14, angle_col = 45, legend = T, main = "")
+  fontsize = 14, angle_col = 45, legend = T, main = "", ...)
 }
 \arguments{
-\item{object}{The simPM object}
+\item{object}{The simPM object.}
 
-\item{colbr}{colors for waves. Default is "PRGn".}
+\item{colbr}{Specify the colors for different waves. Default is "PRGn".}
 
-\item{col}{colors for complete vs. missing data. Default is c("antiquewhite1","firebrick").}
+\item{col}{Specify the colors for complete vs. missing data. 
+Default is c("antiquewhite1","firebrick").}
 
-\item{labels}{logical, indicating whether the label for waves is needed. Default is T.}
+\item{labels}{logical scalar, indicating whether the label for waves is
+needed. Default is TRUE.}
 
-\item{fontsize_col}{specify the font size for the column labels. Default is 20.}
+\item{fontsize_col}{Specify the font size for the column labels. Default
+is 20.}
 
-\item{fontsize_row}{specify the font size for the row labels. Default is 14.}
+\item{fontsize_row}{Specify the font size for the row labels. Default is
+14.}
 
-\item{fontsize}{specify the font size for the legend. Default is 14.}
+\item{fontsize}{Specify the font size for the legend. Default is 14.}
 
-\item{angle_col}{specify the angle of how the column labels are displayed}
+\item{angle_col}{Specify the angle of how the column labels are
+displayed. Default is 45.}
 
-\item{legend}{logical, indicating whether the legend is shown. Default is T.}
+\item{legend}{Logical scalar, indicating whether the legend is shown.
+Default is TRUE.}
 
-\item{main}{specify the plot title}
+\item{main}{Specify the plot title.}
+
+\item{...}{Any additional arguments for \code{\link[pheatmap]{pheatmap}}.}
 }
 \description{
-Plot the missing data patterns for the optimal PM design.
+\code{plotPM} plots the optimal PM design's missing patterns as a
+  heatmap.
 }
 \examples{
 \dontrun{

@@ -1,0 +1,33 @@
+---
+title: "Installation of simPM"
+author: "Yi Feng"
+#date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Install _simPM_
+
+To install `simPM` on your local machine, please run the following code
+
+```r
+install.packages("devtools")
+library(devtools)
+intall_github("YiFengEDMS/simPM",)
+``` 
+
+
+## R source code 
+
+The source code of this R package is made public on the first author's [Github page](https://github.com/YiFengEDMS/simPM). 
+
