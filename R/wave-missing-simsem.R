@@ -262,7 +262,7 @@ sim.results.out <- cbind.data.frame(convergence.rate,   #convergence rate
 opt.design.1 <- sim.results.out[sim.results.out[,"weakest.para.power"]==max(sim.results.out[,"weakest.para.power"]),]
 
 if (nrow(opt.design.1)==1) {
-  opt.desig <- opt.design.1
+  opt.design <- opt.design.1
 }
 if (nrow(opt.design.1)>1) {
   opt.design <- opt.design.1[opt.design.1$cost.design==min(opt.design.1$cost.design), ]
