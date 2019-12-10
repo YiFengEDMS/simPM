@@ -1,74 +1,93 @@
-## Welcome to the homepage of _simPM_!
 
-`simPM` is an R package that automates the search for optimal 'post hoc' planned missing (PHPM) designs. This R package is developed and maintained by [Yi Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R. Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the University of Maryland.
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-#### The story behind _simPM_
-*"What should I do when they cut my research funding after my longitudinal study is already underway?"*
+# simPM
 
-`simPM` was created to help researchers survive the unexpected funding cut in the course of a longitudinal study. It can be used to find an optimal 'post hoc' planned missing design that allows the researchers to complete the study at a reduced cost, while maintaining satisfactory level of statistical power for testing the focal parameters. 
+# Welcome to the homepage of *simPM*\!
 
-#### What does _simPM_ do?
-By automizing the simulation-based power analysis for planned missing designs in longitudinal context, `simPM` can free the researchers from manually configuring the possible PM designs, determining their eligibility, setting up the simulations, and summarizing the results over replications, which can be tedious and time-consuming work especially when there is a large number of plausible PHPM designs to be evaluated.
+### `simPM`: SIMulation-based power analysis for Planned Missing designs.
 
+`simPM` is an R package that automates the Monte Carlo simulation-based
+search for optimal planned missing (PM) and ‘post hoc’ planned missing
+(PHPM) designs. This R package is developed and maintained by [Yi
+Feng](https://terpconnect.umd.edu/~yifeng94/) & [Dr. Gregory R.
+Hancock](https://education.umd.edu/directory/gregory-r-hancock) from the
+University of Maryland.
 
-#### How to install _simPM_? 
+## The story behind *simPM*
 
-The source code of this R package is made public on the author's [Github page](https://github.com/YiFengEDMS/simPM). To install the R package on your local machine, please run the following code:
+> ***“Oh %&$\#\!, they cut my funding\!”***
 
-```r
+We have heard that too often, unfortunately, from researchers who rely
+on external funding to support their longitudinal studies. There are a
+variety of reasons that may lead to the adjusted (shrunken) budget
+announced by the funding agency. Further, what often adds to the
+challenge is that the researchers are asked to provide a revised study
+plan to convince that their project can be continued, showing
+satisfactory inferential validity and statistical power, albeit with the
+reduced budget.
 
+> ***“What can I do except for firing my consultant and (poor) RAs?”***
+
+Planned missing data methods present a very promising solution for such
+challenging situations, providing many practical and methodological
+advantages. However, careful planning is critical such that the planned
+missing design can preserve enough information and statistical power.
+
+`simPM` was created to help researchers survive the unexpected funding
+cut in the course of a longitudinal study. It can be used to find an
+**optimal** ‘post hoc’ planned missing design that allows the
+researchers to complete the study at a reduced cost, while maintaining
+satisfactory level of statistical power for testing the focal
+parameters.
+
+## What does *simPM* do?
+
+By automizing the simulation-based power analysis for planned missing
+designs in longitudinal context, `simPM` can free the researchers from
+manually configuring the possible PM designs, determining their
+eligibility, setting up the simulations, and summarizing the results
+over replications, which can be tedious and time-consuming work
+especially when there is a large number of plausible PHPM designs to be
+evaluated.
+
+## How to install *simPM*?
+
+The source code of this R package is made public on the author’s [Github
+page](https://github.com/YiFengEDMS/simPM). To install `simPM` on your
+local machine, please run the following code
+
+``` r
 install.packages("devtools")
 library(devtools)
-intall_github("YiFengEDMS/simPM")
-
-``` 
-
-#### How to use _simPM_? 
-
-The main function in package `simPM` is `simPM()`. As an example, the following code can be used to search for an optimal wave-level PHPM design with 4 waves of repeated measures.       
-
-```r
-wave.ex1=simPM(
-        popModel=popModel,                                 #supply the population model using lavaan language
-        analyzeModel=analyzeModel,                         #supply the analysis model using lavaan language
-        VarNAMES=c("se1","se2","se3","se4"),               #specify the observed variable names, in chronological order
-        Time=4,                                            #total number of waves
-        Time.complete=1,                                   #number of waves completed before funding cut occurs
-        k=1,                                               #number of observed variables collected at each wave
-        pc=0.2,                                            #percentage of participants to provide complete data after funding cut
-        pd=0,                                              #percentage of participants to provide no data after funding cut
-        costmx=c(5,10,15),                                 #unit cost of each data point at the following waves
-        n=323,                                             #original sample size
-        nreps=1000,                                        #number of replications for simulation
-        focal.param=c("i~1","s~1","i~~i","s~~s"),          #specify the focal parameters
-        complete.wave=NULL,                                #specify any future wave/variables that need complete data 
-        eval.budget=T,                                     #whether or not there is a budget restriction
-        rm.budget=30*323*0.7,                              #the amount of remaining budget
-        distal.var=NULL,                                   #specify any distal variables that are not subject to PM
-        seed=12345,                                        #random seed
-        engine="l",                                        #use lavaan to fit the models
-        methods="wave")                                    #type of PHPM designs, "wave" indicates wave-level missing
-``` 
-
-
-To view the results, use the `summary.opt` function.
-```r
-summary.opt(wave.ex1)
-``` 
-
-To view the missing data patterns in the optimal PHPM design, use the `plotPM` function.
-```r
-plotPM(wave.ex1,Time=4,k=1)
+devtools::intall_github("YiFengEDMS/simPM")
 ```
 
+## Useful resources
 
-To view more details of the optimal PHPM design, use the following code:
-```r
-summary(wave.ex1$opt.output)
-```
+Below are some vignettes demonstrating the features of `simPM`:
 
-More details are available in the [package manual](https://yifengedms.github.io/simPM/manual/simPM_0.0.0.9000.pdf). More examples will be available on this page soon. Please stay tuned!
+1.  [Installation](articles/installation.html)
+2.  [Package
+    manual](https://yifengedms.github.io/simPM/manual/simPM_0.0.0.9000.pdf)
+3.  [An example of PHPM with a linear
+    LGM](articles/Linear-Latent-Growth-Model.html)
+4.  [An example of PHPM with a second-order LGM]()
+5.  [An example of PHPM with a cross-lagged and autoregression model]()
+6.  [Wave-level PM designs]()
+7.  [Item-level PM designs]()
+8.  [Forward selection]()
+9.  [Attrition]()
+10. [Summarize the optimal design]()
+11. [Plot the optimal design]()
 
-#### Questions or Suggestions?
-Send an email to [yifeng94@umd.edu](yifeng94@umd.edu). We are happy to hear about your thoughts!
+## Citation
 
+Yi Feng and Gregory R. Hancock (2019). simPM: SIMulation-based power
+analysis for Planned Missing designs. R package version 0.0.0.9000.
+<https://yifengedms.github.io/simPM/>
+
+## Questions or Suggestions?
+
+Send an email to [yifeng94@umd.edu](yifeng94@umd.edu). We are happy to
+hear about your thoughts\!

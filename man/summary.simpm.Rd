@@ -4,7 +4,7 @@
 \alias{summary.simpm}
 \title{Extract the summary information of the simpm object.}
 \usage{
-summary.simpm(object)
+\method{summary}{simpm}(object)
 }
 \arguments{
 \item{object}{The output object returned by \code{\link{simPM}}.}

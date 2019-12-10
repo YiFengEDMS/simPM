@@ -373,6 +373,8 @@ opt.nm.1 <- function(
     "design.order" = op, 
     "misc" = misc)
 
+  class(re.ob) <- append(class(re.ob),"simpm")
+  
   return(re.ob)
 
 }

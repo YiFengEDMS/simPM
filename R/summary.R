@@ -8,6 +8,7 @@
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
+#' @method summary simpm
 #' @export summary.simpm
 #' @examples
 
@@ -33,4 +34,3 @@ summary.simpm <- function(object) {
   print(object$opt.ns)
 }
 
-#summary.opt(re.ob)

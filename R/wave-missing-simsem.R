@@ -212,9 +212,9 @@ if (prod(pn>=1)!=0) {
   #  data.miss=impose(miss.model,data)
 
   misstemplate <- miss(logical = logical.Mx, m = 0)
-  output <- simsem::sim(nreps, n = n, model = analyzeModel, generate = popModel, miss = misstemplate,
-#                        multicore=multicore,
-seed <- seed + d)
+  output <- simsem::sim(nreps, n = n, model = analyzeModel, generate = popModel, miss = misstemplate, seed = seed + d
+#                        ,multicore=multicore
+)
 
   template[[d]] <- misstemplate
   sim.out[[d]] <- output
@@ -290,6 +290,8 @@ re.ob <- list("results" = sim.results.out,
               'opt.logical' = opt.logical,
               'opt.output' = opt.output,
               "misc"=misc)
+
+class(re.ob) <- append(class(re.ob),"simpm")
 
 return(re.ob)
 }

@@ -52,7 +52,7 @@ navbar:
       -  text: Installation
          href: articles/Installation.html
       -  text: An Example of PHPM with a Linear LGM
-         href: articles/Linear latent growth model.html
+         href: articles/Linear-Latent-Growth-Model.html
       -  text: Non-Interactive Execution from within R
          href: articles/noninteractive_execution.html
       -  text: Standalone Execution and Scheduled Processing

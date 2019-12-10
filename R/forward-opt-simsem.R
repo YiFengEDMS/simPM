@@ -313,7 +313,7 @@ forward.opt.simsem <- function(
         if (num.miss==max.mk) {
         output <- simsem::sim(nRep = nreps, n=n, model=analyzeModel, generate=popModel, miss=misstemplate,
                               #multicore=multicore,
-                              seed=seed)
+                              seed = seed)
         } else if (num.miss < max.mk) {
         output <- simsem::sim(nRep=nreps/5, n=n, model=analyzeModel, generate=popModel, miss=misstemplate,
                               #multicore=multicore,
@@ -437,6 +437,9 @@ forward.opt.simsem <- function(
     }
     
     re.ob2 <- list(re.ob, all.results)
+    
+    class(re.ob2) <- append(class(re.ob2),"simpm")
+    
     return(re.ob2)
   }
 }

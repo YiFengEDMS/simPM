@@ -248,10 +248,15 @@ balance.miss.l <- function(
     #  miss.model=miss(logical=logical.Mx)
     #  data.miss=impose(miss.model,data)
 
-    misstemplate <- miss(logical=logical.Mx, m=0)
-    output <- simsem::sim(nreps, n=n, model=analyzeModel, generate=popModel,miss=misstemplate,
-                          #multicore=multicore,
-                          seed=seed+d)
+    misstemplate <- miss(logical = logical.Mx, m=0)
+    output <- simsem::sim(nreps, 
+                          n = n, 
+                          model = analyzeModel, 
+                          generate=popModel,
+                          miss=misstemplate, 
+                          seed = seed + d
+                          #,multicore=multicore
+                          )
 
     template[[d]] <- misstemplate
     sim.out[[d]] <- output
@@ -317,6 +322,8 @@ balance.miss.l <- function(
     'opt.logical'=opt.logical,
     'opt.output'=opt.output,
     "misc"=misc)
+  
+  class(re.ob) <- append(class(re.ob),"simpm")
   
   return(re.ob)
 }

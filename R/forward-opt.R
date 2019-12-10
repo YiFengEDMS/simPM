@@ -519,6 +519,9 @@ forward.opt <- function(
       previous[[num.miss]]=re.ob$opt.pattern   # update the previous pattern list
 
     }
+    
+    class(re.ob) <- append(class(re.ob),"simpm")
+    
     return(re.ob)
   }
 }

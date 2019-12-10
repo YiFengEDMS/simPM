@@ -392,6 +392,8 @@ wave.miss <- function(
              "n.miss.waves" = opt.design$miss.waves,
              "misc" = misc)
   
+  class(re.ob) <- append(class(re.ob),"simpm")
+  
   return(re.ob)
 
 }

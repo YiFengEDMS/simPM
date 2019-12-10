@@ -151,9 +151,14 @@ opt1.simsem <- function(
     logical.Mx <- logical.mx==1
 
     misstemplate <- miss(logical = logical.Mx, m = 0)
-    output <- simsem::sim(nreps, n = n, model = analyzeModel, generate = popModel, miss = misstemplate,
-                          #multicore=multicore,
-                          seed = seed+i)
+    output <- simsem::sim(nreps, 
+                          n = n, 
+                          model = analyzeModel, 
+                          generate = popModel, 
+                          miss = misstemplate,
+                          seed = seed + i
+                          #, multicore=multicore
+                          )
     sim.out[[i]] <- output    #save the simulation output
 
     sim.param <- summaryParam(output)
@@ -250,6 +255,8 @@ opt1.simsem <- function(
              "opt.output" = opt.output,
              "misc" = misc)
 
+  class(re.ob) <- append(class(re.ob),"simpm")
+  
   return(re.ob)
 
 }

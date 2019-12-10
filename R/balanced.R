@@ -420,6 +420,8 @@ balance.miss <- function(
     "n.miss.point"=opt.design$miss.point,
     "misc"=misc)
   
+  class(re.ob) <- append(class(re.ob),"simpm")
+  
   return(re.ob)
 
 }

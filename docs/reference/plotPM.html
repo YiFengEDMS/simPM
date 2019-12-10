@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Plot the missing data patterns for the optimal PM design. — plotPM" />
 
-<meta property="og:description" content="Plot the missing data patterns for the optimal PM design." />
+<meta property="og:description" content="plotPM plots the optimal PM design's missing patterns as a
+  heatmap." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,7 +100,7 @@
       <a href="../articles/Installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Linear latent growth model.html">An Example of PHPM with a Linear LGM</a>
+      <a href="../articles/Linear-Latent-Growth-Model.html">An Example of PHPM with a Linear LGM</a>
     </li>
     <li>
       <a href="../articles/noninteractive_execution.html">Non-Interactive Execution from within R</a>
@@ -168,56 +169,67 @@
 
     <div class="ref-description">
     
-    <p>Plot the missing data patterns for the optimal PM design.</p>
+    <p><code>plotPM</code> plots the optimal PM design's missing patterns as a
+  heatmap.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>plotPM</span>(<span class='no'>object</span>, <span class='kw'>colbr</span> <span class='kw'>=</span> <span class='st'>"PRGn"</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"antiquewhite1"</span>, <span class='st'>"firebrick"</span>),
   <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>fontsize_col</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>fontsize_row</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>fontsize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>angle_col</span> <span class='kw'>=</span> <span class='fl'>45</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+  <span class='kw'>fontsize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>angle_col</span> <span class='kw'>=</span> <span class='fl'>45</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>The simPM object</p></td>
+      <td><p>The simPM object.</p></td>
     </tr>
     <tr>
       <th>colbr</th>
-      <td><p>colors for waves. Default is "PRGn".</p></td>
+      <td><p>Specify the colors for different waves. Default is "PRGn".</p></td>
     </tr>
     <tr>
       <th>col</th>
-      <td><p>colors for complete vs. missing data. Default is c("antiquewhite1","firebrick").</p></td>
+      <td><p>Specify the colors for complete vs. missing data. 
+Default is c("antiquewhite1","firebrick").</p></td>
     </tr>
     <tr>
       <th>labels</th>
-      <td><p>logical, indicating whether the label for waves is needed. Default is T.</p></td>
+      <td><p>logical scalar, indicating whether the label for waves is
+needed. Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>fontsize_col</th>
-      <td><p>specify the font size for the column labels. Default is 20.</p></td>
+      <td><p>Specify the font size for the column labels. Default
+is 20.</p></td>
     </tr>
     <tr>
       <th>fontsize_row</th>
-      <td><p>specify the font size for the row labels. Default is 14.</p></td>
+      <td><p>Specify the font size for the row labels. Default is
+14.</p></td>
     </tr>
     <tr>
       <th>fontsize</th>
-      <td><p>specify the font size for the legend. Default is 14.</p></td>
+      <td><p>Specify the font size for the legend. Default is 14.</p></td>
     </tr>
     <tr>
       <th>angle_col</th>
-      <td><p>specify the angle of how the column labels are displayed</p></td>
+      <td><p>Specify the angle of how the column labels are
+displayed. Default is 45.</p></td>
     </tr>
     <tr>
       <th>legend</th>
-      <td><p>logical, indicating whether the legend is shown. Default is T.</p></td>
+      <td><p>Logical scalar, indicating whether the legend is shown.
+Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>main</th>
-      <td><p>specify the plot title</p></td>
+      <td><p>Specify the plot title.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Any additional arguments for <code><a href='https://www.rdocumentation.org/packages/pheatmap/topics/pheatmap'>pheatmap</a></code>.</p></td>
     </tr>
     </table>
     

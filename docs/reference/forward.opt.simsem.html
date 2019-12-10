@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function to search for the optimal PM design with forward selection (lavaan-based) — forward.opt.simsem • simPM</title>
+<title>Search for the optimal PM design using forward assembly. — forward.opt.simsem • simPM</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Function to search for the optimal PM design with forward selection (lavaan-based) — forward.opt.simsem" />
+<meta property="og:title" content="Search for the optimal PM design using forward assembly. — forward.opt.simsem" />
 
-<meta property="og:description" content="Function to search for the optimal PM design with forward selection (lavaan-based)" />
+<meta property="og:description" content="forward.opt.simsem runs simulations using lavaan and simsem. It returns the search results for optimal item-level PM designs via forward assembly." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,7 +99,7 @@
       <a href="../articles/Installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Linear latent growth model.html">An Example of PHPM with a Linear LGM</a>
+      <a href="../articles/Linear-Latent-Growth-Model.html">An Example of PHPM with a Linear LGM</a>
     </li>
     <li>
       <a href="../articles/noninteractive_execution.html">Non-Interactive Execution from within R</a>
@@ -161,14 +161,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Function to search for the optimal PM design with forward selection (lavaan-based)</h1>
+    <h1>Search for the optimal PM design using forward assembly.</h1>
     
     <div class="hidden name"><code>forward.opt.simsem.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Function to search for the optimal PM design with forward selection (lavaan-based)</p>
+    <p><code>forward.opt.simsem</code> runs simulations using <code>lavaan</code> and <code>simsem</code>. It returns the search results for optimal item-level PM designs via forward assembly.</p>
     
     </div>
 
@@ -181,19 +181,24 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>popModel</th>
-      <td><p>The data generation model (population model) specified using lavaan script</p></td>
+      <td><p>The data generation model (population model) specified #'    using lavaan script.</p></td>
     </tr>
     <tr>
       <th>analyzeModel</th>
-      <td><p>The analysis model,specified using lavaan script. The analysis model can be different from the population model.</p></td>
+      <td><p>The analysis model, specified using lavaan script. #'    The analysis model can be different from the population model.</p></td>
     </tr>
     <tr>
       <th>NAMES</th>
-      <td><p>A vector containing the names of the observed variables. The variable names must be ordered chronologically, by the time (wave) they are measured.</p></td>
+      <td><p>A character vector containing the names of the observed
+variables. The variable names must be ordered chronologically, by
+the time (wave) they are measured.</p></td>
     </tr>
     <tr>
       <th>distal.var</th>
-      <td><p>Specify the names of the variables, if there are any time-independent distal variables included in the model that are not subject planned missingness.</p></td>
+      <td><p>Char vector. Specify the name(s) of the distal
+variables. User needs to specify this argument if there are any 
+time-independent distal variables included in the model that are not
+subject to planned missingness.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -205,62 +210,87 @@
     </tr>
     <tr>
       <th>seed</th>
-      <td><p>Random seet for simulation</p></td>
+      <td><p>The random seed for random number generation.</p></td>
     </tr>
     <tr>
       <th>Time</th>
-      <td><p>The total number of time points (or waves of data collection).</p></td>
+      <td><p>Numeric. The total number of time points (or total number
+of waves of data collection).</p></td>
     </tr>
     <tr>
       <th>k</th>
-      <td><p>The number of observed variables collected at each wave.</p></td>
+      <td><p>Numeric. The number of observed variables collected at each
+wave.</p></td>
     </tr>
     <tr>
       <th>Time.complete</th>
-      <td><p>Number of waves of data collection that have been completed before the funding cut occurs.</p></td>
+      <td><p>Numeric. Number of waves of data collection that
+have been completed before the funding cut occurs.</p></td>
     </tr>
     <tr>
       <th>costmx</th>
-      <td><p>A vector containing the unit cost of each observed variable that is yet to be measured (post the funding cut). The cost is assumed to be constant across subjects, but it is allowed to vary across variables and across waves.</p></td>
+      <td><p>A numeric vector containing the unit cost of each
+observed variable that is yet to be measured (post the funding cut).
+The cost is assumed to be constant across subjects, but it is
+allowed to vary across variables and across waves.</p></td>
     </tr>
     <tr>
       <th>pc</th>
-      <td><p>Proportion of completers. The proportion of subjects that will participate in all of the following waves of data collection and provide complete data. This must be greater than 0.</p></td>
+      <td><p>Numeric. Proportion of completers: the proportion of subjects
+that will participate in all of the following waves of data
+collection and provide complete data. This must be greater than 0.</p></td>
     </tr>
     <tr>
       <th>pd</th>
-      <td><p>The proportion of subjects that will not participate in any of the following waves of data collection (i.e., drop from the longitudinal study). This can be 0.</p></td>
+      <td><p>Numeric. The proportion of subjects that will not participate
+in any of the following waves of data collection (i.e., people who
+will drop from the longitudinal study). This value can be 0.</p></td>
     </tr>
     <tr>
       <th>focal.param</th>
-      <td><p>The parameters of focal interest. The focal parameters should be specified #' using the lavaan script.</p></td>
+      <td><p>Character vector. The parameters of focal interest.
+The focal parameters should be specified in the format of 
+<code>lavaan</code> script.</p></td>
     </tr>
     <tr>
       <th>max.mk</th>
-      <td><p>Specify the maximum number of unique missing data patterns in the selected design. Only applicable if forward selection is used.</p></td>
+      <td><p>Specify the maximum number of unique missing data
+patterns in the selected design. Only applicable if forward assembly
+is used.</p></td>
     </tr>
     <tr>
       <th>eval.budget</th>
-      <td><p>Logical, indicating whether there is any budget constraint. If the user wishes to search for PM designs under the budget limit, they need to specify the amount of the remaining available budget that can be used for future data collection.</p></td>
+      <td><p>Logical scalar (TRUE or FALSE), indicating whether
+there is any budget constraint. If the user wishes to search for PM
+designs under the budget limit, they need to specify the amount of
+the remaining available budget that can be used for future data
+collection.</p></td>
     </tr>
     <tr>
       <th>rm.budget</th>
-      <td><p>The amount of remaining budget avaialbe for future data collection.</p></td>
+      <td><p>Numeric. The amount of remaining budget avaialbe for
+future data collection. User must supply a value for this argument
+if <code>eval.budget = TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>complete.var</th>
-      <td><p>Specify the names of the variable(s) if there are any variable(s) that need to have complete data collected across all the participating subjects.</p></td>
+      <td><p>Char vector. Specify the name(s) of the 
+variable(s) if there are any variable(s) that need to have complete
+data collected from all the participating subjects.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object containing the information of the optimal item-level PM design, with highest power for testing the
-focal parameters, compared with other candidate PM designs</p>
+    <p>An object containing the information of the optimal
+   item-level missing design. The optimal design is the one that yields
+   highest power for testing the focal parameters, compared to other
+   plausible candidate PM designs.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='simPM.html'>simPM</a></code> which wraps this function</p></div>
+    <div class='dont-index'><p><code><a href='simPM.html'>simPM</a></code> which is a warpper function for this
+   function.</p></div>
     
 
   </div>

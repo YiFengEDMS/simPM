@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>To check the simulation results for lower level designs in forward selection — pres.design • simPM</title>
+<title>Check the simulation results for lower level designs in forward assembly. 
+<code>pres.design</code> is only applicable when Mplus is used for simulations. — pres.design • simPM</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +31,11 @@
 
 
 
-<meta property="og:title" content="To check the simulation results for lower level designs in forward selection — pres.design" />
+<meta property="og:title" content="Check the simulation results for lower level designs in forward assembly. 
+<code>pres.design</code> is only applicable when Mplus is used for simulations. — pres.design" />
 
-<meta property="og:description" content="To check the simulation results for lower level designs in forward selection" />
+<meta property="og:description" content="Check the simulation results for lower level designs in forward assembly. 
+pres.design is only applicable when Mplus is used for simulations." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,7 +102,7 @@
       <a href="../articles/Installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Linear latent growth model.html">An Example of PHPM with a Linear LGM</a>
+      <a href="../articles/Linear-Latent-Growth-Model.html">An Example of PHPM with a Linear LGM</a>
     </li>
     <li>
       <a href="../articles/noninteractive_execution.html">Non-Interactive Execution from within R</a>
@@ -161,38 +164,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>To check the simulation results for lower level designs in forward selection</h1>
+    <h1>Check the simulation results for lower level designs in forward assembly. 
+<code>pres.design</code> is only applicable when Mplus is used for simulations.</h1>
     
     <div class="hidden name"><code>pres.design.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>To check the simulation results for lower level designs in forward selection</p>
+    <p>Check the simulation results for lower level designs in forward assembly. 
+<code>pres.design</code> is only applicable when Mplus is used for simulations.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>pres.design</span>(<span class='no'>opt.results</span>, <span class='no'>max.mk</span>)</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An object containing the information of the optimal PM design, with highest power for testing the
-focal parameters, compared with other PM designs</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='simPM.html'>simPM</a></code> which wraps this function</p></div>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>opt.results</th>
+      <td><p>The object returned from forward assembly.</p></td>
+    </tr>
+    <tr>
+      <th>max.mk</th>
+      <td><p>The maximum number of unique missing data
+patterns in the selected design.</p></td>
+    </tr>
+    </table>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
   </div>
 </div>
