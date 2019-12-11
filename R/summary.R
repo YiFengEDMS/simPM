@@ -16,9 +16,13 @@
 
 summary.simpm <- function(object) {
   
-  focal.param <- object$misc$focal.param
-  opt.powers <- summaryParam(object$opt.output)[focal.param, ]
-  
+  if (length(object) == 2) {
+    focal.param <- object[[1]]$misc$focal.param
+    opt.powers <- summaryParam(object[[1]]$opt.output)[focal.param, ]
+  }else{
+    focal.param <- object$misc$focal.param
+    opt.powers <- summaryParam(object$opt.output)[focal.param, ]
+  }  
   
   print("=================results summary================")
   print(object$results)
