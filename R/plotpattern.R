@@ -54,7 +54,7 @@ plotPM <- function(object,
     k <- object[[1]]$misc$k
     
     if (row.names==T) {
-      row.names(data) <- paste0(paste0("pat", seq_len(nrow(data)),":",sep=""), "n=", object[[1]]$opt.ns)
+      row.names(data) <- paste0(paste0("pat", seq_len(nrow(data)),":", sep=""), "n=", object[[1]]$opt.ns)
     }
       
   } else {
