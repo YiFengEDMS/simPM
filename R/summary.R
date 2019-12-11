@@ -20,6 +20,7 @@ summary.simpm <- function(object) {
     focal.param <- object[[1]]$misc$focal.param
     opt.powers <- summaryParam(object[[1]]$opt.output)[focal.param, ]
     
+    
     print("=================results summary================")
     print(object[[1]]$results)
     print("=================Optimal design=================")
@@ -32,6 +33,7 @@ summary.simpm <- function(object) {
     print(object[[1]]$opt.probs)
     print("=================Optimal ns====================")
     print(object[[1]]$opt.ns)
+    
     
   }else{
     focal.param <- object$misc$focal.param
