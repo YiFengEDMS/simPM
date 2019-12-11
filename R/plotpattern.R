@@ -46,14 +46,30 @@ plotPM <- function(object,
                 legend=T,
                 main="",
                 ...) {
+  
+  if (length(object) == 2) {
+    data <- object[[1]]$opt.pattern
+    
+    Time <- object[[1]]$misc$time
+    k <- object[[1]]$misc$k
+    
+    if (row.names==T) {
+      row.names(data) <- paste0(paste0("pat", seq_len(nrow(data)),":",sep=""), "n=", object[[1]]$opt.ns)
+    }
+      
+  } else {
+  
   data <- object$opt.pattern
   
   Time <- object$misc$time
   k <- object$misc$k
   
-  if (row.names==T) {
+  if (row.names == T) {
     row.names(data) <- paste0(paste0("pat", seq_len(nrow(data)),":",sep=""), "n=", object$opt.ns)
   }
+  
+  }
+  
   annotation <- data.frame(Wave = factor(rep(c(1:Time), each = k), labels = paste0("W",1:Time)))
   rownames(annotation) <- colnames(data)
   mat_colors <- list(Wave = brewer.pal(Time, colbr))
@@ -68,6 +84,6 @@ plotPM <- function(object,
   
   if (labels==F) {
     pheatmap(data, scale = "none",col=col,
-             cluster_rows = F, cluster_cols = F, legend = legend, legend_breaks = c(0, 1), fontsize_row = fontsize_row, legend_labels = c("complete", "missing"), fontsize_col = fontsize_col, fontsize = fontsize, drop_levels = T, angle_col = angle_col, gaps_col = gaps, main = main)
+             cluster_rows = F, cluster_cols = F, legend = legend, legend_breaks = c(0, 1), fontsize_row = fontsize_row, legend_labels = c("complete", "missing"), fontsize_col = fontsize_col, fontsize = fontsize, drop_levels = T, angle_col = angle_col, gaps_col = gaps, main = main, ...)
   }
 }
