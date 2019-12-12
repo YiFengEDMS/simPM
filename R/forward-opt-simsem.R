@@ -310,7 +310,6 @@ forward.opt.simsem <- function(
 
         # need to make sure the order of the variable is consistent
         colnames(logical.Mx) <- colnames(logical.mx) <- VNAMES
-        logical.Matrix[[d]] <- logical.Mx
         
         get_data <- simsem::sim(nRep = 1, 
                                 model = analyzeModel, 

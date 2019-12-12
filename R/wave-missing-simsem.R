@@ -206,6 +206,7 @@ if (prod(pn>=1)!=0) {
   # rest are completers
 
   logical.Mx <- logical.mx==1
+  
   # need to make sure the order of the variable is consistent
   colnames(logical.Mx) <- colnames(logical.mx) <- VNAMES
   logical.Matrix[[d]] <- logical.Mx
