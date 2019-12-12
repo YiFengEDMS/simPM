@@ -1,0 +1,553 @@
+---
+title: "An example of PHPM with a second-order LGM"
+author: "Yi Feng & Gregory R. Hancock"
+#date: "`r Sys.Date()`"
+output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<!-- -->
+In this vignette we will demonstrate how to use `simPM` to search for an optimal PHPM design for a longitudinal research study that employs a second-order latent growth model (LGM).
+
+## <span style="color:seagreen">**Research Scenario**</span> 
+
+Suppose a researcher is interested in studying the longitudinal trajectories of children's externalizing behaviors. The researcher has planned to collect data for children from two-parent heterosexual households. The researcher proposed to collect reports from the mother, the father, and the teacher about the child's daily behaviors. Once the data collection is completed, the researcher intends to model the externalizing behaviors as a latent variable and investigate its change over time. 
+
+Suppose the researcher proposed a complete-case longitudinal study to collect data for 1,135 children across four waves, each collected at grades 1, 3, 4, and 5. The proposed analysis model is shown below, where the three indicators of the latent externalizing behavior construct $\eta$ across each of the four waves are the responses from the mother (*M1*-*M4*), the father (*F1*-*F4*), and the teacher (*T1*-*T4*), correspondingly.
+
+Although the researcher has obtained an external funding to support his longitudinal study, unfortunately, after the first wave of data collection, the funding agency announces a 30% reduction in the remaining funding. The researcher wishes to continue the project under the budget constraint, with the hope to not compromise the scientific rigor and statistical power. The reseacher thus decideds to use `simPM` to find a design that yields sufficient power but costs no more than the reduced budget. 
+
+
+```{r,out.width='50%', fig.align='center', fig.cap='A second-order linear LGM', echo=FALSE}
+knitr::include_graphics('images/Second-order-LGM.png')
+```
+
+## <span style="color:seagreen">**Spcify the Population and Analysis Model**</span> 
+
+Because `simPM` searches for an optimal design based on power analysis using Monte Carlo simulations, it is thus required to supply a population model and analysis model. The easiest way to specify the population model and analysis model is to use the [`lavaan` model syntax](http://lavaan.ugent.be/tutorial/syntax1.html). For this Second-order LGM example, the population model is specified as follows:
+
+```{r,eval=F}
+popModel='
+EXB1=~1.150*F1+0.836*T1+1*M1
+EXB2=~1.150*F2+0.836*T2+1*M2
+EXB3=~1.150*F3+0.836*T3+1*M3
+EXB4=~1.150*F4+0.836*T4+1*M4
+
+
+interc=~1*EXB1+1*EXB2+1*EXB3+1*EXB4
+slope=~0*EXB1+2*EXB2+3*EXB3+4*EXB4
+
+interc~~-0.244*slope
+
+interc~8.289*1
+slope~-0.433*1
+
+interc~~18.184*interc
+slope~~0.249*slope
+
+EXB1~~1.084*EXB1
+EXB2~~1.777*EXB2
+EXB3~~1.457*EXB3
+EXB4~~1.700*EXB4
+
+T1~-0.214*1
+T2~-0.214*1
+T3~-0.214*1
+T4~-0.214*1
+
+M1~0*1
+M2~0*1
+M3~0*1
+M4~0*1
+
+F1~-1.136*1
+F2~-1.136*1
+F3~-1.136*1
+F4~-1.136*1
+
+
+M1~~23.886*M1
+F1~~17.737*F1
+T1~~55.074*T1 
+M2~~20.223*M2      
+F2~~8.941*F2      
+T2~~66.698*T2      
+M3~~16.905*M3      
+F3~~13.922*F3      
+T3~~61.995*T3 
+M4~~19.324*M4 
+F4~~13.410*F4      
+T4~~71.127*T4
+
+F1~~4.256*F2+7.040*F3+5.737*F4
+F2~~5.440*F3+3.590*F4
+F3~~6.165*F4
+
+T1~~23.603*T2+24.666*T3+23.168*T4
+T2~~35.213*T3+29.648*T4
+T3~~33.815*T4
+
+M1~~12.975*M2+11.153*M3+11.683*M4
+M2~~12.219*M3+11.332*M4
+M3~~11.807*M4
+
+'
+```
+
+The analysis model is specified as the same second-order LGM but with freely estimated model parameters:
+
+```{r, eval=F}
+analyzeModel='
+
+EXB1=~NA*F1+a*F1+b*T1+1*M1
+EXB2=~NA*F2+a*F2+b*T2+1*M2
+EXB3=~NA*F3+a*F3+b*T3+1*M3
+EXB4=~NA*F4+a*F4+b*T4+1*M4
+
+interc=~1*EXB1+1*EXB2+1*EXB3+1*EXB4
+slope=~0*EXB1+2*EXB2+3*EXB3+4*EXB4
+
+interc~~slope
+
+interc~1
+slope~1
+interc~~interc
+slope~~slope
+
+EXB1~~EXB1
+EXB2~~EXB2
+EXB3~~EXB3
+EXB4~~EXB4
+
+F1~c*1
+F2~c*1
+F3~c*1
+F4~c*1
+
+T1~d*1
+T2~d*1
+T3~d*1
+T4~d*1
+
+M1~0*1
+M2~0*1
+M3~0*1
+M4~0*1
+
+F1~~F1
+F2~~F2
+F3~~F3
+F4~~F4
+
+T1~~T1
+T2~~T2
+T3~~T3
+T4~~T4
+
+M1~~M1
+M2~~M2
+M3~~M3
+M4~~M4
+
+F1~~F2+F3+F4
+F2~~F3+F4
+F3~~F4
+
+T1~~T2+T3+T4
+T2~~T3+T4
+T3~~T4
+
+M1~~M2+M3+M4
+M2~~M3+M4
+M3~~M4
+'
+
+```
+
+
+## <span style="color:seagreen">**Wave-level PHPM Designs**</span> 
+### <a name="wave">1. Search for an Optimal Wave-level Design</a>
+
+We can use the main function `simPM()` to search for an optimal [wave-level missing design](). For `simPM()` to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, `simPM` will automatically map out all the possible wave-level PHPM designs, run power analysis for each plausible design, and output the optimal design. 
+
+```r
+wave.ex2 <- simPM(popModel = popModel,                           #supply the population model using lavaan syntax
+               analyzeModel = analyzeModel,                      #supply the analysis model using lavaan syntax
+               VarNAMES = c("F1","T1","M1","F2","T2","M2",
+                            "F3","T3","M3","F4","T4","M4"),      #the observed variable names, grouped in waves, in chronological order
+               Time = 4,                                         #total number of waves
+               Time.complete = 1,                                #number of waves completed before funding cut occurs
+               k = 3,                                            #number of observed variables collected at each wave
+               pc = 0.1,                                         #percentage of participants to provide complete data after funding cut
+               pd = 0,                                           #percentage of participants to provide no data after funding cut
+               costmx = c(rep(5,3), rep(10,3), rep(15,3)),       #unit cost of each data point at the following waves
+               n = 1135,                                         #original sample size
+               nreps = 1000,                                     #number of replications for Monte Carlo simulation
+               focal.param = c("interc~1", 
+                               "slope~1", 
+                               "interc~~interc", 
+                               "slope~~slope"),                  #specify the focal parameters, using lavaan syntax
+               complete.wave = NULL,                             #specify any future wave that need complete data to be collected
+               eval.budget = T,                                  #whether or not there is a budget restriction
+               rm.budget = 90*1135*0.7,                          #the amount of remaining budget
+               distal.var = NULL,                                #specify any distal variables that are not subject to PM
+               seed = 12345,                                     #random seed
+               engine = "l",                                     #use lavaan and simsem to fit the models
+               methods = "wave"                                  #type of PHPM designs under consideration, "wave" indicates wave-level missing
+)
+
+```
+
+
+
+More specifically:
+
+* `VarNAMES = c("F1","T1","M1","F2","T2","M2","F3","T3","M3","F4","T4","M4")`: The observed variables collected in this study are named <span style="color:firebrick">F1-F4, T1-T4, and M1-M4</span>.
+* `Time = 4`: The study has <span style="color:firebrick">4</span> waves of data collection in total.
+* `Time.complete = 1`: <span style="color:firebrick">One</span> wave of data collection has been completed before funding cut occurs
+* `k = 3`: <span style="color:firebrick">Three</span> observed variable are collected at each wave of data collection. 
+* `pc = 0.1`: <span style="color:firebrick">Ten percent</span> of the participants are randomly assigned to provide complete data for future waves after funding cut.
+* `pd = 0`: <span style="color:firebrick">Zero percent</span> of the participants are assigned to drop from the study.
+* `costmx = c(rep(5,3), rep(10,3), rep(15,3))`: The unit cost of collecting one report from the father, the mother, or the teacher is  <span style="color:firebrick">\$5</span> at wave 2, <span style="color:firebrick">\$10</span> at wave 3, and <span style="color:firebrick">\$15</span> at wave 4.  
+* `n = 1135`: The original sample size planned was <span style="color:firebrick">1,135</span>.
+* `nreps = 1000`: The program will run <span style="color:firebrick">1000</span> replications for Monte Carlo simulation (for each plausible design).
+* `focal.param = c("interc~1", "slope~1", "interc~~interc", "slope~~slope")`: The focal parameters of interest are the mean and variance of the latent intercept and slope for the latent construct of externalizing behaviors.
+* `complete.wave = NULL`: No future waves are by design to have complete data colleted from all of the three sources.
+* `eval.budget = T`: Yes, there is a budget restriction that needs to be taken into consideration.
+* `rm.budget = 90*1135*0.7`: After the funding cut, the researcher will have <span style="color:firebrick"> $\$71,505$ </span> $(=90\times1135\times0.7)$ to support the future waves of data collection.
+* `distal.var = NULL`: There are no distal variables in the model that are not subject to repeated measures.
+* `engine = "l"`: Data were simulated using `simsem` and the models were fitted using `lavaan`.
+* `methods = "wave"`: Search for wave-level missing designs.
+
+
+### 2. Summarize the Result
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
+load("linear_LGM_example.rda")
+library(simPM)
+```
+
+
+To [view a summary of the results](), we can use the `summary()` function. It prints out the comparison among all the plausible wave-level missing designs (with regard to the parameter with the lowest empirical power), the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.
+```{r, eval=FALSE}
+summary(wave.ex2)
+``` 
+
+For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+
+```r
+[1] "=================results summary================"
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1             0.92               s~~s              0.999        4530          2
+[1] "=================Optimal design================="
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1             0.92               s~~s              0.999        4530          2
+```
+
+With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+
+
+```r
+[1] "=================Optimal patterns==============="
+           se1 se2 se3 se4
+             0   1   1   0
+             0   1   0   1
+             0   0   1   1
+completers   0   0   0   0
+[1] "=================Optimal probs=================="
+[1] 0.266667 0.266667 0.266667 0.200000
+[1] "=================Optimal ns===================="
+[1] 86 86 86 65
+
+```
+Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+
+
+```r
+
+[1] "=================Optimal design for focal parameters================="
+     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
+i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
+s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
+i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
+s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
+     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
+i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
+s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
+i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
+s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
+
+```
+
+<!--&nbsp;-->
+
+To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.
+```{r,eval=FALSE}
+summary(wave.ex2$opt.output)
+```
+
+
+### 3. Visualize the Optimal Design 
+
+To [visualize the missing data patterns of the optimal PHPM design](), we can use the `plotPM()` function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled. 
+
+```{r,fig.width=7,fig.height=4}
+plotPM(wave.ex1, labels = F)
+```
+
+
+
+## <span style="color:seagreen">**Balanced Item-level PHPM Designs**</span> 
+### 1. Search for an Optimal Wave-level Design {#item}
+
+We can also use the function `simPM()` to search for an optimal [item-level missing design](). The code to search for optimal item-level PHPM designs is very similar to the code to search for optimal wave-level PHPM designs. The minor differences in the code are followed with comments.  
+
+```r
+item.ex2 <- simPM(
+  popModel,
+  analyzeModel,
+  VarNAMES = c("F1","T1","M1","F2","T2","M2",
+               "F3","T3","M3","F4","T4","M4"),
+  distal.var = NULL,
+  n = 1135,
+  nreps = 1000,
+  seed = 12345,
+  Time = 4,
+  k = 3,
+  Time.complete = 1,
+  costmx = c(5,5,5,10,10,10,15,15,15), 
+  pc = 0.1,
+  pd = 0,
+  focal.param = c("interc~1",
+                  "slope~1",
+                  "interc~~interc",
+                  "slope~~slope"),
+  eval.budget = T,          
+  rm.budget = 90*1135*0.7,        
+  complete.var = NULL,            # specify any observed variables that need complete data to be collected in the future waves
+  engine = "l",
+  methods = "item"                # type of PHPM designs under consideration, "item" indicates item-level missing
+)
+
+```
+
+
+While most of the arguments are the same as in the case of [wave-level missing designs](#wave), there are two arguments that are a little bit different in the context of item-level missing designs:
+
+
+* `complete.var = NULL`: No observed variables are by design to have complete data colleted from all participants in the future waves of data collection.
+* `methods = "item"`: Search for item-level missing designs.
+
+
+### 2. Summarize the Result
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
+load("linear_LGM_example.rda")
+library(simPM)
+```
+
+
+Similarly, to [view a summary of the results](), we can use the `summary()` function. 
+```{r, eval=FALSE}
+summary(item.ex2)
+``` 
+
+For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+
+```r
+[1] "=================results summary================"
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1             0.92               s~~s              0.999        4530          2
+[1] "=================Optimal design================="
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1             0.92               s~~s              0.999        4530          2
+```
+
+With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+
+
+```r
+[1] "=================Optimal patterns==============="
+           se1 se2 se3 se4
+             0   1   1   0
+             0   1   0   1
+             0   0   1   1
+completers   0   0   0   0
+[1] "=================Optimal probs=================="
+[1] 0.266667 0.266667 0.266667 0.200000
+[1] "=================Optimal ns===================="
+[1] 86 86 86 65
+
+```
+Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+
+
+```r
+
+[1] "=================Optimal design for focal parameters================="
+     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
+i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
+s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
+i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
+s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
+     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
+i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
+s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
+i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
+s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
+
+```
+
+<!--&nbsp;-->
+
+To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.
+```{r,eval=FALSE}
+summary(item.ex2$opt.output)
+```
+
+
+### 3. Visualize the Optimal Design 
+
+Similarly, to [visualize the missing data patterns of the optimal PHPM design](), we can use the `plotPM()` function. As shown in the plot, ...
+
+```{r,fig.width=7,fig.height=4}
+plotPM(wave.ex1)
+```
+
+
+## <span style="color:seagreen">**Item-level PHPM Designs via Forward Assembly**</span> 
+### 1. Search for an Optimal Item-level Design via Forward Assembly
+
+We can also use the function `simPM()` to search for an optimal [item-level missing design]() via [forward assembly](). We only need to change a few arguments within the `simPM()` function in order to do forward assembly.
+
+```r
+forward.ex2 <- simPM(
+  analyzeModel = analyzeModel,
+  popModel = popModel,
+  VarNAMES = c("F1","T1","M1","F2","T2","M2",
+               "F3","T3","M3","F4","T4","M4"),
+  distal.var = NULL,
+  n = 1135,
+  nreps = 1000,
+  seed = 123321,
+  Time = 4,
+  k = 3,
+  Time.complete = 1,
+  costmx = c(rep(5,3),rep(10,3),rep(15,3)),  
+  pc = 0.05,   
+  pd = 0,
+  focal.param = c("interc~1",
+                  "slope~1",
+                  "interc~~interc",
+                  "slope~~slope"),
+  max.mk = 5,                                      #maximum number of unique missing data patterns in the design
+  eval.budget = T,            
+  rm.budget = 1135*(15+30+45)*0.7,          
+  complete.var = "M3",                             #assume the researcher would want to collect complete data from the mothers at wave 3
+  engine = "l",
+  methods = "forward"                              #type of PHPM designs under consideration, "forward" indicates imbalanced item-level PM designs searched via forward assembly.
+)
+
+```
+
+
+While most of the arguments remains the same as in balanced item-level missing designs, here are a few arguments that are different and thus we offer a summary below: 
+
+
+* `max.mk = 5`: In this example, the researcher would want to consider the PM designs with no more than <span style="color:firebrick">5</span> unique missing data patterns. 
+* `methods = "forward"`: Search for item-level missing designs via <span style="color:firebrick">forward assembly</span>.
+
+
+### 2. Summarize the Result
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
+load("linear_LGM_example.rda")
+library(simPM)
+```
+
+
+Similarly, to [view a summary of the results](), we can use the `summary()` function. 
+```{r, eval=FALSE}
+summary(forward.ex2)
+``` 
+
+For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+
+```r
+[1] "=================results summary================"
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1             0.92               s~~s              0.999        4530          2
+[1] "=================Optimal design================="
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1             0.92               s~~s              0.999        4530          2
+```
+
+With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+
+
+```r
+[1] "=================Optimal patterns==============="
+           se1 se2 se3 se4
+             0   1   1   0
+             0   1   0   1
+             0   0   1   1
+completers   0   0   0   0
+[1] "=================Optimal probs=================="
+[1] 0.266667 0.266667 0.266667 0.200000
+[1] "=================Optimal ns===================="
+[1] 86 86 86 65
+
+```
+Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+
+
+```r
+
+[1] "=================Optimal design for focal parameters================="
+     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
+i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
+s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
+i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
+s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
+     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
+i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
+s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
+i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
+s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
+
+```
+
+<!--&nbsp;-->
+
+To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.
+```{r,eval=FALSE}
+summary(forward.ex2$opt.output)
+```
+
+
+### 3. Visualize the Optimal Design 
+
+Similarly, to [visualize the missing data patterns of the optimal PHPM design](), we can use the `plotPM()` function. As shown in the plot, ...
+
+```{r,fig.width=7,fig.height=4}
+plotPM(wave.ex1)
+```
+

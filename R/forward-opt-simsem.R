@@ -308,16 +308,37 @@ forward.opt.simsem <- function(
 
         logical.Mx <- logical.mx==1
 
-        misstemplate <- miss(logical=logical.Mx, m=0)
+        # need to make sure the order of the variable is consistent
+        colnames(logical.Mx) <- colnames(logical.mx) <- VNAMES
+        logical.Matrix[[d]] <- logical.Mx
+        
+        get_data <- simsem::sim(nRep = 1, 
+                                model = analyzeModel, 
+                                generate = popModel, 
+                                n = 2, 
+                                dataOnly = T)
+        
+        # important! Need the variable to be ordered the same as the generated data!
+        logical.Mx.reorder <- logical.Mx[, colnames(get_data[[1]])]
+        
+        misstemplate <- miss(logical = logical.Mx.reorder, m=0)
 
         if (num.miss==max.mk) {
-        output <- simsem::sim(nRep = nreps, n=n, model=analyzeModel, generate=popModel, miss=misstemplate,
+        output <- simsem::sim(nRep = nreps, 
+                              n = n, 
+                              model = analyzeModel, 
+                              generate = popModel, 
+                              miss = misstemplate,
                               #multicore=multicore,
                               seed = seed)
         } else if (num.miss < max.mk) {
-        output <- simsem::sim(nRep=nreps/5, n=n, model=analyzeModel, generate=popModel, miss=misstemplate,
+        output <- simsem::sim(nRep = nreps/5, 
+                              n = n, 
+                              model = analyzeModel, 
+                              generate = popModel, 
+                              miss = misstemplate,
                               #multicore=multicore,
-                              seed=seed)
+                              seed = seed)
         }
 
         sim.out[[i]] <- output

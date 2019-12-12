@@ -40,6 +40,10 @@ reference:
       - '`check_proj4string`'
       - '`load_prodopts`'
       - '`split_nodata_values`'
+      
+toc:
+  depth: 3
+  
 navbar:
   type: inverse
   left:
@@ -53,8 +57,8 @@ navbar:
          href: articles/Installation.html
       -  text: An Example of PHPM with a Linear LGM
          href: articles/Linear-Latent-Growth-Model.html
-      -  text: Non-Interactive Execution from within R
-         href: articles/noninteractive_execution.html
+      -  text: An Example of PHPM with a Second-order Linear LGM
+         href: articles/Second-Order-Latent-Growth-Model.html
       -  text: Standalone Execution and Scheduled Processing
          href: articles/standalone_execution.html
       -  text: Outputs Format and Naming Conventions

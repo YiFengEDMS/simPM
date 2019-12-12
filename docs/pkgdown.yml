@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   installation: installation.html
   Linear-Latent-Growth-Model: Linear-Latent-Growth-Model.html
+  Second-Order-Latent-Growth-Model: Second-Order-Latent-Growth-Model.html
   simpm: simpm.html
 

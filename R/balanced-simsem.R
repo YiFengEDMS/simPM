@@ -243,12 +243,25 @@ balance.miss.l <- function(
     # rest are completers
 
     logical.Mx <- logical.mx==1
+    
+    # need to make sure the order of the variable is consistent
+    colnames(logical.Mx) <- colnames(logical.mx) <- VNAMES
     logical.Matrix[[d]] <- logical.Mx
+    
+    get_data <- simsem::sim(nRep = 1, 
+                            model = analyzeModel, 
+                            generate = popModel, 
+                            n = 2, 
+                            dataOnly = T)
+    
 
     #  miss.model=miss(logical=logical.Mx)
     #  data.miss=impose(miss.model,data)
-
-    misstemplate <- miss(logical = logical.Mx, m=0)
+    
+    # important! Need the variable to be ordered the same as the generated data!
+    logical.Mx.reorder <- logical.Mx[, colnames(get_data[[1]])]
+    
+    misstemplate <- miss(logical = logical.Mx.reorder, m=0)
     output <- simsem::sim(nreps, 
                           n = n, 
                           model = analyzeModel, 

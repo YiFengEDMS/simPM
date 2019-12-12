@@ -206,13 +206,26 @@ if (prod(pn>=1)!=0) {
   # rest are completers
 
   logical.Mx <- logical.mx==1
+  # need to make sure the order of the variable is consistent
+  colnames(logical.Mx) <- colnames(logical.mx) <- VNAMES
   logical.Matrix[[d]] <- logical.Mx
-
-  #  miss.model=miss(logical=logical.Mx)
-  #  data.miss=impose(miss.model,data)
-
-  misstemplate <- miss(logical = logical.Mx, m = 0)
-  output <- simsem::sim(nreps, n = n, model = analyzeModel, generate = popModel, miss = misstemplate, seed = seed + d
+  
+  get_data <- simsem::sim(nRep = 1, 
+                          model = analyzeModel, 
+                          generate = popModel, 
+                          n = 2, 
+                          dataOnly = T)
+  
+  # important! Need the variable to be ordered the same as the generated data!
+  logical.Mx.reorder <- logical.Mx[, colnames(get_data[[1]])]
+  
+  misstemplate <- miss(logical = logical.Mx.reorder, m=0)
+  output <- simsem::sim(nreps, 
+                        n = n, 
+                        model = analyzeModel, 
+                        generate = popModel, 
+                        miss = misstemplate, 
+                        seed = seed + d
 #                        ,multicore=multicore
 )
 

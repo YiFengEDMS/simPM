@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Search for the optimal missing pattern with only one missing measured variable. An internal function for forward assembly. — opt1.simsem • simPM</title>
+<title>Extract the summary information of the simpm object. — summary.simpm • simPM</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Search for the optimal missing pattern with only one missing measured variable. An internal function for forward assembly. — opt1.simsem" />
+<meta property="og:title" content="Extract the summary information of the simpm object. — summary.simpm" />
 
-<meta property="og:description" content="opt1.simsem is an internal function that runs simulations using lavaan and simsem. It returns the optimal missing pattern that only contains one missing measured variable. This is the first step of forward assembly." />
+<meta property="og:description" content="summary.simpm summarizes and extracts the important information about the optimal PM design." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -161,117 +161,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Search for the optimal missing pattern with only one missing measured variable. An internal function for forward assembly.</h1>
+    <h1>Extract the summary information of the simpm object.</h1>
     
-    <div class="hidden name"><code>opt1.simsem.Rd</code></div>
+    <div class="hidden name"><code>summary.simpm.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>opt1.simsem</code> is an internal function that runs simulations using <code>lavaan</code> and <code>simsem</code>. It returns the optimal missing pattern that only contains one missing measured variable. This is the first step of forward assembly.</p>
+    <p><code>summary.simpm</code> summarizes and extracts the important information about the optimal PM design.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>opt1.simsem</span>(<span class='no'>popModel</span>, <span class='no'>analyzeModel</span>, <span class='no'>NAMES</span>, <span class='no'>distal.var</span>, <span class='no'>n</span>, <span class='no'>nreps</span>, <span class='no'>seed</span>,
-  <span class='no'>Time</span>, <span class='no'>k</span>, <span class='no'>Time.complete</span>, <span class='no'>costmx</span>, <span class='no'>pc</span>, <span class='no'>pd</span>, <span class='no'>focal.param</span>,
-  <span class='kw'>complete.var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for simpm</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>popModel</th>
-      <td><p>The data generation model (population model) specified #'    using lavaan script.</p></td>
-    </tr>
-    <tr>
-      <th>analyzeModel</th>
-      <td><p>The analysis model, specified using lavaan script. #'    The analysis model can be different from the population model.</p></td>
-    </tr>
-    <tr>
-      <th>NAMES</th>
-      <td><p>A character vector containing the names of the observed
-variables. The variable names must be ordered chronologically, by
-the time (wave) they are measured.</p></td>
-    </tr>
-    <tr>
-      <th>distal.var</th>
-      <td><p>Char vector. Specify the name(s) of the distal
-variables. User needs to specify this argument if there are any 
-time-independent distal variables included in the model that are not
-subject to planned missingness.</p></td>
-    </tr>
-    <tr>
-      <th>n</th>
-      <td><p>The total sample size as initially planned.</p></td>
-    </tr>
-    <tr>
-      <th>nreps</th>
-      <td><p>Number of replications for Monte Carlo simulations.</p></td>
-    </tr>
-    <tr>
-      <th>seed</th>
-      <td><p>The random seed for random number generation.</p></td>
-    </tr>
-    <tr>
-      <th>Time</th>
-      <td><p>Numeric. The total number of time points (or total number
-of waves of data collection).</p></td>
-    </tr>
-    <tr>
-      <th>k</th>
-      <td><p>Numeric. The number of observed variables collected at each
-wave.</p></td>
-    </tr>
-    <tr>
-      <th>Time.complete</th>
-      <td><p>Numeric. Number of waves of data collection that
-have been completed before the funding cut occurs.</p></td>
-    </tr>
-    <tr>
-      <th>costmx</th>
-      <td><p>A numeric vector containing the unit cost of each
-observed variable that is yet to be measured (post the funding cut).
-The cost is assumed to be constant across subjects, but it is
-allowed to vary across variables and across waves.</p></td>
-    </tr>
-    <tr>
-      <th>pc</th>
-      <td><p>Numeric. Proportion of completers: the proportion of subjects
-that will participate in all of the following waves of data
-collection and provide complete data. This must be greater than 0.</p></td>
-    </tr>
-    <tr>
-      <th>pd</th>
-      <td><p>Numeric. The proportion of subjects that will not participate
-in any of the following waves of data collection (i.e., people who
-will drop from the longitudinal study). This value can be 0.</p></td>
-    </tr>
-    <tr>
-      <th>focal.param</th>
-      <td><p>Character vector. The parameters of focal interest.
-The focal parameters should be specified in the format of 
-<code>lavaan</code> script.</p></td>
-    </tr>
-    <tr>
-      <th>complete.var</th>
-      <td><p>Char vector. Specify the name(s) of the 
-variable(s) if there are any variable(s) that need to have complete
-data collected from all the participating subjects.</p></td>
+      <th>object</th>
+      <td><p>The output object returned by <code><a href='simPM.html'>simPM</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object containing the information of the optimal missing
-   data pattern containing only one missing observed variable. The
-   optimal pattern is the one that yields highest statistical power for
-   testing the focal parameters, compared to other patterns with only
-   one missing observed variable.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='simPM.html'>simPM</a></code> which is a warpper function for this
-   function.</p></div>
+    <p>The information about the optimal PM design.</p>
     
 
   </div>
@@ -281,8 +196,6 @@ data collected from all the participating subjects.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
