@@ -1,7 +1,7 @@
 ---
 output: 
   github_document:
-    toc: true
+    toc: false
     toc_depth: 3
 ---
 
@@ -68,7 +68,7 @@ Below are some vignettes demonstrating the features of `simPM`:
 1. [Wave-level PM designs]()
 1. [Item-level PM designs]()
 1. [Forward assembly]()
-1. [Attrition]()
+<!-- 1. [Attrition] -->
 1. [Summarize the optimal design]()
 1. [Plot the optimal design]()
 

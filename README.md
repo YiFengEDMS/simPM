@@ -72,19 +72,19 @@ Below are some vignettes demonstrating the features of `simPM`:
     manual](https://yifengedms.github.io/simPM/manual/simPM_0.0.0.9000.pdf)
 3.  [An example of PHPM with a linear
     LGM](articles/Linear-Latent-Growth-Model.html)
-4.  [An example of PHPM with a second-order LGM](articles/Second-Order-Latent-Growth-Model.html)
+4.  [An example of PHPM with a second-order
+    LGM](articles/Second-Order-Latent-Growth-Model.html)
 5.  [An example of PHPM with an autoregression and cross-lagged model]()
 6.  [Wave-level PM designs]()
 7.  [Item-level PM designs]()
-8.  [Forward assembly]()
-9.  [Attrition]()
-10. [Summarize the optimal design]()
-11. [Plot the optimal design]()
+8.  [Forward assembly]() <!-- 1. [Attrition] -->
+9.  [Summarize the optimal design]()
+10. [Plot the optimal design]()
 
 ## Citation
 
-Yi Feng and Gregory R. Hancock (2019). simPM: SIMulation-based power
-analysis for Planned Missing designs. R package version 0.0.0.9000.
+Feng, Y. & Hancock, G. R. (2019). simPM: SIMulation-based power analysis
+for Planned Missing designs. R package version 0.0.0.9000.
 <https://yifengedms.github.io/simPM/>
 
 ## Questions or Suggestions?
