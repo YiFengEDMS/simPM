@@ -27,7 +27,7 @@ To visualize the missing data patterns of the optimal PHPM design, we can use th
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
 load("wave.ex2_r1.rda")
 load("item.ex2_r1.rda")
-#load("forward.ex2_r1.rda")
+load("forward.ex2_r1.rda")
 library(simPM)
 ```
 
@@ -57,12 +57,18 @@ plotPM(wave.ex2, labels = F, col = c("gray96", "gray35"), fontsize_col = 15)
 ```
 
 
-Below is an example of the plot showing the missing data patterns for a item-level PHPM design. If we do not wish to include the number of participants assigned to each missing data pattern, we can turn it off by setting `row.names = FALSE`.
+Below is an example of the plot showing the missing data patterns for a balanced item-level PHPM design. If we do not wish to include the number of participants assigned to each missing data pattern, we can turn it off by setting `row.names = FALSE`.
 
 ```{r,fig.width=9,fig.height=6}
 plotPM(item.ex2, row.names=F, fontsize_col = 15)
 ```
 
+
+Below is an example of the plot showing the missing data patterns for an imbalanced item-level PHPM design (with forward assembly). 
+
+```{r,fig.width=9,fig.height=6}
+plotPM(forward.ex2)
+```
 
 
 

@@ -54,7 +54,7 @@ navbar:
       icon: fas fa-book
       menu:
       -  text: Installation
-         href: articles/Installation.html
+         href: articles/installation.html
       -  text: An Example of PHPM with a Linear LGM
          href: articles/Linear-Latent-Growth-Model.html
       -  text: An Example of PHPM with a Second-order Linear LGM

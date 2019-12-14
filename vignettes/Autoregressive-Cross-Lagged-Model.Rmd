@@ -185,18 +185,18 @@ wave.ex3 <- simPM(popModel = popModel,                               #supply the
 More specifically:
 
 * `VarNAMES = c("PeerPop1","SelfPop1","Support1", "PeerPop2","SelfPop2","Support2","PeerPop3","SelfPop3","Support3")`: The observed variables collected in this study are named <span style="color:firebrick">PeerPop1, SelfPop1, Support1,  PeerPop2, SelfPop2, Support2, PeerPop3, SelfPop3, Support3</span>.
-* `Time = 4`: The study has <span style="color:firebrick">4</span> waves of data collection in total.
-* `Time.complete = 1`: <span style="color:firebrick">One</span> wave of data collection has been completed before funding cut occurs
+* `Time = 3`: The study has <span style="color:firebrick">3</span> waves of data collection in total.
+* `Time.complete = 1`: <span style="color:firebrick">One</span> wave of data collection has been completed before funding cut occurs.
 * `k = 3`: <span style="color:firebrick">Three</span> observed variable are collected at each wave of data collection. 
 * `pc = 0.1`: <span style="color:firebrick">Ten percent</span> of the participants are randomly assigned to provide complete data for future waves after funding cut.
 * `pd = 0`: <span style="color:firebrick">Zero percent</span> of the participants are assigned to drop from the study.
-* `costmx = c(rep(5,3), rep(10,3), rep(15,3))`: The unit cost of collecting one report from the father, the mother, or the teacher is  <span style="color:firebrick">\$5</span> at wave 2, <span style="color:firebrick">\$10</span> at wave 3, and <span style="color:firebrick">\$15</span> at wave 4.  
-* `n = 1135`: The original sample size planned was <span style="color:firebrick">1,135</span>.
+* `costmx = c(5, 5, 5, 10, 10, 10)`: The unit cost of collecting one report from the father, the mother, or the teacher is  <span style="color:firebrick">\$5</span> at wave 2 and <span style="color:firebrick">\$10</span> at wave 3.  
+* `n = 1000`: The original sample size planned was <span style="color:firebrick">1,000</span>.
 * `nreps = 1000`: The program will run <span style="color:firebrick">1000</span> replications for Monte Carlo simulation (for each plausible design).
-* `focal.param = c("interc~1", "slope~1", "interc~~interc", "slope~~slope")`: The focal parameters of interest are the mean and variance of the latent intercept and slope for the latent construct of externalizing behaviors.
+* `focal.param=c("PeerPop2~SelfPop1","Support2~PeerPop1","PeerPop3~SelfPop2","Support3~PeerPop2")`: The focal parameters of interest are the cross-lagged path coefficients predicting peer-perceived popularity from self-perceived popularity and the cross-lagged path coefficients predicting teacher-child support from peer-perceived popularity.
 * `complete.wave = NULL`: No future waves are by design to have complete data colleted from all of the three sources.
 * `eval.budget = T`: Yes, there is a budget restriction that needs to be taken into consideration.
-* `rm.budget = 90*1135*0.7`: After the funding cut, the researcher will have <span style="color:firebrick"> $\$71,505$ </span> $(=90\times1135\times0.7)$ to support the future waves of data collection.
+* `rm.budget = 45*1000*0.7`: After the funding cut, the researcher will have <span style="color:firebrick"> $\$31,500$ </span> $(=45\times1000\times0.7)$ to support the future waves of data collection.
 * `distal.var = NULL`: There are no distal variables in the model that are not subject to repeated measures.
 * `engine = "l"`: Data were simulated using `simsem` and the models were fitted using `lavaan`.
 * `methods = "wave"`: Search for wave-level missing designs.
@@ -207,67 +207,65 @@ More specifically:
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("wave.ex2_r1.rda")
+load("wave.ex3_r1.rda")
 library(simPM)
 ```
 
 
 To [view a summary of the results](Summary.html), we can use the `summary.simpm()` function. It prints out the comparison among all the plausible wave-level missing designs (with regard to the parameter with the lowest empirical power), the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.
 ```{r, eval=FALSE}
-summary(wave.ex2)
+summary(wave.ex3)
 ``` 
 
-For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$24,750, which is below the reduced available budget.
 
 ```r
 [1] "=================results summary================"
   convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+1                1  PeerPop3~SelfPop2              0.358       24750          1
 [1] "=================Optimal design================="
   convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+1                1  PeerPop3~SelfPop2              0.358       24750          1
 ```
 
-With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+With this design, 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the three unique missing data patterns ($n=450$ in each pattern). 
 
 
 ```r
 [1] "=================Optimal patterns==============="
-           se1 se2 se3 se4
-             0   1   1   0
-             0   1   0   1
-             0   0   1   1
-completers   0   0   0   0
+           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3
+                  0        0        0        1        1        1        0        0        0
+                  0        0        0        0        0        0        1        1        1
+completers        0        0        0        0        0        0        0        0        0
 [1] "=================Optimal probs=================="
-[1] 0.266667 0.266667 0.266667 0.200000
+[1] 0.45 0.45 0.10
 [1] "=================Optimal ns===================="
-[1] 86 86 86 65
+[1] 450 450 100
 
 ```
-Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+Over 1000 replications, this design yields poor statistical power for testing most of the focal parameters. The empirical power for testing $b_{PS_1}$ is 0.681 and 0.358 for testing $b_{PS_2}$. The power is 0.834 for testing $b_{TP_1}$ and 0.642 for testing $b_{TP_2}$.
 
 
 ```r
 
 [1] "=================Optimal design for focal parameters================="
-     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
-i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
-s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
-i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
-s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
-     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
-i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
-s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
-i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
-s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
-
+                  Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD Std Ave SE Average Param  Average Bias
+PeerPop2~SelfPop1       0.05015451  0.02113615 0.02038431               0.681 0.07585215 0.03185897 0.03076342         0.051 -8.454893e-04
+Support2~PeerPop1       0.12303069  0.04152845 0.04179084               0.834 0.10939710 0.03665247 0.03692004         0.124 -9.693051e-04
+PeerPop3~SelfPop2       0.05607364  0.03602006 0.03485226               0.358 0.08512223 0.05447372 0.05276132         0.056  7.363818e-05
+Support3~PeerPop2       0.13345178  0.05734917 0.05745153               0.642 0.12809893 0.05467605 0.05477553         0.132  1.451783e-03
+                  Coverage Average FMI1    SD FMI1
+PeerPop2~SelfPop1    0.936    0.3647029 0.02633273
+Support2~PeerPop1    0.955    0.4380497 0.02350980
+PeerPop3~SelfPop2    0.936    0.8057133 0.01852440
+Support3~PeerPop2    0.951    0.7088486 0.02283863
 ```
 
 <!--&nbsp;-->
 
 To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.
 ```{r,eval=FALSE}
-summary(wave.ex2$opt.output)
+summary(wave.ex3$opt.output)
 ```
 
 
@@ -275,8 +273,8 @@ summary(wave.ex2$opt.output)
 
 To [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled. 
 
-```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex2, labels = F)
+```{r,fig.width=9,fig.height=5}
+plotPM(wave.ex3, fontsize_col = 15, angle_col = 90)
 ```
 
 
@@ -287,30 +285,26 @@ plotPM(wave.ex2, labels = F)
 We can also use the function `simPM()` to search for an optimal [item-level missing design](Item-Level-PHPM.html). The code to search for optimal item-level PHPM designs is very similar to the code to search for optimal wave-level PHPM designs. The minor differences in the code are followed with comments.  
 
 ```r
-item.ex2 <- simPM(
+item.ex3 <- simPM(
   popModel,
   analyzeModel,
-  VarNAMES = c("F1","T1","M1","F2","T2","M2",
-               "F3","T3","M3","F4","T4","M4"),
+  VarNAMES=c("PeerPop1","SelfPop1","Support1","PeerPop2","SelfPop2","Support2","PeerPop3","SelfPop3","Support3"),
   distal.var = NULL,
-  n = 1135,
-  nreps = 1000,
-  seed = 12345,
-  Time = 4,
-  k = 3,
-  Time.complete = 1,
-  costmx = c(5,5,5,10,10,10,15,15,15), 
-  pc = 0.1,
-  pd = 0,
-  focal.param = c("interc~1",
-                  "slope~1",
-                  "interc~~interc",
-                  "slope~~slope"),
-  eval.budget = T,          
-  rm.budget = 90*1135*0.7,        
-  complete.var = NULL,            # specify any observed variables that need complete data to be collected in the future waves
-  engine = "l",
-  methods = "item"                # type of PHPM designs under consideration, "item" indicates item-level missing
+  n=1000,
+  nreps=10,
+  seed=12345,
+  Time=3,
+  k=3,
+  Time.complete=1,
+  costmx=c(5,5,5,10,10,10), 
+  pc=0.1,
+  pd=0,
+  focal.param=c("PeerPop2~SelfPop1","Support2~PeerPop1","PeerPop3~SelfPop2","Support3~PeerPop2"),
+  eval.budget=T,          
+  rm.budget=31500L,        # remaining available budget 45*1000*0.7
+  complete.var=NULL,
+  engine="l",
+  methods="item"
 )
 
 ```
@@ -328,67 +322,81 @@ While most of the arguments are the same as in the case of [wave-level missing d
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("item.ex2_r1.rda")
+load("item.ex3_r1.rda")
 library(simPM)
 ```
 
 
 Similarly, to [view a summary of the results](Summary.html), we can use the `summary()` function. 
 ```{r, eval=FALSE}
-summary(item.ex2)
+summary(item.ex3)
 ``` 
 
-For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+For this example, given the budget constraints, there are four plausible item-level PHPM designs (with missingness balanced across the patterns). The program thus has run simulations for all the four plausible designs and made comparisons across the designs. The optimal design among the 4 balanced item-level missing designs will cost \$31,500, which is equal to the reduced available budget.
 
 ```r
 [1] "=================results summary================"
-  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.point
+1                1  PeerPop3~SelfPop2              0.721       31500          2
+2                1  PeerPop3~SelfPop2              0.523       24750          3
+3                1  PeerPop3~SelfPop2              0.361       18000          4
+4                1  PeerPop3~SelfPop2              0.257       11250          5
 [1] "=================Optimal design================="
-  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.point
+1                1  PeerPop3~SelfPop2              0.721       31500          2
 ```
 
-With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+With this design, 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the 15 unique missing data patterns ($n=60$ in each pattern). In each missing data pattern, the participants are assigned to miss four observed indicators (items) in the future waves of data collection (e.g., self-perceived popularity at wave 2 and peer-perceived popularity at wave 3). 
 
 
 ```r
 [1] "=================Optimal patterns==============="
-           se1 se2 se3 se4
-             0   1   1   0
-             0   1   0   1
-             0   0   1   1
-completers   0   0   0   0
+           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3
+                  0        0        0        1        1        0        0        0        0
+                  0        0        0        1        0        1        0        0        0
+                  0        0        0        1        0        0        1        0        0
+                  0        0        0        1        0        0        0        1        0
+                  0        0        0        1        0        0        0        0        1
+                  0        0        0        0        1        1        0        0        0
+                  0        0        0        0        1        0        1        0        0
+                  0        0        0        0        1        0        0        1        0
+                  0        0        0        0        1        0        0        0        1
+                  0        0        0        0        0        1        1        0        0
+                  0        0        0        0        0        1        0        1        0
+                  0        0        0        0        0        1        0        0        1
+                  0        0        0        0        0        0        1        1        0
+                  0        0        0        0        0        0        1        0        1
+                  0        0        0        0        0        0        0        1        1
+completers        0        0        0        0        0        0        0        0        0
 [1] "=================Optimal probs=================="
-[1] 0.266667 0.266667 0.266667 0.200000
+ [1] 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.10
 [1] "=================Optimal ns===================="
-[1] 86 86 86 65
+ [1]  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60 100
 
 ```
-Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+Over 1000 replications, this design yields an empirical power of 0.786 for testing the path coefficient $b_{PS_1}$, 0.721 for testing the path coefficient $b_{PS_2}$, 0.917 for testing the path coefficient $b_{TS_1}$, and 0.890 for testing the path coefficient $b_{TS_2}$.
 
 
 ```r
 
 [1] "=================Optimal design for focal parameters================="
-     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
-i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
-s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
-i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
-s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
-     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
-i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
-s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
-i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
-s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
-
+                  Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD Std Ave SE Average Param  Average Bias
+PeerPop2~SelfPop1       0.05055570  0.01874772 0.01847418               0.786 0.07640485 0.02824061 0.02788479         0.051 -0.0004443034
+Support2~PeerPop1       0.12345953  0.03710990 0.03693612               0.917 0.10985168 0.03249985 0.03269727         0.124 -0.0005404742
+PeerPop3~SelfPop2       0.05675102  0.02228946 0.02215252               0.721 0.08639815 0.03395195 0.03365353         0.056  0.0007510192
+Support3~PeerPop2       0.13073982  0.04158240 0.04079068               0.890 0.12585197 0.03996419 0.03892887         0.132 -0.0012601844
+                  Coverage Average FMI1    SD FMI1
+PeerPop2~SelfPop1    0.943    0.2266084 0.01766973
+Support2~PeerPop1    0.953    0.2816413 0.02098447
+PeerPop3~SelfPop2    0.939    0.5163652 0.02112441
+Support3~PeerPop2    0.940    0.4224801 0.02196725
 ```
 
 <!--&nbsp;-->
 
 To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.
 ```{r,eval=FALSE}
-summary(item.ex2$opt.output)
+summary(item.ex3$opt.output)
 ```
 
 
@@ -396,8 +404,8 @@ summary(item.ex2$opt.output)
 
 Similarly, to [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. As shown in the plot, ...
 
-```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex2)
+```{r,fig.width=9,fig.height=5}
+plotPM(item.ex3, fontsize_col = 15, angle_col = 90)
 ```
 
 
@@ -407,31 +415,27 @@ plotPM(wave.ex2)
 We can also use the function `simPM()` to search for an optimal [item-level missing design via forward assembly](Forward-Assembly-PHPM.html). We only need to change a few arguments within the `simPM()` function in order to do forward assembly.
 
 ```r
-forward.ex2 <- simPM(
-  analyzeModel = analyzeModel,
-  popModel = popModel,
-  VarNAMES = c("F1","T1","M1","F2","T2","M2",
-               "F3","T3","M3","F4","T4","M4"),
+forward.ex3 <- simPM(
+  popModel,
+  analyzeModel,
+  VarNAMES=c("PeerPop1","SelfPop1","Support1","PeerPop2","SelfPop2","Support2","PeerPop3","SelfPop3","Support3"),
   distal.var = NULL,
-  n = 1135,
-  nreps = 1000,
-  seed = 123321,
-  Time = 4,
-  k = 3,
-  Time.complete = 1,
-  costmx = c(rep(5,3),rep(10,3),rep(15,3)),  
-  pc = 0.05,   
-  pd = 0,
-  focal.param = c("interc~1",
-                  "slope~1",
-                  "interc~~interc",
-                  "slope~~slope"),
-  max.mk = 5,                                      #maximum number of unique missing data patterns in the design
-  eval.budget = T,            
-  rm.budget = 1135*(15+30+45)*0.7,          
-  complete.var = "M3",                             #assume the researcher would want to collect complete data from the mothers at wave 3
-  engine = "l",
-  methods = "forward"                              #type of PHPM designs under consideration, "forward" indicates imbalanced item-level PM designs searched via forward assembly.
+  n=10,
+  nreps=1000,
+  seed=12345,
+  Time=3,
+  k=3,
+  max.mk=3, 
+  Time.complete=1,
+  costmx=c(5,5,5,10,10,10), 
+  pc=0.1,
+  pd=0,
+  focal.param=c("PeerPop2~SelfPop1","Support2~PeerPop1","PeerPop3~SelfPop2","Support3~PeerPop2"),
+  eval.budget=T,          
+  rm.budget=31500L,        
+  complete.var=NULL,
+  engine="l",
+  methods="forward"
 )
 
 ```
@@ -440,7 +444,7 @@ forward.ex2 <- simPM(
 While most of the arguments remains the same as in balanced item-level missing designs, here are a few arguments that are different and thus we offer a summary below: 
 
 
-* `max.mk = 5`: In this example, the researcher would want to consider the PM designs with no more than <span style="color:firebrick">5</span> unique missing data patterns. 
+* `max.mk = 3`: In this example, the researcher would want to consider the PM designs with no more than <span style="color:firebrick">3</span> unique missing data patterns. 
 * `methods = "forward"`: Search for item-level missing designs via <span style="color:firebrick">forward assembly</span>.
 
 
@@ -449,59 +453,59 @@ While most of the arguments remains the same as in balanced item-level missing d
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("item.ex2_r1.rda")
+load("forward.ex3_r1.rda")
 library(simPM)
 ```
 
 
 Similarly, to [view a summary of the results](Summary.html), we can use the `summary()` function. 
 ```{r, eval=FALSE}
-summary(forward.ex2)
+summary(forward.ex3)
 ``` 
 
-For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+Based on the output, this optimal design costs \$30,000, which is below the reduced available budget.
 
 ```r
-[1] "=================results summary================"
-  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
 [1] "=================Optimal design================="
-  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+   convergence.rate weakest.param.name weakest.para.power cost.design miss.num miss.var1 miss.var2 miss.var3 sim.seq miss.loc1
+16                1  PeerPop2~SelfPop1              0.885       30000        3  SelfPop2  SelfPop3  Support3      16         5
+   miss.loc2 miss.loc3
+16         8         9
 ```
 
-With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+With this design, 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the three unique missing data patterns ($n=300$ in each pattern). 
 
 
 ```r
 [1] "=================Optimal patterns==============="
-           se1 se2 se3 se4
-             0   1   1   0
-             0   1   0   1
-             0   0   1   1
-completers   0   0   0   0
+           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3
+                  0        0        0        0        1        0        0        1        1
+                  0        0        0        0        0        1        0        1        0
+                  0        0        0        0        0        0        0        1        0
+completers        0        0        0        0        0        0        0        0        0
 [1] "=================Optimal probs=================="
-[1] 0.266667 0.266667 0.266667 0.200000
+[1] 0.3 0.3 0.3 0.1
 [1] "=================Optimal ns===================="
-[1] 86 86 86 65
+[1] 300 300 300 100
 
 ```
-Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+Over 1000 replications, this design yields an empirical power of 0.885 for testing the path coefficient $b_{PS_1}$, 0.914 for testing the path coefficient $b_{PS_2}$, 0.906 for testing the path coefficient $b_{TS_1}$, and 0.937 for testing the path coefficient $b_{TS_2}$. With this PHPM design, the statistical power is satisfactory for testing each of the focal parameters. 
+
 
 
 ```r
 
 [1] "=================Optimal design for focal parameters================="
-     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
-i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
-s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
-i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
-s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
-     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
-i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
-s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
-i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
-s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
+                  Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD Std Ave SE Average Param
+PeerPop2~SelfPop1        0.0509315  0.01593366 0.01625888               0.885 0.07715693 0.02407530 0.02460888         0.051
+Support2~PeerPop1        0.1225502  0.03691843 0.03681819               0.906 0.10899450 0.03257593 0.03257226         0.124
+PeerPop3~SelfPop2        0.0568749  0.01686760 0.01728927               0.914 0.08652626 0.02558155 0.02628572         0.056
+Support3~PeerPop2        0.1313719  0.03780042 0.03793717               0.937 0.12610467 0.03596546 0.03609359         0.132
+                   Average Bias Coverage Average FMI1     SD FMI1
+PeerPop2~SelfPop1 -6.849557e-05    0.951  0.004906487 0.002715199
+Support2~PeerPop1 -1.449846e-03    0.937  0.275855979 0.020332822
+PeerPop3~SelfPop2  8.748955e-04    0.947  0.202017999 0.015647460
+Support3~PeerPop2 -6.281368e-04    0.951  0.330559605 0.020608104
 
 ```
 
@@ -509,7 +513,7 @@ s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
 
 To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.
 ```{r,eval=FALSE}
-summary(forward.ex2$opt.output)
+summary(forward.ex3$opt.output)
 ```
 
 
@@ -517,7 +521,7 @@ summary(forward.ex2$opt.output)
 
 Similarly, to [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. As shown in the plot, ...
 
-```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex2)
+```{r,fig.width=9,fig.height=5}
+plotPM(forward.ex3, fontsize_col = 15, angle_col = 90)
 ```
 

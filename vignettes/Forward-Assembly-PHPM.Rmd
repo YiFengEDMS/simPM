@@ -219,7 +219,7 @@ forward.ex2 <- simPM(
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("item.ex2_r1.rda")
+load("forward.ex2_r1.rda")
 library(simPM)
 ```
 
@@ -235,17 +235,17 @@ In this example, given that we have specified to collect complete data for the m
 
 The program will run Monte Carlo simulations in order to assemble the optimal PHPM design. With the `max.mk = 5` argument, the target PHPM design will have five unique missing data patterns, each has $1, 2, ..., 5$ missing observed measurements, respectively.
 
-According to the output, the optimal design costs \$61,830, which is below the reduced available budget. From the output, we can see that 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the 126 unique missing data patterns ($n=8$ in each pattern). In each missing data pattern, the participants are assigned to miss four observed indicators (items) in the future waves of data collection (e.g., father and mother report at wave 2 as well as father and teacher report at wave 3). 
+According to the output, the optimal design costs \$30,000, which is below the reduced available budget. From the output, we can see that 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the three unique missing data patterns ($n=300$ in each pattern). 
 
-Over 1000 replications, this design yields an empirical power of 1 for testing the mean intercept (`interc~1`), the mean slope (`slope~1`), and the intercept variance (`interc~~interc`). The empirical statistical power for testing the slope variance (`slope~~slope`) is 0.79.   
+Over 1000 replications, this design yields an empirical power of 0.786 for testing the path coefficient $b_{PS_1}$, 0.721 for testing the path coefficient $b_{PS_2}$, 0.917 for testing the path coefficient $b_{TS_1}$, and 0.890 for testing the path coefficient $b_{TS_2}$.
 
 
 ```{r}
-summary(item.ex2)
+summary(forward.ex2)
 ``` 
 
-```{r,fig.width=7,fig.height=4}
-plotPM(item.ex2, row.names=F)
+```{r,fig.width=9,fig.height=5}
+plotPM(forward.ex2, row.names=F)
 ```
 
 

@@ -583,7 +583,7 @@ While most of the arguments remains the same as in balanced item-level PHPM desi
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("wave.ex2_r1.rda")
+load("forward.ex2_r1.rda")
 library(simPM)
 ```
 
@@ -593,49 +593,45 @@ Similarly, to [view a summary of the results](Summary.html), we can use the `sum
 summary(forward.ex2)
 ``` 
 
-For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs \$4,530, which is below the reduced available budget.
+According to the output, the optimal design costs \$69,802.5, which is below the reduced available budget.
 
 ```r
-[1] "=================results summary================"
-  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
 [1] "=================Optimal design================="
-  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+   convergence.rate weakest.param.name weakest.para.power cost.design miss.num miss.var1 miss.var2
+48             0.93       slope~~slope               0.94     69802.5        5        T2        F3
+   miss.var3 miss.var4 miss.var5 sim.seq miss.loc1 miss.loc2 miss.loc3 miss.loc4 miss.loc5
+48        T3        T4        M4      48         5         7         8        11        12
 ```
 
-With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns ($n=86$ in each pattern). 
+With this design, 5% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 95% of the participants are randomly assigned to one of the five unique missing data patterns ($n=215$ in each pattern). 
 
 
 ```r
 [1] "=================Optimal patterns==============="
-           se1 se2 se3 se4
-             0   1   1   0
-             0   1   0   1
-             0   0   1   1
-completers   0   0   0   0
+           F1 T1 M1 F2 T2 M2 F3 T3 M3 F4 T4 M4
+            0  0  0  0  1  0  1  1  0  0  1  1
+            0  0  0  0  1  1  1  0  0  0  1  0
+            0  0  0  0  0  1  1  0  0  0  0  1
+            0  0  0  0  0  1  0  0  0  0  1  0
+            0  0  0  0  0  0  0  1  0  0  0  0
+completers  0  0  0  0  0  0  0  0  0  0  0  0
 [1] "=================Optimal probs=================="
-[1] 0.266667 0.266667 0.266667 0.200000
+[1] 0.19 0.19 0.19 0.19 0.19 0.05
 [1] "=================Optimal ns===================="
-[1] 86 86 86 65
+[1] 215 215 215 215 215  60
 
 ```
-Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
+Over 1000 replications, this design yields an empirical power of 0.94 for testing the slope variance $\sigma^2_\beta$, and 1 for testing the mean intercept ($\mu_\alpha$), the mean slope ($\mu_\beta$), and the intercept variance ($\sigma^2_\alpha$).
 
 
 ```r
 
 [1] "=================Optimal design for focal parameters================="
-     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
-i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
-s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
-i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
-s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
-     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
-i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
-s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
-i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
-s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
+               Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est   Std Est SD Std Ave SE Average FMI1     SD FMI1
+interc~1              8.2865724  0.18423599 0.18257516                1.00  1.9443858 9.325732e-02 0.09379636   0.02365522 0.006379778
+slope~1              -0.4329607  0.03256262 0.03172940                1.00 -0.9003786 2.070116e-01 0.18404313   0.10842323 0.019047938
+interc~~interc       18.2731813  1.68107536 1.66210528                1.00  1.0000000 1.554693e-16 0.00000000   0.11784586 0.021024875
+slope~~slope          0.2502644  0.07226992 0.07443478                0.94  1.0000000 1.438019e-16 0.00000000   0.27518386 0.024379875
 
 ```
 
@@ -652,6 +648,6 @@ summary(forward.ex2$opt.output)
 Similarly, to [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. As shown in the plot, ...
 
 ```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex2)
+plotPM(forward.ex2)
 ```
 
