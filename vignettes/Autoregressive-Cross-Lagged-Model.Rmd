@@ -28,7 +28,7 @@ Suppose a group of researchers is interested in examining the longitudinal recip
 Unfortunately, after the first wave of data collection, the funding agency announces a 30% reduction in the remaining funding. The researcher wishes to continue the project under the budget constraint, with the hope to not compromise the scientific rigor and statistical power. The reseacher thus decideds to use `simPM` to find a design that yields sufficient power but costs no more than the reduced budget. 
 
 
-```{r,out.width='50%', fig.align='center', fig.cap='An autoregressive and cross-lagged model', echo=FALSE}
+```{r,out.width='70%', fig.align='center', fig.cap='An autoregressive and cross-lagged model', echo=FALSE}
 knitr::include_graphics('images/Autoregressive-cross-lagged.png')
 ```
 
@@ -148,7 +148,7 @@ Support3~~Support3
 ## <span style="color:seagreen">**Wave-level PHPM Designs**</span> 
 ### <a name="wave">1. Search for an Optimal Wave-level Design</a>
 
-We can use the main function `simPM()` to search for an optimal [wave-level missing design](). For `simPM()` to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, `simPM` will automatically map out all the possible wave-level PHPM designs, run power analysis for each plausible design, and output the optimal design. 
+We can use the main function `simPM()` to search for an optimal [wave-level missing design](Wave-Level-PHPM.html). For `simPM()` to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, `simPM` will automatically map out all the possible wave-level PHPM designs, run power analysis for each plausible design, and output the optimal design. 
 
 
 ```r
@@ -184,7 +184,7 @@ wave.ex3 <- simPM(popModel = popModel,                               #supply the
 
 More specifically:
 
-* `VarNAMES = c("PeerPop1","SelfPop1","Support1", "PeerPop2","SelfPop2","Support2","PeerPop3","SelfPop3","Support3")`: The observed variables collected in this study are named <span style="color:firebrick">F1-F4, T1-T4, and M1-M4</span>.
+* `VarNAMES = c("PeerPop1","SelfPop1","Support1", "PeerPop2","SelfPop2","Support2","PeerPop3","SelfPop3","Support3")`: The observed variables collected in this study are named <span style="color:firebrick">PeerPop1, SelfPop1, Support1,  PeerPop2, SelfPop2, Support2, PeerPop3, SelfPop3, Support3</span>.
 * `Time = 4`: The study has <span style="color:firebrick">4</span> waves of data collection in total.
 * `Time.complete = 1`: <span style="color:firebrick">One</span> wave of data collection has been completed before funding cut occurs
 * `k = 3`: <span style="color:firebrick">Three</span> observed variable are collected at each wave of data collection. 
@@ -207,12 +207,12 @@ More specifically:
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("linear_LGM_example.rda")
+load("wave.ex2_r1.rda")
 library(simPM)
 ```
 
 
-To [view a summary of the results](), we can use the `summary()` function. It prints out the comparison among all the plausible wave-level missing designs (with regard to the parameter with the lowest empirical power), the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.
+To [view a summary of the results](Summary.html), we can use the `summary.simpm()` function. It prints out the comparison among all the plausible wave-level missing designs (with regard to the parameter with the lowest empirical power), the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.
 ```{r, eval=FALSE}
 summary(wave.ex2)
 ``` 
@@ -273,18 +273,18 @@ summary(wave.ex2$opt.output)
 
 ### 3. Visualize the Optimal Design 
 
-To [visualize the missing data patterns of the optimal PHPM design](), we can use the `plotPM()` function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled. 
+To [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled. 
 
 ```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex1, labels = F)
+plotPM(wave.ex2, labels = F)
 ```
 
 
 
 ## <span style="color:seagreen">**Balanced Item-level PHPM Designs**</span> 
-### 1. Search for an Optimal Wave-level Design {#item}
+### 1. Search for an Optimal Item-level Design {#item}
 
-We can also use the function `simPM()` to search for an optimal [item-level missing design](). The code to search for optimal item-level PHPM designs is very similar to the code to search for optimal wave-level PHPM designs. The minor differences in the code are followed with comments.  
+We can also use the function `simPM()` to search for an optimal [item-level missing design](Item-Level-PHPM.html). The code to search for optimal item-level PHPM designs is very similar to the code to search for optimal wave-level PHPM designs. The minor differences in the code are followed with comments.  
 
 ```r
 item.ex2 <- simPM(
@@ -328,12 +328,12 @@ While most of the arguments are the same as in the case of [wave-level missing d
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("linear_LGM_example.rda")
+load("item.ex2_r1.rda")
 library(simPM)
 ```
 
 
-Similarly, to [view a summary of the results](), we can use the `summary()` function. 
+Similarly, to [view a summary of the results](Summary.html), we can use the `summary()` function. 
 ```{r, eval=FALSE}
 summary(item.ex2)
 ``` 
@@ -394,17 +394,17 @@ summary(item.ex2$opt.output)
 
 ### 3. Visualize the Optimal Design 
 
-Similarly, to [visualize the missing data patterns of the optimal PHPM design](), we can use the `plotPM()` function. As shown in the plot, ...
+Similarly, to [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. As shown in the plot, ...
 
 ```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex1)
+plotPM(wave.ex2)
 ```
 
 
 ## <span style="color:seagreen">**Item-level PHPM Designs via Forward Assembly**</span> 
 ### 1. Search for an Optimal Item-level Design via Forward Assembly
 
-We can also use the function `simPM()` to search for an optimal [item-level missing design]() via [forward assembly](). We only need to change a few arguments within the `simPM()` function in order to do forward assembly.
+We can also use the function `simPM()` to search for an optimal [item-level missing design via forward assembly](Forward-Assembly-PHPM.html). We only need to change a few arguments within the `simPM()` function in order to do forward assembly.
 
 ```r
 forward.ex2 <- simPM(
@@ -449,12 +449,12 @@ While most of the arguments remains the same as in balanced item-level missing d
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
-load("linear_LGM_example.rda")
+load("item.ex2_r1.rda")
 library(simPM)
 ```
 
 
-Similarly, to [view a summary of the results](), we can use the `summary()` function. 
+Similarly, to [view a summary of the results](Summary.html), we can use the `summary()` function. 
 ```{r, eval=FALSE}
 summary(forward.ex2)
 ``` 
@@ -515,9 +515,9 @@ summary(forward.ex2$opt.output)
 
 ### 3. Visualize the Optimal Design 
 
-Similarly, to [visualize the missing data patterns of the optimal PHPM design](), we can use the `plotPM()` function. As shown in the plot, ...
+Similarly, to [visualize the missing data patterns of the optimal PHPM design](PlotPM.html), we can use the `plotPM()` function. As shown in the plot, ...
 
 ```{r,fig.width=7,fig.height=4}
-plotPM(wave.ex1)
+plotPM(wave.ex2)
 ```
 

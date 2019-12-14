@@ -2,8 +2,15 @@ pandoc: 2.7.1
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
+  Autoregressive-Cross-Lagged-Model: Autoregressive-Cross-Lagged-Model.html
+  faq: faq.html
+  Forward-Assembly-PHPM: Forward-Assembly-PHPM.html
   installation: installation.html
+  Item-Level-PHPM: Item-Level-PHPM.html
   Linear-Latent-Growth-Model: Linear-Latent-Growth-Model.html
+  PlotPM: PlotPM.html
   Second-Order-Latent-Growth-Model: Second-Order-Latent-Growth-Model.html
   simpm: simpm.html
+  Summary: Summary.html
+  Wave-Level-PHPM: Wave-Level-PHPM.html
 

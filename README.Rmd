@@ -53,24 +53,24 @@ The source code of this R package is made public on the author's [Github page](h
 ```r
 install.packages("devtools")
 library(devtools)
-devtools::intall_github("YiFengEDMS/simPM")
+intall_github("YiFengEDMS/simPM")
 ``` 
 
 ## Useful resources
 
-Below are some vignettes demonstrating the features of `simPM`:
+Below are some vignettes demonstrating the usage of `simPM`:
 
 1. [Installation](articles/installation.html)
 1. [Package manual](https://yifengedms.github.io/simPM/manual/simPM_0.0.0.9000.pdf)
 1. [An example of PHPM with a linear LGM](articles/Linear-Latent-Growth-Model.html)
 1. [An example of PHPM with a second-order LGM](articles/Second-Order-Latent-Growth-Model.html)
-1. [An example of PHPM with an autoregression and cross-lagged model]()
-1. [Wave-level PM designs]()
-1. [Item-level PM designs]()
-1. [Forward assembly]()
+1. [An example of PHPM with an autoregression and cross-lagged model](articles/Autoregressive-Cross-Lagged-Model.html)
+1. [Wave-level PM designs](articles/Wave-Level-PHPM.html)
+1. [Item-level PM designs](articles/Item-Level-PHPM.html)
+1. [Forward assembly](articles/Forward-Assembly-PHPM.html)
 <!-- 1. [Attrition] -->
-1. [Summarize the optimal design]()
-1. [Plot the optimal design]()
+1. [Summarize the optimal design](articles/Summary.html)
+1. [Plot the optimal design](articles/PlotPM.html)
 
 
 ## Citation

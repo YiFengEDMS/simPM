@@ -68,16 +68,22 @@
       <a href="../articles/Second-Order-Latent-Growth-Model.html">An Example of PHPM with a Second-order Linear LGM</a>
     </li>
     <li>
-      <a href="../articles/standalone_execution.html">Standalone Execution and Scheduled Processing</a>
+      <a href="../articles/Autoregressive-Cross-Lagged-Model.html">An Example of PHPM with an Autoregression and Cross-lagged Model</a>
     </li>
     <li>
-      <a href="../articles/output.html">Outputs Format and Naming Conventions</a>
+      <a href="../articles/Wave-Level-PHPM.html">Wave-level PM designs</a>
     </li>
     <li>
-      <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
+      <a href="../articles/Item-Level-PHPM.html">Item-level PM designs</a>
     </li>
     <li>
-      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+      <a href="../articles/Forward-Assembly-PHPM.html">Forward assembly</a>
+    </li>
+    <li>
+      <a href="../articles/Summary.html">Summarize the optimal design</a>
+    </li>
+    <li>
+      <a href="../articles/PlotPM.html">Plot the optimal design</a>
     </li>
   </ul>
 </li>
@@ -85,21 +91,21 @@
   <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
-    functions
+    Functions
   </a>
 </li>
 <li>
   <a href="../news/index.html">
     <span class="fa fa-newspaper-o"></span>
      
-    news
+    News
   </a>
 </li>
 <li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
-    faq
+    FAQ
   </a>
 </li>
       </ul>
@@ -140,8 +146,8 @@
 <h2 class="hasAnchor">
 <a href="#research-scenario" class="anchor"></a><span style="color:seagreen"><strong>Research Scenario</strong></span>
 </h2>
-<p>Suppose a researcher is interested in studying the longitudinal growth of self-esteem. A longitudinal study has been proposed that extends over 4 years, with participants assessed on self-report self-esteem annually. The data will be analyzed using a linear LGM, as seen in the following diagram. Because the goal of the study is to examine the typical growth trajectory as well as the inter-individual trajectory variability, the model parameters of focal interest are the mean and variance of both the latent intercept and slope (shown in red).</p>
-<p>Very unfortunately, after completing the first wave of data collection, the sponsor cites necessary agency-wide funding cuts and decides to implement a 30% reduction in funding for remaining waves. The researcher thus decides to use <code>simPM</code> to find a design that yields sufficient power but costs no more than the reduced budget.</p>
+<p>In this hypothetical scenario, a researcher (Dr. X) is interested in studying the longitudinal growth of adolescents’ self-esteem. Dr. X has proposed a longitudinal study that is expected to extend over 4 years. Participants will be assessed on self-report self-esteem annually. The data will be analyzed using a linear LGM, as seen in the following diagram. Because the goal of the study is to examine the typical growth trajectory as well as the inter-individual trajectory variability, the model parameters of focal interest are the mean and variance of both the latent intercept and slope (shown in red).</p>
+<p>Very unfortunately, after completing the first wave of data collection, due to various external reasons the sponsor decides to implement a 30% reduction in funding for remaining three waves. Dr. X wishes to continue the study with a new data collection plan. She decides to use <code>simPM</code> to find a design that yields sufficient power but costs no more than the reduced budget.</p>
 <div class="figure" style="text-align: center">
 <img src="images/linear_lgm.png" alt="A linear LGM" width="50%"><p class="caption">
 A linear LGM
@@ -152,7 +158,7 @@ A linear LGM
 <h2 class="hasAnchor">
 <a href="#spcify-the-population-and-analysis-model" class="anchor"></a><span style="color:seagreen"><strong>Spcify the Population and Analysis Model</strong></span>
 </h2>
-<p>Because <code>simPM</code> searches for an optimal design based on power analysis using Monte Carlo simulations, it is thus required to supply a population model and analysis model. The easiest way to specify the population model and analysis model is to use the <a href="http://lavaan.ugent.be/tutorial/syntax1.html"><code>lavaan</code> model syntax</a>. For this linear LGM example, the population model is specified as</p>
+<p><code>simPM</code> searches for an optimal design based on power analysis using Monte Carlo simulations. To implement power analysis, we first need to supply a population data generating model and an analysis model. The easiest way to specify the population model and analysis model is to use the <a href="http://lavaan.ugent.be/tutorial/syntax1.html"><code>lavaan</code> model syntax</a>. For this linear LGM example, the population model is specified as the follows, assuming Dr. X has made an informed decision about the population model and parameter values based on substantive thoery and past research.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">popModel &lt;-<span class="st"> '</span></a>
 <a class="sourceLine" id="cb1-2" title="2"></a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="st">i=~1*se1+1*se2+1*se3+1*se4</span></a>
@@ -203,70 +209,69 @@ A linear LGM
 <h2 class="hasAnchor">
 <a href="#search-for-an-optimal-wave-level-design" class="anchor"></a><span style="color:seagreen"><strong>Search for an Optimal Wave-level Design</strong></span>
 </h2>
-<p>We can use the main function <code><a href="../reference/simPM.html">simPM()</a></code> to search for an optimal <a href="">wave-level missing design</a>. For <code><a href="../reference/simPM.html">simPM()</a></code> to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, <code>simPM</code> will automatically map out all the possible PHPM designs, run power analysis for each plausible design, and output the optimal design.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">wave.ex1=<span class="kw"><a href="../reference/simPM.html">simPM</a></span>(</a>
-<a class="sourceLine" id="cb3-2" title="2">        <span class="dt">popModel=</span>popModel,                                 <span class="co">#supply the population model using lavaan language</span></a>
-<a class="sourceLine" id="cb3-3" title="3">        <span class="dt">analyzeModel=</span>analyzeModel,                         <span class="co">#supply the analysis model using lavaan language</span></a>
-<a class="sourceLine" id="cb3-4" title="4">        <span class="dt">VarNAMES=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"se1"</span>,<span class="st">"se2"</span>,<span class="st">"se3"</span>,<span class="st">"se4"</span>),               <span class="co">#the observed variable names, in chronological order</span></a>
-<a class="sourceLine" id="cb3-5" title="5">        <span class="dt">Time=</span><span class="dv">4</span>,                                            <span class="co">#total number of waves</span></a>
-<a class="sourceLine" id="cb3-6" title="6">        <span class="dt">Time.complete=</span><span class="dv">1</span>,                                   <span class="co">#number of waves completed before funding cut occurs</span></a>
-<a class="sourceLine" id="cb3-7" title="7">        <span class="dt">k=</span><span class="dv">1</span>,                                               <span class="co">#number of observed variables collected at each wave</span></a>
-<a class="sourceLine" id="cb3-8" title="8">        <span class="dt">pc=</span><span class="fl">0.2</span>,                                            <span class="co">#percentage of participants to provide complete data after funding cut</span></a>
-<a class="sourceLine" id="cb3-9" title="9">        <span class="dt">pd=</span><span class="dv">0</span>,                                              <span class="co">#percentage of participants to provide no data after funding cut</span></a>
-<a class="sourceLine" id="cb3-10" title="10">        <span class="dt">costmx=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>),                                 <span class="co">#unit cost of each data point at the following waves</span></a>
-<a class="sourceLine" id="cb3-11" title="11">        <span class="dt">n=</span><span class="dv">323</span>,                                             <span class="co">#original sample size</span></a>
-<a class="sourceLine" id="cb3-12" title="12">        <span class="dt">nreps=</span><span class="dv">1000</span>,                                        <span class="co">#number of replications for simulation</span></a>
-<a class="sourceLine" id="cb3-13" title="13">        <span class="dt">focal.param=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"i~1"</span>,<span class="st">"s~1"</span>,<span class="st">"i~~i"</span>,<span class="st">"s~~s"</span>),          <span class="co">#specify the focal parameters</span></a>
-<a class="sourceLine" id="cb3-14" title="14">        <span class="dt">complete.wave=</span><span class="ot">NULL</span>,                                <span class="co">#specify any future wave/variables that need complete data </span></a>
-<a class="sourceLine" id="cb3-15" title="15">        <span class="dt">eval.budget=</span>T,                                     <span class="co">#whether or not there is a budget restriction</span></a>
-<a class="sourceLine" id="cb3-16" title="16">        <span class="dt">rm.budget=</span><span class="dv">30</span><span class="op">*</span><span class="dv">323</span><span class="op">*</span><span class="fl">0.7</span>,                              <span class="co">#the amount of remaining budget</span></a>
-<a class="sourceLine" id="cb3-17" title="17">        <span class="dt">distal.var=</span><span class="ot">NULL</span>,                                   <span class="co">#specify any distal variables that are not subject to PM</span></a>
-<a class="sourceLine" id="cb3-18" title="18">        <span class="dt">seed=</span><span class="dv">12345</span>,                                        <span class="co">#random seed</span></a>
-<a class="sourceLine" id="cb3-19" title="19">        <span class="dt">engine=</span><span class="st">"l"</span>,                                        <span class="co">#use lavaan to fit the models</span></a>
-<a class="sourceLine" id="cb3-20" title="20">        <span class="dt">methods=</span><span class="st">"wave"</span>)                                    <span class="co">#type of PHPM designs, "wave" indicates wave-level missing</span></a></code></pre></div>
+<p>We can use the main function <code><a href="../reference/simPM.html">simPM()</a></code> to search for an optimal <a href="Wave-Level-PHPM.html">wave-level missing design</a>. For <code><a href="../reference/simPM.html">simPM()</a></code> to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, <code>simPM</code> will automatically map out all the possible PHPM designs, run power analysis for each plausible design, and output the optimal design.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">wave.ex1=<span class="kw"><a href="../reference/simPM.html">simPM</a></span>(<span class="dt">popModel =</span> popModel,                                 <span class="co">#supply the population model using lavaan language</span></a>
+<a class="sourceLine" id="cb3-2" title="2">               <span class="dt">analyzeModel =</span> analyzeModel,                         <span class="co">#supply the analysis model using lavaan language</span></a>
+<a class="sourceLine" id="cb3-3" title="3">               <span class="dt">VarNAMES =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"se1"</span>,<span class="st">"se2"</span>,<span class="st">"se3"</span>,<span class="st">"se4"</span>),               <span class="co">#the observed variable names</span></a>
+<a class="sourceLine" id="cb3-4" title="4">               <span class="dt">Time =</span> <span class="dv">4</span>,                                            <span class="co">#total number of waves</span></a>
+<a class="sourceLine" id="cb3-5" title="5">               <span class="dt">Time.complete =</span> <span class="dv">1</span>,                                   <span class="co">#number of waves completed before funding cut occurs</span></a>
+<a class="sourceLine" id="cb3-6" title="6">               <span class="dt">k =</span> <span class="dv">1</span>,                                               <span class="co">#number of observed variables collected at each wave</span></a>
+<a class="sourceLine" id="cb3-7" title="7">               <span class="dt">pc =</span> <span class="fl">0.2</span>,                                            <span class="co">#percentage of participants to provide complete data after funding cut</span></a>
+<a class="sourceLine" id="cb3-8" title="8">               <span class="dt">pd =</span> <span class="dv">0</span>,                                              <span class="co">#percentage of participants to provide no data after funding cut</span></a>
+<a class="sourceLine" id="cb3-9" title="9">               <span class="dt">costmx =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>),                                 <span class="co">#unit cost of each data point at the following waves</span></a>
+<a class="sourceLine" id="cb3-10" title="10">               <span class="dt">n =</span> <span class="dv">323</span>,                                             <span class="co">#original sample size</span></a>
+<a class="sourceLine" id="cb3-11" title="11">               <span class="dt">nreps =</span> <span class="dv">1000</span>,                                        <span class="co">#number of replications for simulation</span></a>
+<a class="sourceLine" id="cb3-12" title="12">               <span class="dt">focal.param =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"i~1"</span>,<span class="st">"s~1"</span>,<span class="st">"i~~i"</span>,<span class="st">"s~~s"</span>),          <span class="co">#specify the focal parameters</span></a>
+<a class="sourceLine" id="cb3-13" title="13">               <span class="dt">complete.wave =</span> <span class="ot">NULL</span>,                                <span class="co">#specify any future wave/variables that need complete data </span></a>
+<a class="sourceLine" id="cb3-14" title="14">               <span class="dt">eval.budget =</span> T,                                     <span class="co">#whether or not there is a budget restriction</span></a>
+<a class="sourceLine" id="cb3-15" title="15">               <span class="dt">rm.budget =</span> <span class="dv">30</span><span class="op">*</span><span class="dv">323</span><span class="op">*</span><span class="fl">0.7</span>,                              <span class="co">#the amount of remaining budget</span></a>
+<a class="sourceLine" id="cb3-16" title="16">               <span class="dt">distal.var =</span> <span class="ot">NULL</span>,                                   <span class="co">#specify any distal variables that are not subject to PM</span></a>
+<a class="sourceLine" id="cb3-17" title="17">               <span class="dt">seed =</span> <span class="dv">12345</span>,                                        <span class="co">#random seed</span></a>
+<a class="sourceLine" id="cb3-18" title="18">               <span class="dt">engine =</span> <span class="st">"l"</span>,                                        <span class="co">#use lavaan to fit the models</span></a>
+<a class="sourceLine" id="cb3-19" title="19">               <span class="dt">methods =</span> <span class="st">"wave"</span>)                                    <span class="co">#type of PHPM designs, "wave" indicates wave-level missing</span></a></code></pre></div>
 <p>More specifically:</p>
 <ul>
 <li>
-<code>VarNAMES=c("se1","se2","se3","se4")</code>: The observed variables collected in this study are named <span style="color:firebrick">se1, se2, se3, and se4</span>,</li>
+<code>VarNAMES = c("se1","se2","se3","se4")</code>: The observed variables collected in this study are named <span style="color:firebrick">se1, se2, se3, and se4</span>.</li>
 <li>
-<code>Time=4</code>: The study has <span style="color:firebrick">4</span> waves of data collection in total</li>
+<code>Time = 4</code>: The study has <span style="color:firebrick">4</span> waves of data collection in total.</li>
 <li>
-<code>Time.complete=1</code>: <span style="color:firebrick">One</span> wave of data collection has been completed before funding cut occurs</li>
+<code>Time.complete = 1</code>: <span style="color:firebrick">One</span> wave of data collection has been completed before funding cut occurs.</li>
 <li>
-<code>k=1</code>: Only <span style="color:firebrick">one</span> observed variable is collected at each wave</li>
+<code>k = 1</code>: Only <span style="color:firebrick">one</span> observed variable is collected at each wave.</li>
 <li>
-<code>pc=0.2</code>: <span style="color:firebrick">Twenty percent</span> of the participants are assigned to provide complete data for future waves after funding cut</li>
+<code>pc = 0.2</code>: <span style="color:firebrick">Twenty percent</span> of the participants are assigned to provide complete data for future waves after funding cut.</li>
 <li>
-<code>pd=0</code>: <span style="color:firebrick">Zero percent</span> of the participants are assigned to drop from the study</li>
+<code>pd = 0</code>: <span style="color:firebrick">Zero percent</span> of the participants are assigned to drop from the study.</li>
 <li>
-<code>costmx=c(5,10,15)</code>: The unit cost of one data point is <span style="color:firebrick">$5</span> at wave 2, <span style="color:firebrick">$10</span> at wave 3, and <span style="color:firebrick">$15</span> at wave 4.<br>
+<code>costmx = c(5,10,15)</code>: The unit cost of one data point is <span style="color:firebrick">$5</span> at wave 2, <span style="color:firebrick">$10</span> at wave 3, and <span style="color:firebrick">$15</span> at wave 4.<br>
 </li>
 <li>
-<code>n=323</code>: The original sample size planned was <span style="color:firebrick">323</span>.</li>
+<code>n = 323</code>: The original sample size planned was <span style="color:firebrick">323</span>.</li>
 <li>
-<code>nreps=1000</code>: The program will run <span style="color:firebrick">1000</span> replications for Monte Carlo simulation (for each plausible design).</li>
+<code>nreps = 1000</code>: The program will run <span style="color:firebrick">1000</span> replications for Monte Carlo simulation (for each plausible design).</li>
 <li>
-<code>focal.param=c("i~1","s~1","i~~i","s~~s")</code>: The focal parameters of interest are the mean and variance of the latent intercept and slope.</li>
+<code>focal.param = c("i~1","s~1","i~~i","s~~s")</code>: The focal parameters of interest are the mean and variance of the latent intercept and slope.</li>
 <li>
-<code>complete.wave=NULL</code>: No future waves are by design to have complete data from each participant.</li>
+<code>complete.wave = NULL</code>: No future waves are by design to have complete data from each participant.</li>
 <li>
-<code>eval.budget=T</code>: Yes, there is a budget restriction.</li>
+<code>eval.budget = T</code>: Yes, there is a budget restriction.</li>
 <li>
-<code>rm.budget=30*323*0.7</code>: After the funding cut, the researcher will have <span style="color:firebrick"> <span class="math inline">\(\$6,783\)</span> </span> <span class="math inline">\((=30\times323\times0.7)\)</span> to support the future waves of data collection</li>
+<code>rm.budget = 30*323*0.7</code>: After the funding cut, the researcher will have <span style="color:firebrick"> <span class="math inline">\(\$6,783\)</span> </span> <span class="math inline">\((=30\times323\times0.7)\)</span> to support the future waves of data collection</li>
 <li>
-<code>distal.var=NULL</code>: There are no distal variables in the model that are not subject to repeated measures.</li>
+<code>distal.var = NULL</code>: There are no distal variables in the model that are not subject to repeated measures (and thus not considered for PHPM).</li>
 <li>
-<code>engine="l"</code>: Model fitted using <code>lavaan</code>.</li>
+<code>engine = "l"</code>: Model fitted using <code>lavaan</code>.</li>
 <li>
-<code>methods="wave"</code>: Search for wave-level missing designs.</li>
+<code>methods = "wave"</code>: Search for wave-level missing designs.</li>
 </ul>
 </div>
 <div id="summarize-the-result" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summarize-the-result" class="anchor"></a><span style="color:seagreen"><strong>Summarize the Result</strong></span>
 </h2>
-<p>To <a href="">view a summary of the results</a>, we can use the <code>summary.opt()</code> function. It prints out the comparison among all the plausible wave-level missing designs (with regard to the parameter with the lowest empirical power), the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">summary.opt</span>(wave.ex1)</a></code></pre></div>
+<p>To <a href="Summary.html">view a summary of the results</a>, we can use the <code><a href="../reference/summary.simpm.html">summary.simpm()</a></code> function. It prints out the comparison among all the plausible wave-level missing designs (the comparison is made with regard to the focal parameter who has the lowest empirical power). The function will also print the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.ex1)</a></code></pre></div>
 <p>For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs $4,530, which is below the reduced available budget.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">[<span class="dv">1</span>] <span class="st">"=================results summary================"</span></a>
 <a class="sourceLine" id="cb5-2" title="2">  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves</a>
@@ -274,7 +279,7 @@ A linear LGM
 <a class="sourceLine" id="cb5-4" title="4">[<span class="dv">1</span>] <span class="st">"=================Optimal design================="</span></a>
 <a class="sourceLine" id="cb5-5" title="5">  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves</a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="dv">1</span>             <span class="fl">0.92</span>               s<span class="op">~</span><span class="er">~</span>s              <span class="fl">0.999</span>        <span class="dv">4530</span>          <span class="dv">2</span></a></code></pre></div>
-<p>With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns (<span class="math inline">\(n=86\)</span> in each pattern).</p>
+<p>With this design, 20% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 80% of the participants are randomly assigned to one of the three unique missing data patterns (<span class="math inline">\(n=86\)</span> in each pattern). In the pattern matrix, 1 indicates planned missingness and 0 indicates planned complete data.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal patterns==============="</span></a>
 <a class="sourceLine" id="cb6-2" title="2">           se1 se2 se3 se4</a>
 <a class="sourceLine" id="cb6-3" title="3">             <span class="dv">0</span>   <span class="dv">1</span>   <span class="dv">1</span>   <span class="dv">0</span></a>
@@ -285,7 +290,7 @@ A linear LGM
 <a class="sourceLine" id="cb6-8" title="8">[<span class="dv">1</span>] <span class="fl">0.266667</span> <span class="fl">0.266667</span> <span class="fl">0.266667</span> <span class="fl">0.200000</span></a>
 <a class="sourceLine" id="cb6-9" title="9">[<span class="dv">1</span>] <span class="st">"=================Optimal ns===================="</span></a>
 <a class="sourceLine" id="cb6-10" title="10">[<span class="dv">1</span>] <span class="dv">86</span> <span class="dv">86</span> <span class="dv">86</span> <span class="dv">65</span></a></code></pre></div>
-<p>Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance <span class="math inline">\(\sigma^2_\beta\)</span>, and 1 for testing the mean intercept (<span class="math inline">\(\mu_\alpha\)</span>), the mean slope (<span class="math inline">\(\mu_\beta\)</span>), and the intercept variance (<span class="math inline">\(\sigma^2_\alpha\)</span>).</p>
+<p>Over 1000 replications, this design yields an empirical power of 0.999 for testing the slope variance <span class="math inline">\(\sigma^2_\beta\)</span>; the statistical power is 1 for testing the mean intercept (<span class="math inline">\(\mu_\alpha\)</span>), the mean slope (<span class="math inline">\(\mu_\beta\)</span>), and the intercept variance (<span class="math inline">\(\sigma^2_\alpha\)</span>).</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"></a>
 <a class="sourceLine" id="cb7-2" title="2">[<span class="dv">1</span>] <span class="st">"=================Optimal design for focal parameters================="</span></a>
 <a class="sourceLine" id="cb7-3" title="3">     Estimate Average Estimate SD  Average SE <span class="kw">Power</span> (Not equal <span class="dv">0</span>)   Std Est   Std Est SD</a>
@@ -299,15 +304,16 @@ A linear LGM
 <a class="sourceLine" id="cb7-11" title="11">i<span class="op">~</span><span class="er">~</span>i  <span class="fl">0.0000000</span>         <span class="fl">0.268</span> <span class="fl">-2.343916e-03</span>    <span class="fl">0.935</span>   <span class="fl">0.25362176</span> <span class="fl">0.04437375</span></a>
 <a class="sourceLine" id="cb7-12" title="12">s<span class="op">~</span><span class="er">~</span>s  <span class="fl">0.0000000</span>         <span class="fl">0.023</span> <span class="fl">-2.487868e-04</span>    <span class="fl">0.939</span>   <span class="fl">0.62234904</span> <span class="fl">0.04767489</span></a></code></pre></div>
 <!--&nbsp;-->
-<p>To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.</p>
+<p>To view more details of the optimal PHPM design, we can use the following code, which will give us more detailed information about the simulation results for this selected PHPM design.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.ex1<span class="op">$</span>opt.output)</a></code></pre></div>
 </div>
 <div id="visualize-the-optimal-design" class="section level2">
 <h2 class="hasAnchor">
 <a href="#visualize-the-optimal-design" class="anchor"></a><span style="color:seagreen"><strong>Visualize the Optimal Design</strong></span>
 </h2>
-<p>To <a href="">visualize the missing data patterns of the optimal PHPM design</a>, we can use the <code><a href="../reference/plotPM.html">plotPM()</a></code> function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.ex1, <span class="dt">labels =</span> F)</a></code></pre></div>
+<p>To <a href="PlotPM.html">visualize the missing data patterns of the optimal PHPM design</a>, we can use the <code><a href="../reference/plotPM.html">plotPM()</a></code> function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled.</p>
+<p>In this example, we can see that 65 participants are assigned to provide complete data over the future waves of data collection, while the rest of the participants are assigned to one of the three missing data patterns. For instance, there are 86 participants who are randomly picked to NOT provide data in wave 2 and wave 3 (the first row of the plot); Another 86 participants are randomly picked to NOT provide data in wave 2 and wave 4 (the second row of the plot).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.ex1)</a></code></pre></div>
 <p><img src="Linear-Latent-Growth-Model_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <!--
 

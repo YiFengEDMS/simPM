@@ -1,0 +1,68 @@
+---
+title: "Visualize the Results"
+author: "Yi Feng & Gregory R. Hancock"
+#date: "`r Sys.Date()`"
+output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## <span style="color:seagreen">**Visualize the Results**</span> 
+
+
+To visualize the missing data patterns of the optimal PHPM design, we can use the `plotPM()` function with the `simPM()` object. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. 
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+setwd("C:/Users/yifeng94/Desktop/simPM/simPM-git/examples")
+load("wave.ex2_r1.rda")
+load("item.ex2_r1.rda")
+#load("forward.ex2_r1.rda")
+library(simPM)
+```
+
+
+## <span style="color:seagreen">**Examples**</span> 
+
+Below is an example of the plot showing the missing data patterns for a wave-level PHPM design. It corresponds to the missing data pattern matrix in the output summary. By default, the plot will use red (`"firebrick"`) to indicate missingness and beige (`"antiquewhite1"`) to indicate complete data. In the plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is labeled by the missing data pattern. 
+
+```{r,fig.width=7,fig.height=4}
+
+plotPM(wave.ex2, fontsize_col = 15)
+
+```
+
+
+We can change the color scheme of the plot by setting `col = `. 
+
+```{r,fig.width=7,fig.height=4}
+plotPM(wave.ex2, col = c("gray96", "gray35"), fontsize_col = 15)
+```
+
+
+We can also turn off the wave label by using the `labels = FALSE` argument.
+
+```{r,fig.width=7,fig.height=4}
+plotPM(wave.ex2, labels = F, col = c("gray96", "gray35"), fontsize_col = 15)
+```
+
+
+Below is an example of the plot showing the missing data patterns for a item-level PHPM design. If we do not wish to include the number of participants assigned to each missing data pattern, we can turn it off by setting `row.names = FALSE`.
+
+```{r,fig.width=9,fig.height=6}
+plotPM(item.ex2, row.names=F, fontsize_col = 15)
+```
+
+
+
+

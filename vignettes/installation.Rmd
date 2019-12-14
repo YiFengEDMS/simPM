@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Install _simPM_
 
-To install `simPM` on your local machine, please run the following code
+Currently `simPM` is hosted on GitHub. The lastest version of `simPM` can be installed using the code provided below. 
 
 ```r
 install.packages("devtools")
@@ -29,5 +29,5 @@ intall_github("YiFengEDMS/simPM",)
 
 ## R source code 
 
-The source code of this R package is made public on the first author's [Github page](https://github.com/YiFengEDMS/simPM). 
+The source code of this R package is made public on the first author's [Github](https://github.com/YiFengEDMS/simPM). 
 

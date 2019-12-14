@@ -60,12 +60,12 @@ local machine, please run the following code
 ``` r
 install.packages("devtools")
 library(devtools)
-devtools::intall_github("YiFengEDMS/simPM")
+intall_github("YiFengEDMS/simPM")
 ```
 
 ## Useful resources
 
-Below are some vignettes demonstrating the features of `simPM`:
+Below are some vignettes demonstrating the usage of `simPM`:
 
 1.  [Installation](articles/installation.html)
 2.  [Package
@@ -74,12 +74,14 @@ Below are some vignettes demonstrating the features of `simPM`:
     LGM](articles/Linear-Latent-Growth-Model.html)
 4.  [An example of PHPM with a second-order
     LGM](articles/Second-Order-Latent-Growth-Model.html)
-5.  [An example of PHPM with an autoregression and cross-lagged model]()
-6.  [Wave-level PM designs]()
-7.  [Item-level PM designs]()
-8.  [Forward assembly]() <!-- 1. [Attrition] -->
-9.  [Summarize the optimal design]()
-10. [Plot the optimal design]()
+5.  [An example of PHPM with an autoregression and cross-lagged
+    model](articles/Autoregressive-Cross-Lagged-Model.html)
+6.  [Wave-level PM designs](articles/Wave-Level-PHPM.html)
+7.  [Item-level PM designs](articles/Item-Level-PHPM.html)
+8.  [Forward assembly](articles/Forward-Assembly-PHPM.html)
+    <!-- 1. [Attrition] -->
+9.  [Summarize the optimal design](articles/Summary.html)
+10. [Plot the optimal design](articles/PlotPM.html)
 
 ## Citation
 

@@ -59,21 +59,25 @@ navbar:
          href: articles/Linear-Latent-Growth-Model.html
       -  text: An Example of PHPM with a Second-order Linear LGM
          href: articles/Second-Order-Latent-Growth-Model.html
-      -  text: Standalone Execution and Scheduled Processing
-         href: articles/standalone_execution.html
-      -  text: Outputs Format and Naming Conventions
-         href: articles/output.html
-      -  text: Accessing and Analyzing Processed Data from R
-         href: articles/analyze.html
-      -  text: Supported MODIS Products
-         href: articles/Products_list.html
+      -  text: An Example of PHPM with an Autoregression and Cross-lagged Model
+         href: articles/Autoregressive-Cross-Lagged-Model.html
+      -  text: Wave-level PM designs
+         href: articles/Wave-Level-PHPM.html
+      -  text: Item-level PM designs
+         href: articles/Item-Level-PHPM.html
+      -  text: Forward assembly
+         href: articles/Forward-Assembly-PHPM.html
+      -  text: Summarize the optimal design
+         href: articles/Summary.html
+      -  text: Plot the optimal design
+         href: articles/PlotPM.html
     - icon: fa-file-code-o
-      text: "functions"
+      text: "Functions"
       href: reference/index.html 
     - icon: fa-newspaper-o
-      text: "news"
+      text: "News"
       href: news/index.html      
-    - text: "faq"
+    - text: "FAQ"
       icon: fa-question-circle-o
       href: articles/faq.html
   right:
