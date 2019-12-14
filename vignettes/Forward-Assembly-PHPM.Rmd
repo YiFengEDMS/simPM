@@ -246,6 +246,7 @@ summary(forward.ex2)
 
 ```{r,fig.width=9,fig.height=5}
 plotPM(forward.ex2, row.names=F)
+
 ```
 
 
