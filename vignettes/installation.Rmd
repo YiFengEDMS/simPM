@@ -23,7 +23,7 @@ Currently `simPM` is hosted on GitHub. The lastest version of `simPM` can be ins
 ```r
 install.packages("devtools")
 library(devtools)
-intall_github("YiFengEDMS/simPM",)
+intall_github("YiFengEDMS/simPM")
 ``` 
 
 
