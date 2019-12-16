@@ -53,7 +53,7 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa fas fa-book"></span>
      
-    Vignettes
+    Tutorials
      
     <span class="caret"></span>
   </a>
@@ -161,49 +161,66 @@ A linear LGM
 <p><code>simPM</code> searches for an optimal design based on power analysis using Monte Carlo simulations. To implement power analysis, we first need to supply a population data generating model and an analysis model. The easiest way to specify the population model and analysis model is to use the <a href="http://lavaan.ugent.be/tutorial/syntax1.html"><code>lavaan</code> model syntax</a>. For this linear LGM example, the population model is specified as the follows, assuming Dr. X has made an informed decision about the population model and parameter values based on substantive thoery and past research.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">popModel &lt;-<span class="st"> '</span></a>
 <a class="sourceLine" id="cb1-2" title="2"></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="st">i=~1*se1+1*se2+1*se3+1*se4</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="st">s=~0*se1+1*se2+2*se3+3*se4</span></a>
-<a class="sourceLine" id="cb1-5" title="5"></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="st">se1~0*1</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="st">se2~0*1</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="st">se3~0*1</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="st">se4~0*1</span></a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="st">se1~~0.071*se1</span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="st">se2~~0.034*se2</span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="st">se3~~0.067*se3</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="st">se4~~0.025*se4</span></a>
-<a class="sourceLine" id="cb1-15" title="15"></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="st">i~2.983*1</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="st">s~0.086*1</span></a>
-<a class="sourceLine" id="cb1-18" title="18"></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="st">i~~0.268*i+(-0.039)*s</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="st">s~~0.023*s</span></a>
-<a class="sourceLine" id="cb1-21" title="21"></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="st">'</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-3" title="3"><span class="st">#----- loadings -----#</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="st">i=~1*se1+1*se2+1*se3+1*se4</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="st">s=~0*se1+1*se2+2*se3+3*se4</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="st">#----- mean structure ----#</span></a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="st">se1~0*1</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="st">se2~0*1</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="st">se3~0*1</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">se4~0*1</span></a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="st">i~2.983*1</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="st">s~0.086*1</span></a>
+<a class="sourceLine" id="cb1-17" title="17"></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="st">#---- residual variances ----#</span></a>
+<a class="sourceLine" id="cb1-19" title="19"></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="st">se1~~0.071*se1</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="st">se2~~0.034*se2</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="st">se3~~0.067*se3</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="st">se4~~0.025*se4</span></a>
+<a class="sourceLine" id="cb1-24" title="24"></a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="st">#---- variance-covariance strucutre of latent variables ----#</span></a>
+<a class="sourceLine" id="cb1-27" title="27"></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="st">i~~0.268*i+(-0.039)*s</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="st">s~~0.023*s</span></a>
+<a class="sourceLine" id="cb1-30" title="30"></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="st">'</span></a></code></pre></div>
 <p>The analysis model is specified as the same linear LGM with freely estimated model parameters:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">analyzeModel &lt;-<span class="st"> '</span></a>
 <a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">i=~1*se1+1*se2+1*se3+1*se4</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">s=~0*se1+1*se2+2*se3+3*se4</span></a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="st">se1~0*1</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="st">se2~0*1</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="st">se3~0*1</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="st">se4~0*1</span></a>
-<a class="sourceLine" id="cb2-10" title="10"></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="st">se1~~se1</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="st">se2~~se2</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="st">se3~~se3</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="st">se4~~se4</span></a>
-<a class="sourceLine" id="cb2-15" title="15"></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="st">i~1</span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="st">s~1</span></a>
-<a class="sourceLine" id="cb2-18" title="18"></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="st">i~~i+s</span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="st">s~~s</span></a>
-<a class="sourceLine" id="cb2-21" title="21"></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="st">'</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">#----- loadings -----#</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">i=~1*se1+1*se2+1*se3+1*se4</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">s=~0*se1+1*se2+2*se3+3*se4</span></a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">#----- mean structure ----#</span></a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="st">se1~0*1</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">se2~0*1</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="st">se3~0*1</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="st">se4~0*1</span></a>
+<a class="sourceLine" id="cb2-14" title="14"></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="st">i~1</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="st">s~1</span></a>
+<a class="sourceLine" id="cb2-17" title="17"></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="st">#---- residual variances ----#</span></a>
+<a class="sourceLine" id="cb2-19" title="19"></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="st">se1~~se1</span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="st">se2~~se2</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="st">se3~~se3</span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="st">se4~~se4</span></a>
+<a class="sourceLine" id="cb2-24" title="24"></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="st">#---- variance-covariance strucutre of latent variables ----#</span></a>
+<a class="sourceLine" id="cb2-26" title="26"></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="st">i~~i+s</span></a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="st">s~~s</span></a>
+<a class="sourceLine" id="cb2-29" title="29"></a>
+<a class="sourceLine" id="cb2-30" title="30"><span class="st">'</span></a></code></pre></div>
 </div>
 <div id="search-for-an-optimal-wave-level-design" class="section level2">
 <h2 class="hasAnchor">

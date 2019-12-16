@@ -50,7 +50,7 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Vignettes"
+    - text: "Tutorials"
       icon: fas fa-book
       menu:
       -  text: Installation

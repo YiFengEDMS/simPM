@@ -65,7 +65,7 @@ intall_github("YiFengEDMS/simPM")
 
 ## Useful resources
 
-Below are some vignettes demonstrating the usage of `simPM`:
+Below are some tutorials demonstrating the usage of `simPM`:
 
 1.  [Installation](articles/installation.html)
 2.  [Package

@@ -39,6 +39,7 @@ Because `simPM` searches for an optimal design based on power analysis using Mon
 ```{r,eval=F}
 popModel <- '
 
+#----------- path coefficients ------------#
 
 SelfPop2~0.609*SelfPop1+0.111*PeerPop1
 SelfPop3~0.587*SelfPop2+0.053*PeerPop2
@@ -49,6 +50,8 @@ PeerPop3~0.056*SelfPop2+0.679*PeerPop2+0.075*Support2
 Support2~0.468*Support1+0.124*PeerPop1
 Support3~0.280*Support2+0.132*PeerPop2
 
+#----------- residual covariance ----------#
+
 PeerPop1~~0.229*SelfPop1+0.064*Support1
 SelfPop1~~0.007*Support1
 
@@ -58,8 +61,8 @@ SelfPop2~~0.055*Support2
 PeerPop3~~0.052*SelfPop3+0.013*Support3
 SelfPop3~~(-0.034)*Support3
 
+#---------------- means -------------------#
 
-#means
 PeerPop1~3.273*1
 SelfPop1~0.048*1
 Support1~2.905*1
@@ -72,7 +75,7 @@ PeerPop3~0.814*1
 SelfPop3~(-0.161)*1
 Support3~1.451*1
 
-#variances
+#--------------- variances ----------------#
 
 PeerPop1~~0.447*PeerPop1
 SelfPop1~~1.010*SelfPop1
@@ -94,6 +97,8 @@ The analysis model is specified as the same autoregressive and cross-lagged mode
 ```{r, eval=F}
 analyzeModel <- '
 
+#----------- path coefficients ------------#
+
 SelfPop2~SelfPop1+PeerPop1
 SelfPop3~SelfPop2+PeerPop2
 
@@ -102,6 +107,8 @@ PeerPop3~SelfPop2+PeerPop2+Support2
 
 Support2~Support1+PeerPop1
 Support3~Support2+PeerPop2
+
+#----------- residual covariance ----------#
 
 PeerPop1~~SelfPop1+Support1
 SelfPop1~~Support1
@@ -113,7 +120,8 @@ PeerPop3~~SelfPop3+Support3
 SelfPop3~~Support3
 
 
-#means
+#---------------- means -------------------#
+
 PeerPop1~1
 SelfPop1~1
 Support1~1
@@ -126,7 +134,8 @@ PeerPop3~1
 SelfPop3~1
 Support3~1
 
-#variances
+
+#--------------- variances ----------------#
 
 PeerPop1~~PeerPop1
 SelfPop1~~SelfPop1

@@ -18,13 +18,20 @@ knitr::opts_chunk$set(
 
 ## Install _simPM_
 
-Currently `simPM` is hosted on GitHub. The lastest version of `simPM` can be installed using the code provided below. 
+Currently `simPM` is hosted on GitHub. The latest development version of `simPM` can be installed using the code provided below. 
 
 ```r
 install.packages("devtools")
 library(devtools)
 intall_github("YiFengEDMS/simPM")
 ``` 
+
+Alternatively, the users can also try using the following code to install `simPM`.
+
+```r
+install.packages("devtools")
+devtools::intall_github("YiFengEDMS/simPM")
+```
 
 
 ## R source code 
