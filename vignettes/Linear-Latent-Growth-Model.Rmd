@@ -229,6 +229,6 @@ To [visualize the missing data patterns of the optimal PHPM design](PlotPM.html)
 
 In this example, we can see that 65 participants are assigned to provide complete data over the future waves of data collection, while the rest of the participants are assigned to one of the three missing data patterns. For instance, there are 86 participants who are randomly picked to NOT provide data in wave 2 and wave 3 (the first row of the plot); Another 86 participants are randomly picked to NOT provide data in wave 2 and wave 4 (the second row of the plot). 
 
-```{r}
+```{r,fig.width=7,fig.height=4}
 plotPM(wave.ex1)
 ```
