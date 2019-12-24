@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-<!-- -->
+<!--  -->
 In this vignette we will demonstrate how to use `simPM` to search for an optimal PHPM design for a longitudinal research study that employs a linear latent growth model (LGM).
 
 ## <span style="color:seagreen">**Research Scenario**</span> 
