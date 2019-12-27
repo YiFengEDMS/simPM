@@ -1,6 +1,6 @@
 ---
 title: "Installation of simPM"
-author: "Yi Feng"
+#author: "Yi Feng"
 #date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -32,6 +32,11 @@ Alternatively, the users can also try using the following code to install `simPM
 install.packages("devtools")
 devtools::intall_github("YiFengEDMS/simPM")
 ```
+
+It is possible that errors would occur if your R version is older than v3.5.2. If the installation fails, we recommend you to check your R version and to update R and RStudio to the latest version available.
+
+* To download and install the latest R: https://cran.r-project.org/
+* To download and install the latest RStudio: https://cran.r-project.org/ 
 
 
 ## R source code 
