@@ -102,6 +102,8 @@ opt1.simsem <- function(
   sim.out <- vector("list", nrow(all.pattern))   # simulation output storage
 
 
+   VNAMES <- c(VNAMES, distal.var)
+  
   for (i in seq_len(nrow(all.pattern))) {
     # because num.miss=1, no previously selected pattern applicable
     if(pd!=0) {
@@ -118,7 +120,6 @@ opt1.simsem <- function(
     if (is.null(distal.var)==F) {
       dis.pat <- matrix(0, nrow = nrow(patmx), ncol = length(distal.var))
       patmx <- cbind(patmx, dis.pat)
-      VNAMES <- c(VNAMES, distal.var)
     }
 
     # pattern probs
