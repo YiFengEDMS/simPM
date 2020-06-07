@@ -30,7 +30,7 @@ Alternatively, the users can also try using the following code to install `simPM
 
 ```r
 install.packages("devtools")
-devtools::intall_github("YiFengEDMS/simPM")
+devtools::install_github("YiFengEDMS/simPM")
 ```
 
 It is possible that errors would occur if your R version is older than v3.5.2. If the installation fails, we recommend you to check your R version and to update R and RStudio to the latest version available.
