@@ -263,11 +263,10 @@ forward.opt.simsem <- function(
       miss.loc <- matrix(NA, ct, num.miss)
       sim.out <- vector("list", ct)   # simulation output storage
 
-      VNAMES <- c(VNAMES, distal.var)
+      VNAMES <- c(NAMES, distal.var)
 
       for (i in seq_len(nrow(all.pattern))) {
 
-        VNAMES <- NAMES
         ###distal variables
         if (is.null(distal.var)==F) {
 #          dis.pat <- rep(0, length(distal.var))
