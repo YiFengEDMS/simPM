@@ -263,6 +263,7 @@ forward.opt.simsem <- function(
       miss.loc <- matrix(NA, ct, num.miss)
       sim.out <- vector("list", ct)   # simulation output storage
 
+      VNAMES <- c(VNAMES, distal.var)
 
       for (i in seq_len(nrow(all.pattern))) {
 
@@ -271,7 +272,6 @@ forward.opt.simsem <- function(
         if (is.null(distal.var)==F) {
           dis.pat <- rep(0, length(distal.var))
           patmx <- rbind(c(all.pattern[i,], dis.pat),cbind(opt1.pattern, t(replicate(nrow(opt1.pattern), dis.pat))))
-          VNAMES <- c(VNAMES, distal.var)
         }
         if (is.null(distal.var)==T) {
           patmx <- rbind(all.pattern[i, ], opt1.pattern)   # missing patterns
