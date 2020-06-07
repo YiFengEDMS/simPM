@@ -270,8 +270,11 @@ forward.opt.simsem <- function(
         VNAMES <- NAMES
         ###distal variables
         if (is.null(distal.var)==F) {
-          dis.pat <- rep(0, length(distal.var))
-          patmx <- rbind(c(all.pattern[i,], dis.pat),cbind(opt1.pattern, t(replicate(nrow(opt1.pattern), dis.pat))))
+#          dis.pat <- rep(0, length(distal.var))
+#          patmx <- rbind(c(all.pattern[i,], dis.pat),cbind(opt1.pattern, t(replicate(nrow(opt1.pattern), dis.pat))))
+          dis.vec <- rep(0, length(distal.var))
+          dis.pat <- matrix(0, nrow = nrow(opt1.pattern), ncol=length(distal.var))
+          patmx <- rbind(c(all.pattern[i,], dis.vec),cbind(opt1.pattern, dis.pat))
         }
         if (is.null(distal.var)==T) {
           patmx <- rbind(all.pattern[i, ], opt1.pattern)   # missing patterns
