@@ -62,13 +62,10 @@
       <a href="../articles/installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Linear-Latent-Growth-Model.html">An Example of PHPM with a Linear LGM</a>
-    </li>
-    <li>
-      <a href="../articles/Second-Order-Latent-Growth-Model.html">An Example of PHPM with a Second-order Linear LGM</a>
-    </li>
-    <li>
       <a href="../articles/Autoregressive-Cross-Lagged-Model.html">An Example of PHPM with an Autoregression and Cross-lagged Model</a>
+    </li>
+    <li>
+      <a href="../articles/Conditional-Linear-Latent-Growth-Model.html">An Example of PHPM with a Conditional Linear Latent Growth Model</a>
     </li>
     <li>
       <a href="../articles/Wave-Level-PHPM.html">Wave-level PM designs</a>
@@ -150,56 +147,58 @@
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a><span style="color:seagreen"><strong>Examples</strong></span>
 </h2>
-<p>In this <a href="Linear-Latent-Growth-Model.html">hypothetical example</a>, the <code><a href="../reference/summary.simpm.html">summary.simpm()</a></code> function prints out the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.ex1)</a></code></pre></div>
+<p>In this <a href="Conditional-Linear-Latent-Growth-Model.html">hypothetical example</a>, the <code><a href="../reference/summary.simpm.html">summary.simpm()</a></code> function prints out the following:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.lgm)</a></code></pre></div>
 <ul>
-<li>The convergence rate, the name of the parameter with the weakest statistical power and the empirical power for testing this parameter, the cost of the PHPM design, and the number of missing waves (in the case of <a href="Wave-Level-PHPM.html">wave-level PHPM designs</a>) for <strong>each</strong> of the plausible PHPM designs under consideration. In this specfic example, there is only one plausible wave-level PHPM designs given the budget constraints and the specification of other arguments.</li>
+<li>The convergence rate, the name of the parameter with the weakest statistical power and the empirical power for testing this parameter, the cost of the PHPM design, and the number of missing waves (in the case of <a href="Wave-Level-PHPM.html">wave-level PHPM designs</a>) for <strong>each</strong> of the plausible PHPM designs under consideration. In this specfic example, there are only two plausible wave-level PHPM designs given the budget constraints and the specification of other arguments.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">[<span class="dv">1</span>] <span class="st">"=================results summary================"</span></a>
-<a class="sourceLine" id="cb2-2" title="2">  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="dv">1</span>             <span class="fl">0.92</span>               s<span class="op">~</span><span class="er">~</span>s              <span class="fl">0.999</span>        <span class="dv">4530</span>          <span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"></a>
+<a class="sourceLine" id="cb2-2" title="2">[<span class="dv">1</span>] <span class="st">"=================results summary================"</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="dv">1</span>            <span class="fl">1.000</span>             s<span class="op">~</span>sprt              <span class="fl">0.828</span>       <span class="dv">13650</span>          <span class="dv">2</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="dv">2</span>            <span class="fl">0.999</span>             s<span class="op">~</span>sprt              <span class="fl">0.862</span>        <span class="dv">9000</span>          <span class="dv">3</span></a></code></pre></div>
 <ul>
 <li>The optimal design based on Monte Carlo simulations.</li>
 </ul>
 <pre><code>[1] "=================Optimal design================="
   convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2</code></pre>
+2            0.999             s~sprt              0.862        9000          3</code></pre>
 <ul>
 <li>The simulation results for all the focal parameters under the selected optimal design. It does not only include the empirical power, but also additional information such as the average parameter estimate, the empirical standard error of the parameter estimate, and the bias of parameter estimate.</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"></a>
 <a class="sourceLine" id="cb4-2" title="2">[<span class="dv">1</span>] <span class="st">"=================Optimal design for focal parameters================="</span></a>
-<a class="sourceLine" id="cb4-3" title="3">     Estimate Average Estimate SD  Average SE <span class="kw">Power</span> (Not equal <span class="dv">0</span>)   Std Est   Std Est SD</a>
-<a class="sourceLine" id="cb4-4" title="4">i<span class="op">~</span><span class="dv">1</span>        <span class="fl">2.98293751</span> <span class="fl">0.031715239</span> <span class="fl">0.031616120</span>               <span class="fl">1.000</span> <span class="fl">5.8125191</span> <span class="fl">3.214384e-01</span></a>
-<a class="sourceLine" id="cb4-5" title="5">s<span class="op">~</span><span class="dv">1</span>        <span class="fl">0.08626832</span> <span class="fl">0.012315538</span> <span class="fl">0.011890850</span>               <span class="fl">1.000</span> <span class="fl">0.5821286</span> <span class="fl">1.071983e-01</span></a>
-<a class="sourceLine" id="cb4-6" title="6">i<span class="op">~</span><span class="er">~</span>i       <span class="fl">0.26565608</span> <span class="fl">0.028395191</span> <span class="fl">0.027694967</span>               <span class="fl">1.000</span> <span class="fl">1.0000000</span> <span class="fl">1.479881e-16</span></a>
-<a class="sourceLine" id="cb4-7" title="7">s<span class="op">~</span><span class="er">~</span>s       <span class="fl">0.02275121</span> <span class="fl">0.004702874</span> <span class="fl">0.004540174</span>               <span class="fl">0.999</span> <span class="fl">1.0000000</span> <span class="fl">1.476542e-16</span></a>
-<a class="sourceLine" id="cb4-8" title="8">     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1</a>
-<a class="sourceLine" id="cb4-9" title="9">i<span class="op">~</span><span class="dv">1</span>   <span class="fl">0.3109336</span>         <span class="fl">2.983</span> <span class="fl">-6.248508e-05</span>    <span class="fl">0.945</span>   <span class="fl">0.06909154</span> <span class="fl">0.02634767</span></a>
-<a class="sourceLine" id="cb4-10" title="10">s<span class="op">~</span><span class="dv">1</span>   <span class="fl">0.1017555</span>         <span class="fl">0.086</span>  <span class="fl">2.683187e-04</span>    <span class="fl">0.939</span>   <span class="fl">0.33360543</span> <span class="fl">0.03811522</span></a>
-<a class="sourceLine" id="cb4-11" title="11">i<span class="op">~</span><span class="er">~</span>i  <span class="fl">0.0000000</span>         <span class="fl">0.268</span> <span class="fl">-2.343916e-03</span>    <span class="fl">0.935</span>   <span class="fl">0.25362176</span> <span class="fl">0.04437375</span></a>
-<a class="sourceLine" id="cb4-12" title="12">s<span class="op">~</span><span class="er">~</span>s  <span class="fl">0.0000000</span>         <span class="fl">0.023</span> <span class="fl">-2.487868e-04</span>    <span class="fl">0.939</span>   <span class="fl">0.62234904</span> <span class="fl">0.04767489</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-3" title="3">       Estimate Average Estimate SD Average SE <span class="kw">Power</span> (Not equal <span class="dv">0</span>)    Std Est Std Est SD</a>
+<a class="sourceLine" id="cb4-4" title="4">i<span class="op">~</span>sprt       <span class="fl">-1.5001637</span>  <span class="fl">0.11853266</span> <span class="fl">0.11738935</span>               <span class="fl">1.000</span> <span class="fl">-0.5217401</span> <span class="fl">0.03515221</span></a>
+<a class="sourceLine" id="cb4-5" title="5">s<span class="op">~</span>sprt       <span class="fl">-0.2015112</span>  <span class="fl">0.06651828</span> <span class="fl">0.06750681</span>               <span class="fl">0.862</span> <span class="fl">-0.1411624</span> <span class="fl">0.04615719</span></a>
+<a class="sourceLine" id="cb4-6" title="6">i<span class="op">~</span><span class="er">~</span>s         <span class="fl">-0.8928260</span>  <span class="fl">0.18286992</span> <span class="fl">0.17397815</span>               <span class="fl">0.999</span> <span class="fl">-0.2585775</span> <span class="fl">0.04777923</span></a>
+<a class="sourceLine" id="cb4-7" title="7">       Std Ave SE Average Param  Average Bias Coverage Average FMI1     SD FMI1</a>
+<a class="sourceLine" id="cb4-8" title="8">i<span class="op">~</span>sprt <span class="fl">0.03482613</span>          <span class="fl">-1.5</span> <span class="fl">-0.0001637438</span>    <span class="fl">0.950</span>  <span class="fl">0.007683133</span> <span class="fl">0.002622483</span></a>
+<a class="sourceLine" id="cb4-9" title="9">s<span class="op">~</span>sprt <span class="fl">0.04674602</span>          <span class="fl">-0.2</span> <span class="fl">-0.0015111960</span>    <span class="fl">0.956</span>  <span class="fl">0.019456644</span> <span class="fl">0.003455831</span></a>
+<a class="sourceLine" id="cb4-10" title="10">i<span class="op">~</span><span class="er">~</span>s   <span class="fl">0.04514329</span>          <span class="fl">-0.9</span>  <span class="fl">0.0071740326</span>    <span class="fl">0.937</span>  <span class="fl">0.034027477</span> <span class="fl">0.006533191</span></a></code></pre></div>
 <ul>
 <li>The missing pattern matrix for the optimal design, where 1 indicates missingness and 0 indicates complete data.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal patterns==============="</span></a>
-<a class="sourceLine" id="cb5-2" title="2">           se1 se2 se3 se4</a>
-<a class="sourceLine" id="cb5-3" title="3">             <span class="dv">0</span>   <span class="dv">1</span>   <span class="dv">1</span>   <span class="dv">0</span></a>
-<a class="sourceLine" id="cb5-4" title="4">             <span class="dv">0</span>   <span class="dv">1</span>   <span class="dv">0</span>   <span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-5" title="5">             <span class="dv">0</span>   <span class="dv">0</span>   <span class="dv">1</span>   <span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-6" title="6">completers   <span class="dv">0</span>   <span class="dv">0</span>   <span class="dv">0</span>   <span class="dv">0</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-2" title="2">           BDI1 BDI2 BDI3 BDI4 BDI5 BDI6</a>
+<a class="sourceLine" id="cb5-3" title="3">              <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb5-4" title="4">              <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-5" title="5">              <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-6" title="6">              <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-7" title="7">completers    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></a></code></pre></div>
 <ul>
 <li>The proportion of participants randomly assigned to each of the (missing) data patterns. Those proportions should add up to 1.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal probs=================="</span></a>
-<a class="sourceLine" id="cb6-2" title="2">[<span class="dv">1</span>] <span class="fl">0.266667</span> <span class="fl">0.266667</span> <span class="fl">0.266667</span> <span class="fl">0.200000</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
+<a class="sourceLine" id="cb6-2" title="2">[<span class="dv">1</span>] <span class="st">"=================Optimal probs=================="</span></a>
+<a class="sourceLine" id="cb6-3" title="3">[<span class="dv">1</span>] <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span></a></code></pre></div>
 <ul>
 <li>The number of participants actually randomely assigned to each of the (missing) data patterns.</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal ns===================="</span></a>
-<a class="sourceLine" id="cb7-2" title="2">[<span class="dv">1</span>] <span class="dv">86</span> <span class="dv">86</span> <span class="dv">86</span> <span class="dv">65</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-2" title="2">[<span class="dv">1</span>] <span class="dv">90</span> <span class="dv">90</span> <span class="dv">90</span> <span class="dv">90</span> <span class="dv">90</span></a></code></pre></div>
 <p>To view more details of the simulation results for the optimal PHPM design, we can extract the <code>simsem</code> output and use the <code><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary()</a></code> function as follows. It will output the model fit and parameter estimates over replications for the selected design.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.ex1<span class="op">$</span>opt.output)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.lgm<span class="op">$</span>opt.output)</a></code></pre></div>
 </div>
   </div>
 

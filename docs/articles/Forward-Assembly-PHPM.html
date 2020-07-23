@@ -62,13 +62,10 @@
       <a href="../articles/installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Linear-Latent-Growth-Model.html">An Example of PHPM with a Linear LGM</a>
-    </li>
-    <li>
-      <a href="../articles/Second-Order-Latent-Growth-Model.html">An Example of PHPM with a Second-order Linear LGM</a>
-    </li>
-    <li>
       <a href="../articles/Autoregressive-Cross-Lagged-Model.html">An Example of PHPM with an Autoregression and Cross-lagged Model</a>
+    </li>
+    <li>
+      <a href="../articles/Conditional-Linear-Latent-Growth-Model.html">An Example of PHPM with a Conditional Linear Latent Growth Model</a>
     </li>
     <li>
       <a href="../articles/Wave-Level-PHPM.html">Wave-level PM designs</a>
@@ -158,333 +155,267 @@
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a><span style="color:seagreen"><strong>Example</strong></span>
 </h2>
-<p>In this <a href="Second-Order-Latent-Growth-Model.html">hypothetical example</a>, a researcher (Mr. Y) is interested in studying the longitudinal trajectories of children’s externalizing behaviors. The researcher proposed to collect reports from the mother, the father, and the teacher about the child’s daily behaviors (from families with hetero-sexual parents). Once the data collection is completed, the researcher intends to model the externalizing behaviors as a latent variable and investigate its change over time.</p>
-<p>Suppose the researcher has proposed a complete-case longitudinal study to collect data for 1,135 children across four waves, each collected at grades 1, 3, 4, and 5. The proposed analysis model is shown below, where the three indicators of the latent construct (externalizing behavior) <span class="math inline">\(\eta\)</span> across each of the four waves are the responses from the mother (<em>M1</em>-<em>M4</em>), the father (<em>F1</em>-<em>F4</em>), and the teacher (<em>T1</em>-<em>T4</em>), correspondingly.</p>
-<p>Although the researcher has initially obtained an external funding to support his longitudinal study, unfortunately, after the first wave of data collection, the funding agency announces a 30% reduction in the remaining funding. Mr. Y wishes to continue the project but he has to deal with the lowered budget constraint. Of course, Mr. Y also wants to keep the scientific rigor and satisfactory statistical power. He thus chooses to use <code>simPM</code> to find a design that yields sufficient power but costs no more than the reduced budget.</p>
+<p>In this <a href="Autoregressive-Cross-Lagged-Model.html">hypothetical example</a>, Suppose a group of researchers is interested in examining the longitudinal reciprocal relations between peer relationships and teacher-child relationships. They have been funded for a longitudinal panel study following 1000 children for three years. Each year they would collect data on three measures: two measures of peer relationships (self-perceived popularity and peer-perceived popularity) and one measure of teacher-child relationships (teacher-child support). Upon the completion of data collection, they plan to fit an autoregressive cross-lagged model shown below. The parameter of focal interest to the researchers are the cross-lagged path coefficients predicting the peer-perceived popularity from the self-perceived popularity measured at the previous time point, as well as in the cross-lagged paths predicting teacher-child support from the peer-perceived popularity measured at the previous time point (marked in red).</p>
+<p>Unfortunately, after the first wave of data collection, the funding agency announces a 30% reduction in the remaining funding. The researcher wishes to continue the project under the budget constraint, with the hope to not compromise the scientific rigor and statistical power. The reseacher thus decideds to use <code>simPM</code> to find a design that yields sufficient power but costs no more than the reduced budget.</p>
 <div class="figure" style="text-align: center">
-<img src="images/Second-order-LGM.png" alt="A second-order linear LGM" width="50%"><p class="caption">
-A second-order linear LGM
+<img src="images/Autoregressive-cross-lagged.png" alt="An autoregressive and cross-lagged model" width="80%"><p class="caption">
+An autoregressive and cross-lagged model
 </p>
 </div>
-<p>After supplying the population model and the analysis model, we can use the <code><a href="../reference/simPM.html">simPM()</a></code> function to search for an optimal item-level missing design with the <code>methods = "forward"</code> argument. For this example, suppose we wish to have no more than five unique missing data patterns in the PHPM design. For more details about the specification of other arguments, please refer to <a href="Second-Order-Latent-Growth-Model.html">this vignette</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">popModel=<span class="st">'</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="st">EXB1=~1.150*F1+0.836*T1+1*M1</span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="st">EXB2=~1.150*F2+0.836*T2+1*M2</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="st">EXB3=~1.150*F3+0.836*T3+1*M3</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="st">EXB4=~1.150*F4+0.836*T4+1*M4</span></a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="st">interc=~1*EXB1+1*EXB2+1*EXB3+1*EXB4</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="st">slope=~0*EXB1+2*EXB2+3*EXB3+4*EXB4</span></a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="st">interc~~-0.244*slope</span></a>
-<a class="sourceLine" id="cb1-12" title="12"></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="st">interc~8.289*1</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="st">slope~-0.433*1</span></a>
-<a class="sourceLine" id="cb1-15" title="15"></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="st">interc~~18.184*interc</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="st">slope~~0.249*slope</span></a>
-<a class="sourceLine" id="cb1-18" title="18"></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="st">EXB1~~1.084*EXB1</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="st">EXB2~~1.777*EXB2</span></a>
-<a class="sourceLine" id="cb1-21" title="21"><span class="st">EXB3~~1.457*EXB3</span></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="st">EXB4~~1.700*EXB4</span></a>
-<a class="sourceLine" id="cb1-23" title="23"></a>
-<a class="sourceLine" id="cb1-24" title="24"><span class="st">T1~-0.214*1</span></a>
-<a class="sourceLine" id="cb1-25" title="25"><span class="st">T2~-0.214*1</span></a>
-<a class="sourceLine" id="cb1-26" title="26"><span class="st">T3~-0.214*1</span></a>
-<a class="sourceLine" id="cb1-27" title="27"><span class="st">T4~-0.214*1</span></a>
-<a class="sourceLine" id="cb1-28" title="28"></a>
-<a class="sourceLine" id="cb1-29" title="29"><span class="st">M1~0*1</span></a>
-<a class="sourceLine" id="cb1-30" title="30"><span class="st">M2~0*1</span></a>
-<a class="sourceLine" id="cb1-31" title="31"><span class="st">M3~0*1</span></a>
-<a class="sourceLine" id="cb1-32" title="32"><span class="st">M4~0*1</span></a>
-<a class="sourceLine" id="cb1-33" title="33"></a>
-<a class="sourceLine" id="cb1-34" title="34"><span class="st">F1~-1.136*1</span></a>
-<a class="sourceLine" id="cb1-35" title="35"><span class="st">F2~-1.136*1</span></a>
-<a class="sourceLine" id="cb1-36" title="36"><span class="st">F3~-1.136*1</span></a>
-<a class="sourceLine" id="cb1-37" title="37"><span class="st">F4~-1.136*1</span></a>
-<a class="sourceLine" id="cb1-38" title="38"></a>
+<p>After supplying the population model and the analysis model, we can use the <code><a href="../reference/simPM.html">simPM()</a></code> function to search for an optimal item-level missing design with the <code>methods = "forward"</code> argument. For this example, suppose we wish to have no more than three unique missing data patterns in the PHPM design. For more details about the specification of other arguments, please refer to <a href="Autoregressive-Cross-Lagged-Model.html">this vignette</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"></a>
+<a class="sourceLine" id="cb1-2" title="2">popModel &lt;-<span class="st"> '</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="st">#----------- path coefficients ------------#</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="st">SelfPop2~0.609*SelfPop1+0.111*PeerPop1</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="st">SelfPop3~0.587*SelfPop2+0.053*PeerPop2</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="st">PeerPop2~0.051*SelfPop1+0.647*PeerPop1+(-0.056)*Support1</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="st">PeerPop3~0.056*SelfPop2+0.679*PeerPop2+0.075*Support2</span></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="st">Support2~0.468*Support1+0.124*PeerPop1</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">Support3~0.280*Support2+0.132*PeerPop2</span></a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="st">#----------- residual covariance ----------#</span></a>
+<a class="sourceLine" id="cb1-16" title="16"></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="st">PeerPop1~~0.229*SelfPop1+0.064*Support1</span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="st">SelfPop1~~0.007*Support1</span></a>
+<a class="sourceLine" id="cb1-19" title="19"></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="st">PeerPop2~~0.079*SelfPop2+(-0.036)*Support2</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="st">SelfPop2~~0.055*Support2</span></a>
+<a class="sourceLine" id="cb1-22" title="22"></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="st">PeerPop3~~0.052*SelfPop3+0.013*Support3</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="st">SelfPop3~~(-0.034)*Support3</span></a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="st">#---------------- means -------------------#</span></a>
+<a class="sourceLine" id="cb1-27" title="27"></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="st">PeerPop1~3.273*1</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="st">SelfPop1~0.048*1</span></a>
+<a class="sourceLine" id="cb1-30" title="30"><span class="st">Support1~2.905*1</span></a>
+<a class="sourceLine" id="cb1-31" title="31"></a>
+<a class="sourceLine" id="cb1-32" title="32"><span class="st">PeerPop2~1.247*1</span></a>
+<a class="sourceLine" id="cb1-33" title="33"><span class="st">SelfPop2~(-0.343)*1</span></a>
+<a class="sourceLine" id="cb1-34" title="34"><span class="st">Support2~1.193*1</span></a>
+<a class="sourceLine" id="cb1-35" title="35"></a>
+<a class="sourceLine" id="cb1-36" title="36"><span class="st">PeerPop3~0.814*1</span></a>
+<a class="sourceLine" id="cb1-37" title="37"><span class="st">SelfPop3~(-0.161)*1</span></a>
+<a class="sourceLine" id="cb1-38" title="38"><span class="st">Support3~1.451*1</span></a>
 <a class="sourceLine" id="cb1-39" title="39"></a>
-<a class="sourceLine" id="cb1-40" title="40"><span class="st">M1~~23.886*M1</span></a>
-<a class="sourceLine" id="cb1-41" title="41"><span class="st">F1~~17.737*F1</span></a>
-<a class="sourceLine" id="cb1-42" title="42"><span class="st">T1~~55.074*T1 </span></a>
-<a class="sourceLine" id="cb1-43" title="43"><span class="st">M2~~20.223*M2      </span></a>
-<a class="sourceLine" id="cb1-44" title="44"><span class="st">F2~~8.941*F2      </span></a>
-<a class="sourceLine" id="cb1-45" title="45"><span class="st">T2~~66.698*T2      </span></a>
-<a class="sourceLine" id="cb1-46" title="46"><span class="st">M3~~16.905*M3      </span></a>
-<a class="sourceLine" id="cb1-47" title="47"><span class="st">F3~~13.922*F3      </span></a>
-<a class="sourceLine" id="cb1-48" title="48"><span class="st">T3~~61.995*T3 </span></a>
-<a class="sourceLine" id="cb1-49" title="49"><span class="st">M4~~19.324*M4 </span></a>
-<a class="sourceLine" id="cb1-50" title="50"><span class="st">F4~~13.410*F4      </span></a>
-<a class="sourceLine" id="cb1-51" title="51"><span class="st">T4~~71.127*T4</span></a>
-<a class="sourceLine" id="cb1-52" title="52"></a>
-<a class="sourceLine" id="cb1-53" title="53"><span class="st">F1~~4.256*F2+7.040*F3+5.737*F4</span></a>
-<a class="sourceLine" id="cb1-54" title="54"><span class="st">F2~~5.440*F3+3.590*F4</span></a>
-<a class="sourceLine" id="cb1-55" title="55"><span class="st">F3~~6.165*F4</span></a>
-<a class="sourceLine" id="cb1-56" title="56"></a>
-<a class="sourceLine" id="cb1-57" title="57"><span class="st">T1~~23.603*T2+24.666*T3+23.168*T4</span></a>
-<a class="sourceLine" id="cb1-58" title="58"><span class="st">T2~~35.213*T3+29.648*T4</span></a>
-<a class="sourceLine" id="cb1-59" title="59"><span class="st">T3~~33.815*T4</span></a>
-<a class="sourceLine" id="cb1-60" title="60"></a>
-<a class="sourceLine" id="cb1-61" title="61"><span class="st">M1~~12.975*M2+11.153*M3+11.683*M4</span></a>
-<a class="sourceLine" id="cb1-62" title="62"><span class="st">M2~~12.219*M3+11.332*M4</span></a>
-<a class="sourceLine" id="cb1-63" title="63"><span class="st">M3~~11.807*M4</span></a>
-<a class="sourceLine" id="cb1-64" title="64"></a>
-<a class="sourceLine" id="cb1-65" title="65"><span class="st">'</span></a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">analyzeModel=<span class="st">'</span></a>
+<a class="sourceLine" id="cb1-40" title="40"><span class="st">#--------------- variances ----------------#</span></a>
+<a class="sourceLine" id="cb1-41" title="41"></a>
+<a class="sourceLine" id="cb1-42" title="42"><span class="st">PeerPop1~~0.447*PeerPop1</span></a>
+<a class="sourceLine" id="cb1-43" title="43"><span class="st">SelfPop1~~1.010*SelfPop1</span></a>
+<a class="sourceLine" id="cb1-44" title="44"><span class="st">Support1~~0.540*Support1</span></a>
+<a class="sourceLine" id="cb1-45" title="45"></a>
+<a class="sourceLine" id="cb1-46" title="46"><span class="st">PeerPop2~~0.238*PeerPop2</span></a>
+<a class="sourceLine" id="cb1-47" title="47"><span class="st">SelfPop2~~0.607*SelfPop2</span></a>
+<a class="sourceLine" id="cb1-48" title="48"><span class="st">Support2~~0.432*Support2</span></a>
+<a class="sourceLine" id="cb1-49" title="49"></a>
+<a class="sourceLine" id="cb1-50" title="50"><span class="st">PeerPop3~~0.211*PeerPop3</span></a>
+<a class="sourceLine" id="cb1-51" title="51"><span class="st">SelfPop3~~0.380*SelfPop3</span></a>
+<a class="sourceLine" id="cb1-52" title="52"><span class="st">Support3~~0.424*Support3</span></a>
+<a class="sourceLine" id="cb1-53" title="53"></a>
+<a class="sourceLine" id="cb1-54" title="54"><span class="st">'</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">analyzeModel &lt;-<span class="st"> '</span></a>
 <a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">EXB1=~NA*F1+a*F1+b*T1+1*M1</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">EXB2=~NA*F2+a*F2+b*T2+1*M2</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="st">EXB3=~NA*F3+a*F3+b*T3+1*M3</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="st">EXB4=~NA*F4+a*F4+b*T4+1*M4</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">#----------- path coefficients ------------#</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">SelfPop2~SelfPop1+PeerPop1</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">SelfPop3~SelfPop2+PeerPop2</span></a>
 <a class="sourceLine" id="cb2-7" title="7"></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="st">interc=~1*EXB1+1*EXB2+1*EXB3+1*EXB4</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="st">slope=~0*EXB1+2*EXB2+3*EXB3+4*EXB4</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">PeerPop2~SelfPop1+PeerPop1+Support1</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="st">PeerPop3~SelfPop2+PeerPop2+Support2</span></a>
 <a class="sourceLine" id="cb2-10" title="10"></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="st">interc~~slope</span></a>
-<a class="sourceLine" id="cb2-12" title="12"></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="st">interc~1</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="st">slope~1</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="st">interc~~interc</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="st">slope~~slope</span></a>
-<a class="sourceLine" id="cb2-17" title="17"></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="st">EXB1~~EXB1</span></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="st">EXB2~~EXB2</span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="st">EXB3~~EXB3</span></a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="st">EXB4~~EXB4</span></a>
-<a class="sourceLine" id="cb2-22" title="22"></a>
-<a class="sourceLine" id="cb2-23" title="23"><span class="st">F1~c*1</span></a>
-<a class="sourceLine" id="cb2-24" title="24"><span class="st">F2~c*1</span></a>
-<a class="sourceLine" id="cb2-25" title="25"><span class="st">F3~c*1</span></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="st">F4~c*1</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">Support2~Support1+PeerPop1</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="st">Support3~Support2+PeerPop2</span></a>
+<a class="sourceLine" id="cb2-13" title="13"></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="st">#----------- residual covariance ----------#</span></a>
+<a class="sourceLine" id="cb2-15" title="15"></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="st">PeerPop1~~SelfPop1+Support1</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="st">SelfPop1~~Support1</span></a>
+<a class="sourceLine" id="cb2-18" title="18"></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="st">PeerPop2~~SelfPop2+Support2</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="st">SelfPop2~~Support2</span></a>
+<a class="sourceLine" id="cb2-21" title="21"></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="st">PeerPop3~~SelfPop3+Support3</span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="st">SelfPop3~~Support3</span></a>
+<a class="sourceLine" id="cb2-24" title="24"></a>
+<a class="sourceLine" id="cb2-25" title="25"></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="st">#---------------- means -------------------#</span></a>
 <a class="sourceLine" id="cb2-27" title="27"></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="st">T1~d*1</span></a>
-<a class="sourceLine" id="cb2-29" title="29"><span class="st">T2~d*1</span></a>
-<a class="sourceLine" id="cb2-30" title="30"><span class="st">T3~d*1</span></a>
-<a class="sourceLine" id="cb2-31" title="31"><span class="st">T4~d*1</span></a>
-<a class="sourceLine" id="cb2-32" title="32"></a>
-<a class="sourceLine" id="cb2-33" title="33"><span class="st">M1~0*1</span></a>
-<a class="sourceLine" id="cb2-34" title="34"><span class="st">M2~0*1</span></a>
-<a class="sourceLine" id="cb2-35" title="35"><span class="st">M3~0*1</span></a>
-<a class="sourceLine" id="cb2-36" title="36"><span class="st">M4~0*1</span></a>
-<a class="sourceLine" id="cb2-37" title="37"></a>
-<a class="sourceLine" id="cb2-38" title="38"><span class="st">F1~~F1</span></a>
-<a class="sourceLine" id="cb2-39" title="39"><span class="st">F2~~F2</span></a>
-<a class="sourceLine" id="cb2-40" title="40"><span class="st">F3~~F3</span></a>
-<a class="sourceLine" id="cb2-41" title="41"><span class="st">F4~~F4</span></a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="st">PeerPop1~1</span></a>
+<a class="sourceLine" id="cb2-29" title="29"><span class="st">SelfPop1~1</span></a>
+<a class="sourceLine" id="cb2-30" title="30"><span class="st">Support1~1</span></a>
+<a class="sourceLine" id="cb2-31" title="31"></a>
+<a class="sourceLine" id="cb2-32" title="32"><span class="st">PeerPop2~1</span></a>
+<a class="sourceLine" id="cb2-33" title="33"><span class="st">SelfPop2~1</span></a>
+<a class="sourceLine" id="cb2-34" title="34"><span class="st">Support2~1</span></a>
+<a class="sourceLine" id="cb2-35" title="35"></a>
+<a class="sourceLine" id="cb2-36" title="36"><span class="st">PeerPop3~1</span></a>
+<a class="sourceLine" id="cb2-37" title="37"><span class="st">SelfPop3~1</span></a>
+<a class="sourceLine" id="cb2-38" title="38"><span class="st">Support3~1</span></a>
+<a class="sourceLine" id="cb2-39" title="39"></a>
+<a class="sourceLine" id="cb2-40" title="40"></a>
+<a class="sourceLine" id="cb2-41" title="41"><span class="st">#--------------- variances ----------------#</span></a>
 <a class="sourceLine" id="cb2-42" title="42"></a>
-<a class="sourceLine" id="cb2-43" title="43"><span class="st">T1~~T1</span></a>
-<a class="sourceLine" id="cb2-44" title="44"><span class="st">T2~~T2</span></a>
-<a class="sourceLine" id="cb2-45" title="45"><span class="st">T3~~T3</span></a>
-<a class="sourceLine" id="cb2-46" title="46"><span class="st">T4~~T4</span></a>
-<a class="sourceLine" id="cb2-47" title="47"></a>
-<a class="sourceLine" id="cb2-48" title="48"><span class="st">M1~~M1</span></a>
-<a class="sourceLine" id="cb2-49" title="49"><span class="st">M2~~M2</span></a>
-<a class="sourceLine" id="cb2-50" title="50"><span class="st">M3~~M3</span></a>
-<a class="sourceLine" id="cb2-51" title="51"><span class="st">M4~~M4</span></a>
-<a class="sourceLine" id="cb2-52" title="52"></a>
-<a class="sourceLine" id="cb2-53" title="53"><span class="st">F1~~F2+F3+F4</span></a>
-<a class="sourceLine" id="cb2-54" title="54"><span class="st">F2~~F3+F4</span></a>
-<a class="sourceLine" id="cb2-55" title="55"><span class="st">F3~~F4</span></a>
-<a class="sourceLine" id="cb2-56" title="56"></a>
-<a class="sourceLine" id="cb2-57" title="57"><span class="st">T1~~T2+T3+T4</span></a>
-<a class="sourceLine" id="cb2-58" title="58"><span class="st">T2~~T3+T4</span></a>
-<a class="sourceLine" id="cb2-59" title="59"><span class="st">T3~~T4</span></a>
-<a class="sourceLine" id="cb2-60" title="60"></a>
-<a class="sourceLine" id="cb2-61" title="61"><span class="st">M1~~M2+M3+M4</span></a>
-<a class="sourceLine" id="cb2-62" title="62"><span class="st">M2~~M3+M4</span></a>
-<a class="sourceLine" id="cb2-63" title="63"><span class="st">M3~~M4</span></a>
-<a class="sourceLine" id="cb2-64" title="64"><span class="st">'</span></a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">forward.ex2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simPM.html">simPM</a></span>(</a>
-<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">analyzeModel =</span> analyzeModel,</a>
-<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">popModel =</span> popModel,</a>
-<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">VarNAMES =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"F1"</span>,<span class="st">"T1"</span>,<span class="st">"M1"</span>,<span class="st">"F2"</span>,<span class="st">"T2"</span>,<span class="st">"M2"</span>,</a>
-<a class="sourceLine" id="cb3-5" title="5">               <span class="st">"F3"</span>,<span class="st">"T3"</span>,<span class="st">"M3"</span>,<span class="st">"F4"</span>,<span class="st">"T4"</span>,<span class="st">"M4"</span>),</a>
-<a class="sourceLine" id="cb3-6" title="6">  <span class="dt">distal.var =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb3-7" title="7">  <span class="dt">n =</span> <span class="dv">1135</span>,</a>
-<a class="sourceLine" id="cb3-8" title="8">  <span class="dt">nreps =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">seed =</span> <span class="dv">123321</span>,</a>
-<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">Time =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">k =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb3-12" title="12">  <span class="dt">Time.complete =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb3-13" title="13">  <span class="dt">costmx =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">10</span>,<span class="dv">3</span>),<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">15</span>,<span class="dv">3</span>)),  </a>
-<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">pc =</span> <span class="fl">0.05</span>,   </a>
-<a class="sourceLine" id="cb3-15" title="15">  <span class="dt">pd =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb3-16" title="16">  <span class="dt">focal.param =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"interc~1"</span>,</a>
-<a class="sourceLine" id="cb3-17" title="17">                  <span class="st">"slope~1"</span>,</a>
-<a class="sourceLine" id="cb3-18" title="18">                  <span class="st">"interc~~interc"</span>,</a>
-<a class="sourceLine" id="cb3-19" title="19">                  <span class="st">"slope~~slope"</span>),</a>
-<a class="sourceLine" id="cb3-20" title="20">  <span class="dt">max.mk =</span> <span class="dv">5</span>,                                      <span class="co">#maximum number of unique missing data patterns allowed in the design</span></a>
-<a class="sourceLine" id="cb3-21" title="21">  <span class="dt">eval.budget =</span> T,            </a>
-<a class="sourceLine" id="cb3-22" title="22">  <span class="dt">rm.budget =</span> <span class="dv">1135</span><span class="op">*</span>(<span class="dv">15</span><span class="op">+</span><span class="dv">30</span><span class="op">+</span><span class="dv">45</span>)<span class="op">*</span><span class="fl">0.7</span>,          </a>
-<a class="sourceLine" id="cb3-23" title="23">  <span class="dt">complete.var =</span> <span class="st">"M3"</span>,                             <span class="co">#assume the researcher wants to collect complete data from the mothers at wave 3</span></a>
-<a class="sourceLine" id="cb3-24" title="24">  <span class="dt">engine =</span> <span class="st">"l"</span>,</a>
-<a class="sourceLine" id="cb3-25" title="25">  <span class="dt">methods =</span> <span class="st">"forward"</span>                              <span class="co">#type of PHPM designs under consideration, "forward" indicates imbalanced item-level PM designs searched via forward assembly.</span></a>
-<a class="sourceLine" id="cb3-26" title="26">)</a></code></pre></div>
-<p>In this example, given that we have specified to collect complete data for the mother’s report at wave 3, we thus have:</p>
+<a class="sourceLine" id="cb2-43" title="43"><span class="st">PeerPop1~~PeerPop1</span></a>
+<a class="sourceLine" id="cb2-44" title="44"><span class="st">SelfPop1~~SelfPop1</span></a>
+<a class="sourceLine" id="cb2-45" title="45"><span class="st">Support1~~Support1</span></a>
+<a class="sourceLine" id="cb2-46" title="46"></a>
+<a class="sourceLine" id="cb2-47" title="47"><span class="st">PeerPop2~~PeerPop2</span></a>
+<a class="sourceLine" id="cb2-48" title="48"><span class="st">SelfPop2~~SelfPop2</span></a>
+<a class="sourceLine" id="cb2-49" title="49"><span class="st">Support2~~Support2</span></a>
+<a class="sourceLine" id="cb2-50" title="50"></a>
+<a class="sourceLine" id="cb2-51" title="51"><span class="st">PeerPop3~~PeerPop3</span></a>
+<a class="sourceLine" id="cb2-52" title="52"><span class="st">SelfPop3~~SelfPop3</span></a>
+<a class="sourceLine" id="cb2-53" title="53"><span class="st">Support3~~Support3</span></a>
+<a class="sourceLine" id="cb2-54" title="54"></a>
+<a class="sourceLine" id="cb2-55" title="55"><span class="st">'</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">forward.ex3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simPM.html">simPM</a></span>(</a>
+<a class="sourceLine" id="cb3-2" title="2">  popModel,</a>
+<a class="sourceLine" id="cb3-3" title="3">  analyzeModel,</a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">VarNAMES=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,<span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,<span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),</a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="dt">distal.var =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="dt">n=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="dt">nreps=</span><span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="dt">seed=</span><span class="dv">12345</span>,</a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">Time=</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">k=</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">max.mk=</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="dt">Time.complete=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="dt">costmx=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">10</span>), </a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">pc=</span><span class="fl">0.1</span>,</a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="dt">pd=</span><span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="dt">focal.param=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,<span class="st">"Support2~PeerPop1"</span>,<span class="st">"PeerPop3~SelfPop2"</span>,<span class="st">"Support3~PeerPop2"</span>),</a>
+<a class="sourceLine" id="cb3-17" title="17">  <span class="dt">eval.budget=</span>T,          </a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="dt">rm.budget=</span>31500L,        </a>
+<a class="sourceLine" id="cb3-19" title="19">  <span class="dt">complete.var=</span><span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb3-20" title="20">  <span class="dt">engine=</span><span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb3-21" title="21">  <span class="dt">methods=</span><span class="st">"forward"</span></a>
+<a class="sourceLine" id="cb3-22" title="22">)</a></code></pre></div>
+<p>In this example, we have:</p>
 <ul>
 <li>
-<span class="math inline">\({8 \choose 1}=8\)</span> possible patterns with <span class="math inline">\(1\)</span> missing observed measurement.</li>
+<span class="math inline">\({6 \choose 1}=6\)</span> possible patterns with <span class="math inline">\(1\)</span> missing observed measurement.</li>
 <li>
-<span class="math inline">\({8 \choose 2}=28\)</span> possible patterns with <span class="math inline">\(2\)</span> missing observed measurements.</li>
+<span class="math inline">\({6 \choose 2}=15\)</span> possible patterns with <span class="math inline">\(2\)</span> missing observed measurements.</li>
 <li>
-<span class="math inline">\({8 \choose 3}=56\)</span> possible patterns with <span class="math inline">\(3\)</span> missing observed measurements.</li>
+<span class="math inline">\({6 \choose 3}=20\)</span> possible patterns with <span class="math inline">\(3\)</span> missing observed measurements.</li>
 <li>
-<span class="math inline">\({8 \choose 4}=70\)</span> possible patterns with <span class="math inline">\(4\)</span> missing observed measurements.</li>
+<span class="math inline">\({6 \choose 4}=15\)</span> possible patterns with <span class="math inline">\(4\)</span> missing observed measurements.</li>
 <li>
-<span class="math inline">\({8 \choose 5}=56\)</span> possible patterns with <span class="math inline">\(5\)</span> missing observed measurements.</li>
+<span class="math inline">\({6 \choose 5}=6\)</span> possible patterns with <span class="math inline">\(5\)</span> missing observed measurements.</li>
 </ul>
-<p>The program will run Monte Carlo simulations in order to assemble the optimal PHPM design. With the <code>max.mk = 5</code> argument, the target PHPM design will have five unique missing data patterns, each has <span class="math inline">\(1, 2, ..., 5\)</span> missing observed measurements, respectively.</p>
+<p>The program will run Monte Carlo simulations in order to assemble the optimal PHPM design. With the <code>max.mk = 3</code> argument, the target PHPM design will have five unique missing data patterns, each has <span class="math inline">\(1, 2, 3\)</span> missing observed measurements, respectively.</p>
 <p>According to the output, the optimal design costs $30,000, which is below the reduced available budget. From the output, we can see that 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the three unique missing data patterns (<span class="math inline">\(n=300\)</span> in each pattern).</p>
-<p>Over 1000 replications, this design yields an empirical power of 0.786 for testing the path coefficient <span class="math inline">\(b_{PS_1}\)</span>, 0.721 for testing the path coefficient <span class="math inline">\(b_{PS_2}\)</span>, 0.917 for testing the path coefficient <span class="math inline">\(b_{TS_1}\)</span>, and 0.890 for testing the path coefficient <span class="math inline">\(b_{TS_2}\)</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(forward.ex2)</a>
+<p>Over 1000 replications, this design yields an empirical power of 0.885 for testing the path coefficient <span class="math inline">\(b_{PS_1}\)</span>, 0.914 for testing the path coefficient <span class="math inline">\(b_{PS_2}\)</span>, 0.906 for testing the path coefficient <span class="math inline">\(b_{TS_1}\)</span>, and 0.937 for testing the path coefficient <span class="math inline">\(b_{TS_2}\)</span>. With this PHPM design, the statistical power is satisfactory for testing each of the focal parameters.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(forward.ex3)</a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; [1] "=================results summary================"</span></a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt;    convergence.rate weakest.param.name weakest.para.power cost.design</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; 14            0.913       slope~~slope              0.922    70880.75</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; 15            0.912       slope~~slope              0.896    70880.75</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; 16            0.908       slope~~slope              0.921    70880.75</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; 17            0.921       slope~~slope              0.930    70880.75</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; 18            0.920       slope~~slope              0.918    70880.75</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 19            0.913       slope~~slope              0.931    70880.75</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; 20            0.919       slope~~slope              0.913    69802.50</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; 24            0.910       slope~~slope              0.907    70880.75</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 25            0.909       slope~~slope              0.896    70880.75</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 26            0.907       slope~~slope              0.912    70880.75</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; 27            0.917       slope~~slope              0.914    70880.75</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 28            0.914       slope~~slope              0.899    70880.75</span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 29            0.914       slope~~slope              0.912    70880.75</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 30            0.915       slope~~slope              0.897    69802.50</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 31            0.909       slope~~slope              0.924    69802.50</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 32            0.908       slope~~slope              0.905    69802.50</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; 33            0.908       slope~~slope              0.929    69802.50</span></a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; 34            0.909       slope~~slope              0.903    68724.25</span></a>
-<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; 35            0.918       slope~~slope              0.918    68724.25</span></a>
-<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 39            0.910       slope~~slope              0.914    70880.75</span></a>
-<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; 40            0.915       slope~~slope              0.902    70880.75</span></a>
-<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 41            0.922       slope~~slope              0.929    70880.75</span></a>
-<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; 42            0.911       slope~~slope              0.921    70880.75</span></a>
-<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt; 43            0.914       slope~~slope              0.907    70880.75</span></a>
-<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt; 44            0.918       slope~~slope              0.928    70880.75</span></a>
-<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt; 45            0.918       slope~~slope              0.910    69802.50</span></a>
-<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt; 46            0.920       slope~~slope              0.930    69802.50</span></a>
-<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt; 47            0.923       slope~~slope              0.920    69802.50</span></a>
-<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt; 48            0.930       slope~~slope              0.940    69802.50</span></a>
-<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt; 49            0.921       slope~~slope              0.916    68724.25</span></a>
-<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; 50            0.922       slope~~slope              0.925    68724.25</span></a>
-<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt; 51            0.920       slope~~slope              0.918    69802.50</span></a>
-<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt; 52            0.924       slope~~slope              0.906    69802.50</span></a>
-<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt; 53            0.924       slope~~slope              0.927    69802.50</span></a>
-<a class="sourceLine" id="cb4-38" title="38"><span class="co">#&gt; 54            0.922       slope~~slope              0.906    68724.25</span></a>
-<a class="sourceLine" id="cb4-39" title="39"><span class="co">#&gt; 55            0.922       slope~~slope              0.907    68724.25</span></a>
-<a class="sourceLine" id="cb4-40" title="40"><span class="co">#&gt; 56            0.925       slope~~slope              0.919    67646.00</span></a>
-<a class="sourceLine" id="cb4-41" title="41"><span class="co">#&gt;    miss.num miss.var1 miss.var2 miss.var3 miss.var4 miss.var5 sim.seq</span></a>
-<a class="sourceLine" id="cb4-42" title="42"><span class="co">#&gt; 14        5        F2        T2        F3        F4        T4      14</span></a>
-<a class="sourceLine" id="cb4-43" title="43"><span class="co">#&gt; 15        5        F2        T2        F3        F4        M4      15</span></a>
-<a class="sourceLine" id="cb4-44" title="44"><span class="co">#&gt; 16        5        F2        T2        F3        T4        M4      16</span></a>
-<a class="sourceLine" id="cb4-45" title="45"><span class="co">#&gt; 17        5        F2        T2        T3        F4        T4      17</span></a>
-<a class="sourceLine" id="cb4-46" title="46"><span class="co">#&gt; 18        5        F2        T2        T3        F4        M4      18</span></a>
-<a class="sourceLine" id="cb4-47" title="47"><span class="co">#&gt; 19        5        F2        T2        T3        T4        M4      19</span></a>
-<a class="sourceLine" id="cb4-48" title="48"><span class="co">#&gt; 20        5        F2        T2        F4        T4        M4      20</span></a>
-<a class="sourceLine" id="cb4-49" title="49"><span class="co">#&gt; 24        5        F2        M2        F3        F4        T4      24</span></a>
-<a class="sourceLine" id="cb4-50" title="50"><span class="co">#&gt; 25        5        F2        M2        F3        F4        M4      25</span></a>
-<a class="sourceLine" id="cb4-51" title="51"><span class="co">#&gt; 26        5        F2        M2        F3        T4        M4      26</span></a>
-<a class="sourceLine" id="cb4-52" title="52"><span class="co">#&gt; 27        5        F2        M2        T3        F4        T4      27</span></a>
-<a class="sourceLine" id="cb4-53" title="53"><span class="co">#&gt; 28        5        F2        M2        T3        F4        M4      28</span></a>
-<a class="sourceLine" id="cb4-54" title="54"><span class="co">#&gt; 29        5        F2        M2        T3        T4        M4      29</span></a>
-<a class="sourceLine" id="cb4-55" title="55"><span class="co">#&gt; 30        5        F2        M2        F4        T4        M4      30</span></a>
-<a class="sourceLine" id="cb4-56" title="56"><span class="co">#&gt; 31        5        F2        F3        T3        F4        T4      31</span></a>
-<a class="sourceLine" id="cb4-57" title="57"><span class="co">#&gt; 32        5        F2        F3        T3        F4        M4      32</span></a>
-<a class="sourceLine" id="cb4-58" title="58"><span class="co">#&gt; 33        5        F2        F3        T3        T4        M4      33</span></a>
-<a class="sourceLine" id="cb4-59" title="59"><span class="co">#&gt; 34        5        F2        F3        F4        T4        M4      34</span></a>
-<a class="sourceLine" id="cb4-60" title="60"><span class="co">#&gt; 35        5        F2        T3        F4        T4        M4      35</span></a>
-<a class="sourceLine" id="cb4-61" title="61"><span class="co">#&gt; 39        5        T2        M2        F3        F4        T4      39</span></a>
-<a class="sourceLine" id="cb4-62" title="62"><span class="co">#&gt; 40        5        T2        M2        F3        F4        M4      40</span></a>
-<a class="sourceLine" id="cb4-63" title="63"><span class="co">#&gt; 41        5        T2        M2        F3        T4        M4      41</span></a>
-<a class="sourceLine" id="cb4-64" title="64"><span class="co">#&gt; 42        5        T2        M2        T3        F4        T4      42</span></a>
-<a class="sourceLine" id="cb4-65" title="65"><span class="co">#&gt; 43        5        T2        M2        T3        F4        M4      43</span></a>
-<a class="sourceLine" id="cb4-66" title="66"><span class="co">#&gt; 44        5        T2        M2        T3        T4        M4      44</span></a>
-<a class="sourceLine" id="cb4-67" title="67"><span class="co">#&gt; 45        5        T2        M2        F4        T4        M4      45</span></a>
-<a class="sourceLine" id="cb4-68" title="68"><span class="co">#&gt; 46        5        T2        F3        T3        F4        T4      46</span></a>
-<a class="sourceLine" id="cb4-69" title="69"><span class="co">#&gt; 47        5        T2        F3        T3        F4        M4      47</span></a>
-<a class="sourceLine" id="cb4-70" title="70"><span class="co">#&gt; 48        5        T2        F3        T3        T4        M4      48</span></a>
-<a class="sourceLine" id="cb4-71" title="71"><span class="co">#&gt; 49        5        T2        F3        F4        T4        M4      49</span></a>
-<a class="sourceLine" id="cb4-72" title="72"><span class="co">#&gt; 50        5        T2        T3        F4        T4        M4      50</span></a>
-<a class="sourceLine" id="cb4-73" title="73"><span class="co">#&gt; 51        5        M2        F3        T3        F4        T4      51</span></a>
-<a class="sourceLine" id="cb4-74" title="74"><span class="co">#&gt; 52        5        M2        F3        T3        F4        M4      52</span></a>
-<a class="sourceLine" id="cb4-75" title="75"><span class="co">#&gt; 53        5        M2        F3        T3        T4        M4      53</span></a>
-<a class="sourceLine" id="cb4-76" title="76"><span class="co">#&gt; 54        5        M2        F3        F4        T4        M4      54</span></a>
-<a class="sourceLine" id="cb4-77" title="77"><span class="co">#&gt; 55        5        M2        T3        F4        T4        M4      55</span></a>
-<a class="sourceLine" id="cb4-78" title="78"><span class="co">#&gt; 56        5        F3        T3        F4        T4        M4      56</span></a>
-<a class="sourceLine" id="cb4-79" title="79"><span class="co">#&gt;    miss.loc1 miss.loc2 miss.loc3 miss.loc4 miss.loc5</span></a>
-<a class="sourceLine" id="cb4-80" title="80"><span class="co">#&gt; 14         4         5         7        10        11</span></a>
-<a class="sourceLine" id="cb4-81" title="81"><span class="co">#&gt; 15         4         5         7        10        12</span></a>
-<a class="sourceLine" id="cb4-82" title="82"><span class="co">#&gt; 16         4         5         7        11        12</span></a>
-<a class="sourceLine" id="cb4-83" title="83"><span class="co">#&gt; 17         4         5         8        10        11</span></a>
-<a class="sourceLine" id="cb4-84" title="84"><span class="co">#&gt; 18         4         5         8        10        12</span></a>
-<a class="sourceLine" id="cb4-85" title="85"><span class="co">#&gt; 19         4         5         8        11        12</span></a>
-<a class="sourceLine" id="cb4-86" title="86"><span class="co">#&gt; 20         4         5        10        11        12</span></a>
-<a class="sourceLine" id="cb4-87" title="87"><span class="co">#&gt; 24         4         6         7        10        11</span></a>
-<a class="sourceLine" id="cb4-88" title="88"><span class="co">#&gt; 25         4         6         7        10        12</span></a>
-<a class="sourceLine" id="cb4-89" title="89"><span class="co">#&gt; 26         4         6         7        11        12</span></a>
-<a class="sourceLine" id="cb4-90" title="90"><span class="co">#&gt; 27         4         6         8        10        11</span></a>
-<a class="sourceLine" id="cb4-91" title="91"><span class="co">#&gt; 28         4         6         8        10        12</span></a>
-<a class="sourceLine" id="cb4-92" title="92"><span class="co">#&gt; 29         4         6         8        11        12</span></a>
-<a class="sourceLine" id="cb4-93" title="93"><span class="co">#&gt; 30         4         6        10        11        12</span></a>
-<a class="sourceLine" id="cb4-94" title="94"><span class="co">#&gt; 31         4         7         8        10        11</span></a>
-<a class="sourceLine" id="cb4-95" title="95"><span class="co">#&gt; 32         4         7         8        10        12</span></a>
-<a class="sourceLine" id="cb4-96" title="96"><span class="co">#&gt; 33         4         7         8        11        12</span></a>
-<a class="sourceLine" id="cb4-97" title="97"><span class="co">#&gt; 34         4         7        10        11        12</span></a>
-<a class="sourceLine" id="cb4-98" title="98"><span class="co">#&gt; 35         4         8        10        11        12</span></a>
-<a class="sourceLine" id="cb4-99" title="99"><span class="co">#&gt; 39         5         6         7        10        11</span></a>
-<a class="sourceLine" id="cb4-100" title="100"><span class="co">#&gt; 40         5         6         7        10        12</span></a>
-<a class="sourceLine" id="cb4-101" title="101"><span class="co">#&gt; 41         5         6         7        11        12</span></a>
-<a class="sourceLine" id="cb4-102" title="102"><span class="co">#&gt; 42         5         6         8        10        11</span></a>
-<a class="sourceLine" id="cb4-103" title="103"><span class="co">#&gt; 43         5         6         8        10        12</span></a>
-<a class="sourceLine" id="cb4-104" title="104"><span class="co">#&gt; 44         5         6         8        11        12</span></a>
-<a class="sourceLine" id="cb4-105" title="105"><span class="co">#&gt; 45         5         6        10        11        12</span></a>
-<a class="sourceLine" id="cb4-106" title="106"><span class="co">#&gt; 46         5         7         8        10        11</span></a>
-<a class="sourceLine" id="cb4-107" title="107"><span class="co">#&gt; 47         5         7         8        10        12</span></a>
-<a class="sourceLine" id="cb4-108" title="108"><span class="co">#&gt; 48         5         7         8        11        12</span></a>
-<a class="sourceLine" id="cb4-109" title="109"><span class="co">#&gt; 49         5         7        10        11        12</span></a>
-<a class="sourceLine" id="cb4-110" title="110"><span class="co">#&gt; 50         5         8        10        11        12</span></a>
-<a class="sourceLine" id="cb4-111" title="111"><span class="co">#&gt; 51         6         7         8        10        11</span></a>
-<a class="sourceLine" id="cb4-112" title="112"><span class="co">#&gt; 52         6         7         8        10        12</span></a>
-<a class="sourceLine" id="cb4-113" title="113"><span class="co">#&gt; 53         6         7         8        11        12</span></a>
-<a class="sourceLine" id="cb4-114" title="114"><span class="co">#&gt; 54         6         7        10        11        12</span></a>
-<a class="sourceLine" id="cb4-115" title="115"><span class="co">#&gt; 55         6         8        10        11        12</span></a>
-<a class="sourceLine" id="cb4-116" title="116"><span class="co">#&gt; 56         7         8        10        11        12</span></a>
-<a class="sourceLine" id="cb4-117" title="117"><span class="co">#&gt; [1] "=================Optimal design================="</span></a>
-<a class="sourceLine" id="cb4-118" title="118"><span class="co">#&gt;    convergence.rate weakest.param.name weakest.para.power cost.design</span></a>
-<a class="sourceLine" id="cb4-119" title="119"><span class="co">#&gt; 48             0.93       slope~~slope               0.94     69802.5</span></a>
-<a class="sourceLine" id="cb4-120" title="120"><span class="co">#&gt;    miss.num miss.var1 miss.var2 miss.var3 miss.var4 miss.var5 sim.seq</span></a>
-<a class="sourceLine" id="cb4-121" title="121"><span class="co">#&gt; 48        5        T2        F3        T3        T4        M4      48</span></a>
-<a class="sourceLine" id="cb4-122" title="122"><span class="co">#&gt;    miss.loc1 miss.loc2 miss.loc3 miss.loc4 miss.loc5</span></a>
-<a class="sourceLine" id="cb4-123" title="123"><span class="co">#&gt; 48         5         7         8        11        12</span></a>
-<a class="sourceLine" id="cb4-124" title="124"><span class="co">#&gt; [1] "=================Optimal design for focal parameters================="</span></a>
-<a class="sourceLine" id="cb4-125" title="125"><span class="co">#&gt;                Estimate Average Estimate SD Average SE Power (Not equal 0)</span></a>
-<a class="sourceLine" id="cb4-126" title="126"><span class="co">#&gt; interc~1              8.2865724  0.18423599 0.18257516                1.00</span></a>
-<a class="sourceLine" id="cb4-127" title="127"><span class="co">#&gt; slope~1              -0.4329607  0.03256262 0.03172940                1.00</span></a>
-<a class="sourceLine" id="cb4-128" title="128"><span class="co">#&gt; interc~~interc       18.2731813  1.68107536 1.66210528                1.00</span></a>
-<a class="sourceLine" id="cb4-129" title="129"><span class="co">#&gt; slope~~slope          0.2502644  0.07226992 0.07443478                0.94</span></a>
-<a class="sourceLine" id="cb4-130" title="130"><span class="co">#&gt;                   Std Est   Std Est SD Std Ave SE Average FMI1     SD FMI1</span></a>
-<a class="sourceLine" id="cb4-131" title="131"><span class="co">#&gt; interc~1        1.9443858 9.325732e-02 0.09379636   0.02365522 0.006379778</span></a>
-<a class="sourceLine" id="cb4-132" title="132"><span class="co">#&gt; slope~1        -0.9003786 2.070116e-01 0.18404313   0.10842323 0.019047938</span></a>
-<a class="sourceLine" id="cb4-133" title="133"><span class="co">#&gt; interc~~interc  1.0000000 1.554693e-16 0.00000000   0.11784586 0.021024875</span></a>
-<a class="sourceLine" id="cb4-134" title="134"><span class="co">#&gt; slope~~slope    1.0000000 1.438019e-16 0.00000000   0.27518386 0.024379875</span></a>
-<a class="sourceLine" id="cb4-135" title="135"><span class="co">#&gt; [1] "=================Optimal patterns==============="</span></a>
-<a class="sourceLine" id="cb4-136" title="136"><span class="co">#&gt;            F1 T1 M1 F2 T2 M2 F3 T3 M3 F4 T4 M4</span></a>
-<a class="sourceLine" id="cb4-137" title="137"><span class="co">#&gt;             0  0  0  0  1  0  1  1  0  0  1  1</span></a>
-<a class="sourceLine" id="cb4-138" title="138"><span class="co">#&gt;             0  0  0  0  1  1  1  0  0  0  1  0</span></a>
-<a class="sourceLine" id="cb4-139" title="139"><span class="co">#&gt;             0  0  0  0  0  1  1  0  0  0  0  1</span></a>
-<a class="sourceLine" id="cb4-140" title="140"><span class="co">#&gt;             0  0  0  0  0  1  0  0  0  0  1  0</span></a>
-<a class="sourceLine" id="cb4-141" title="141"><span class="co">#&gt;             0  0  0  0  0  0  0  1  0  0  0  0</span></a>
-<a class="sourceLine" id="cb4-142" title="142"><span class="co">#&gt; completers  0  0  0  0  0  0  0  0  0  0  0  0</span></a>
-<a class="sourceLine" id="cb4-143" title="143"><span class="co">#&gt; [1] "=================Optimal probs=================="</span></a>
-<a class="sourceLine" id="cb4-144" title="144"><span class="co">#&gt; [1] 0.19 0.19 0.19 0.19 0.19 0.05</span></a>
-<a class="sourceLine" id="cb4-145" title="145"><span class="co">#&gt; [1] "=================Optimal ns===================="</span></a>
-<a class="sourceLine" id="cb4-146" title="146"><span class="co">#&gt; [1] 215 215 215 215 215  60</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(forward.ex2, <span class="dt">row.names=</span>F)</a></code></pre></div>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; 2                 1  PeerPop2~SelfPop1              0.755       31500</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; 3                 1  PeerPop2~SelfPop1              0.796       31500</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; 4                 1  PeerPop2~SelfPop1              0.798       31500</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; 5                 1  Support2~PeerPop1              0.736       31500</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; 6                 1  Support2~PeerPop1              0.729       31500</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 7                 1  Support2~PeerPop1              0.714       31500</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; 8                 1  PeerPop2~SelfPop1              0.751       30000</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; 9                 1  PeerPop2~SelfPop1              0.749       30000</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 10                1  PeerPop2~SelfPop1              0.795       30000</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 11                1  Support2~PeerPop1              0.737       31500</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; 12                1  Support2~PeerPop1              0.734       31500</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 13                1  Support2~PeerPop1              0.721       31500</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 14                1  PeerPop3~SelfPop2              0.870       30000</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 15                1  PeerPop3~SelfPop2              0.873       30000</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 16                1  PeerPop2~SelfPop1              0.885       30000</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 17                1  Support2~PeerPop1              0.737       30000</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; 18                1  Support2~PeerPop1              0.724       30000</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; 19                1  Support2~PeerPop1              0.720       30000</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; 20                1  PeerPop3~SelfPop2              0.874       28500</span></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt;    miss.num miss.var1 miss.var2 miss.var3 sim.seq miss.loc1 miss.loc2</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; 2         3  PeerPop2  SelfPop2  PeerPop3       2         4         5</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 3         3  PeerPop2  SelfPop2  SelfPop3       3         4         5</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; 4         3  PeerPop2  SelfPop2  Support3       4         4         5</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt; 5         3  PeerPop2  Support2  PeerPop3       5         4         6</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt; 6         3  PeerPop2  Support2  SelfPop3       6         4         6</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt; 7         3  PeerPop2  Support2  Support3       7         4         6</span></a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt; 8         3  PeerPop2  PeerPop3  SelfPop3       8         4         7</span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt; 9         3  PeerPop2  PeerPop3  Support3       9         4         7</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt; 10        3  PeerPop2  SelfPop3  Support3      10         4         8</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt; 11        3  SelfPop2  Support2  PeerPop3      11         5         6</span></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; 12        3  SelfPop2  Support2  SelfPop3      12         5         6</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt; 13        3  SelfPop2  Support2  Support3      13         5         6</span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt; 14        3  SelfPop2  PeerPop3  SelfPop3      14         5         7</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt; 15        3  SelfPop2  PeerPop3  Support3      15         5         7</span></a>
+<a class="sourceLine" id="cb4-38" title="38"><span class="co">#&gt; 16        3  SelfPop2  SelfPop3  Support3      16         5         8</span></a>
+<a class="sourceLine" id="cb4-39" title="39"><span class="co">#&gt; 17        3  Support2  PeerPop3  SelfPop3      17         6         7</span></a>
+<a class="sourceLine" id="cb4-40" title="40"><span class="co">#&gt; 18        3  Support2  PeerPop3  Support3      18         6         7</span></a>
+<a class="sourceLine" id="cb4-41" title="41"><span class="co">#&gt; 19        3  Support2  SelfPop3  Support3      19         6         8</span></a>
+<a class="sourceLine" id="cb4-42" title="42"><span class="co">#&gt; 20        3  PeerPop3  SelfPop3  Support3      20         7         8</span></a>
+<a class="sourceLine" id="cb4-43" title="43"><span class="co">#&gt;    miss.loc3</span></a>
+<a class="sourceLine" id="cb4-44" title="44"><span class="co">#&gt; 2          7</span></a>
+<a class="sourceLine" id="cb4-45" title="45"><span class="co">#&gt; 3          8</span></a>
+<a class="sourceLine" id="cb4-46" title="46"><span class="co">#&gt; 4          9</span></a>
+<a class="sourceLine" id="cb4-47" title="47"><span class="co">#&gt; 5          7</span></a>
+<a class="sourceLine" id="cb4-48" title="48"><span class="co">#&gt; 6          8</span></a>
+<a class="sourceLine" id="cb4-49" title="49"><span class="co">#&gt; 7          9</span></a>
+<a class="sourceLine" id="cb4-50" title="50"><span class="co">#&gt; 8          8</span></a>
+<a class="sourceLine" id="cb4-51" title="51"><span class="co">#&gt; 9          9</span></a>
+<a class="sourceLine" id="cb4-52" title="52"><span class="co">#&gt; 10         9</span></a>
+<a class="sourceLine" id="cb4-53" title="53"><span class="co">#&gt; 11         7</span></a>
+<a class="sourceLine" id="cb4-54" title="54"><span class="co">#&gt; 12         8</span></a>
+<a class="sourceLine" id="cb4-55" title="55"><span class="co">#&gt; 13         9</span></a>
+<a class="sourceLine" id="cb4-56" title="56"><span class="co">#&gt; 14         8</span></a>
+<a class="sourceLine" id="cb4-57" title="57"><span class="co">#&gt; 15         9</span></a>
+<a class="sourceLine" id="cb4-58" title="58"><span class="co">#&gt; 16         9</span></a>
+<a class="sourceLine" id="cb4-59" title="59"><span class="co">#&gt; 17         8</span></a>
+<a class="sourceLine" id="cb4-60" title="60"><span class="co">#&gt; 18         9</span></a>
+<a class="sourceLine" id="cb4-61" title="61"><span class="co">#&gt; 19         9</span></a>
+<a class="sourceLine" id="cb4-62" title="62"><span class="co">#&gt; 20         9</span></a>
+<a class="sourceLine" id="cb4-63" title="63"><span class="co">#&gt; [1] "=================Optimal design================="</span></a>
+<a class="sourceLine" id="cb4-64" title="64"><span class="co">#&gt;    convergence.rate weakest.param.name weakest.para.power cost.design</span></a>
+<a class="sourceLine" id="cb4-65" title="65"><span class="co">#&gt; 16                1  PeerPop2~SelfPop1              0.885       30000</span></a>
+<a class="sourceLine" id="cb4-66" title="66"><span class="co">#&gt;    miss.num miss.var1 miss.var2 miss.var3 sim.seq miss.loc1 miss.loc2</span></a>
+<a class="sourceLine" id="cb4-67" title="67"><span class="co">#&gt; 16        3  SelfPop2  SelfPop3  Support3      16         5         8</span></a>
+<a class="sourceLine" id="cb4-68" title="68"><span class="co">#&gt;    miss.loc3</span></a>
+<a class="sourceLine" id="cb4-69" title="69"><span class="co">#&gt; 16         9</span></a>
+<a class="sourceLine" id="cb4-70" title="70"><span class="co">#&gt; [1] "=================Optimal design for focal parameters================="</span></a>
+<a class="sourceLine" id="cb4-71" title="71"><span class="co">#&gt;                   Estimate Average Estimate SD Average SE</span></a>
+<a class="sourceLine" id="cb4-72" title="72"><span class="co">#&gt; PeerPop2~SelfPop1        0.0509315  0.01593366 0.01625888</span></a>
+<a class="sourceLine" id="cb4-73" title="73"><span class="co">#&gt; Support2~PeerPop1        0.1225502  0.03691843 0.03681819</span></a>
+<a class="sourceLine" id="cb4-74" title="74"><span class="co">#&gt; PeerPop3~SelfPop2        0.0568749  0.01686760 0.01728927</span></a>
+<a class="sourceLine" id="cb4-75" title="75"><span class="co">#&gt; Support3~PeerPop2        0.1313719  0.03780042 0.03793717</span></a>
+<a class="sourceLine" id="cb4-76" title="76"><span class="co">#&gt;                   Power (Not equal 0)    Std Est Std Est SD Std Ave SE</span></a>
+<a class="sourceLine" id="cb4-77" title="77"><span class="co">#&gt; PeerPop2~SelfPop1               0.885 0.07715693 0.02407530 0.02460888</span></a>
+<a class="sourceLine" id="cb4-78" title="78"><span class="co">#&gt; Support2~PeerPop1               0.906 0.10899450 0.03257593 0.03257226</span></a>
+<a class="sourceLine" id="cb4-79" title="79"><span class="co">#&gt; PeerPop3~SelfPop2               0.914 0.08652626 0.02558155 0.02628572</span></a>
+<a class="sourceLine" id="cb4-80" title="80"><span class="co">#&gt; Support3~PeerPop2               0.937 0.12610467 0.03596546 0.03609359</span></a>
+<a class="sourceLine" id="cb4-81" title="81"><span class="co">#&gt;                   Average Param  Average Bias Coverage Average FMI1</span></a>
+<a class="sourceLine" id="cb4-82" title="82"><span class="co">#&gt; PeerPop2~SelfPop1         0.051 -6.849557e-05    0.951  0.004906487</span></a>
+<a class="sourceLine" id="cb4-83" title="83"><span class="co">#&gt; Support2~PeerPop1         0.124 -1.449846e-03    0.937  0.275855979</span></a>
+<a class="sourceLine" id="cb4-84" title="84"><span class="co">#&gt; PeerPop3~SelfPop2         0.056  8.748955e-04    0.947  0.202017999</span></a>
+<a class="sourceLine" id="cb4-85" title="85"><span class="co">#&gt; Support3~PeerPop2         0.132 -6.281368e-04    0.951  0.330559605</span></a>
+<a class="sourceLine" id="cb4-86" title="86"><span class="co">#&gt;                       SD FMI1</span></a>
+<a class="sourceLine" id="cb4-87" title="87"><span class="co">#&gt; PeerPop2~SelfPop1 0.002715199</span></a>
+<a class="sourceLine" id="cb4-88" title="88"><span class="co">#&gt; Support2~PeerPop1 0.020332822</span></a>
+<a class="sourceLine" id="cb4-89" title="89"><span class="co">#&gt; PeerPop3~SelfPop2 0.015647460</span></a>
+<a class="sourceLine" id="cb4-90" title="90"><span class="co">#&gt; Support3~PeerPop2 0.020608104</span></a>
+<a class="sourceLine" id="cb4-91" title="91"><span class="co">#&gt; [1] "=================Optimal patterns==============="</span></a>
+<a class="sourceLine" id="cb4-92" title="92"><span class="co">#&gt;            PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3</span></a>
+<a class="sourceLine" id="cb4-93" title="93"><span class="co">#&gt;                   0        0        0        0        1        0        0</span></a>
+<a class="sourceLine" id="cb4-94" title="94"><span class="co">#&gt;                   0        0        0        0        0        1        0</span></a>
+<a class="sourceLine" id="cb4-95" title="95"><span class="co">#&gt;                   0        0        0        0        0        0        0</span></a>
+<a class="sourceLine" id="cb4-96" title="96"><span class="co">#&gt; completers        0        0        0        0        0        0        0</span></a>
+<a class="sourceLine" id="cb4-97" title="97"><span class="co">#&gt;            SelfPop3 Support3</span></a>
+<a class="sourceLine" id="cb4-98" title="98"><span class="co">#&gt;                   1        1</span></a>
+<a class="sourceLine" id="cb4-99" title="99"><span class="co">#&gt;                   1        0</span></a>
+<a class="sourceLine" id="cb4-100" title="100"><span class="co">#&gt;                   1        0</span></a>
+<a class="sourceLine" id="cb4-101" title="101"><span class="co">#&gt; completers        0        0</span></a>
+<a class="sourceLine" id="cb4-102" title="102"><span class="co">#&gt; [1] "=================Optimal probs=================="</span></a>
+<a class="sourceLine" id="cb4-103" title="103"><span class="co">#&gt; [1] 0.3 0.3 0.3 0.1</span></a>
+<a class="sourceLine" id="cb4-104" title="104"><span class="co">#&gt; [1] "=================Optimal ns===================="</span></a>
+<a class="sourceLine" id="cb4-105" title="105"><span class="co">#&gt; [1] 300 300 300 100</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(forward.ex3, <span class="dt">row.names=</span>F)</a></code></pre></div>
 <p><img src="Forward-Assembly-PHPM_files/figure-html/unnamed-chunk-6-1.png" width="864"></p>
 </div>
   </div>

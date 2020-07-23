@@ -111,7 +111,7 @@ s~~s
 We can use the main function `simPM()` to search for an optimal [wave-level missing design](Wave-Level-PHPM.html). For `simPM()` to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, `simPM` will automatically map out all the possible PHPM designs, run power analysis for each plausible design, and output the optimal design.     
 
 ```r
-wave.ex1=simPM(popModel = popModel,                                 #supply the population model using lavaan language
+wave.ex1 <- simPM(popModel = popModel,                                 #supply the population model using lavaan language
                analyzeModel = analyzeModel,                         #supply the analysis model using lavaan language
                VarNAMES = c("se1","se2","se3","se4"),               #the observed variable names
                Time = 4,                                            #total number of waves

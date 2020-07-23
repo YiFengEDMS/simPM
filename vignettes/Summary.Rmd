@@ -34,20 +34,22 @@ load("wave.ex1_r1.rda")
 library(simPM)
 ```
 
-In this [hypothetical example](Linear-Latent-Growth-Model.html), the `summary.simpm()` function prints out the following:
+In this [hypothetical example](Conditional-Linear-Latent-Growth-Model.html), the `summary.simpm()` function prints out the following:
 
 ```{r,eval=FALSE}
-summary(wave.ex1)
+summary(wave.lgm)
 ``` 
 
 
-* The convergence rate, the name of the parameter with the weakest statistical power and the empirical power for testing this parameter, the cost of the PHPM design, and the number of missing waves (in the case of [wave-level PHPM designs](Wave-Level-PHPM.html)) for **each** of the plausible PHPM designs under consideration. In this specfic example, there is only one plausible wave-level PHPM designs given the budget constraints and the specification of other arguments.
+* The convergence rate, the name of the parameter with the weakest statistical power and the empirical power for testing this parameter, the cost of the PHPM design, and the number of missing waves (in the case of [wave-level PHPM designs](Wave-Level-PHPM.html)) for **each** of the plausible PHPM designs under consideration. In this specfic example, there are only two plausible wave-level PHPM designs given the budget constraints and the specification of other arguments.
 
 
 ```r
+
 [1] "=================results summary================"
   convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+1            1.000             s~sprt              0.828       13650          2
+2            0.999             s~sprt              0.862        9000          3
 
 ```
 
@@ -57,7 +59,7 @@ summary(wave.ex1)
 ```
 [1] "=================Optimal design================="
   convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
-1             0.92               s~~s              0.999        4530          2
+2            0.999             s~sprt              0.862        9000          3
 ```
 
 * The simulation results for all the focal parameters under the selected optimal design. It does not only include the empirical power, but also additional information such as the average parameter estimate, the empirical standard error of the parameter estimate, and the bias of parameter estimate. 
@@ -65,16 +67,14 @@ summary(wave.ex1)
 ```r
 
 [1] "=================Optimal design for focal parameters================="
-     Estimate Average Estimate SD  Average SE Power (Not equal 0)   Std Est   Std Est SD
-i~1        2.98293751 0.031715239 0.031616120               1.000 5.8125191 3.214384e-01
-s~1        0.08626832 0.012315538 0.011890850               1.000 0.5821286 1.071983e-01
-i~~i       0.26565608 0.028395191 0.027694967               1.000 1.0000000 1.479881e-16
-s~~s       0.02275121 0.004702874 0.004540174               0.999 1.0000000 1.476542e-16
-     Std Ave SE Average Param  Average Bias Coverage Average FMI1    SD FMI1
-i~1   0.3109336         2.983 -6.248508e-05    0.945   0.06909154 0.02634767
-s~1   0.1017555         0.086  2.683187e-04    0.939   0.33360543 0.03811522
-i~~i  0.0000000         0.268 -2.343916e-03    0.935   0.25362176 0.04437375
-s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
+       Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD
+i~sprt       -1.5001637  0.11853266 0.11738935               1.000 -0.5217401 0.03515221
+s~sprt       -0.2015112  0.06651828 0.06750681               0.862 -0.1411624 0.04615719
+i~~s         -0.8928260  0.18286992 0.17397815               0.999 -0.2585775 0.04777923
+       Std Ave SE Average Param  Average Bias Coverage Average FMI1     SD FMI1
+i~sprt 0.03482613          -1.5 -0.0001637438    0.950  0.007683133 0.002622483
+s~sprt 0.04674602          -0.2 -0.0015111960    0.956  0.019456644 0.003455831
+i~~s   0.04514329          -0.9  0.0071740326    0.937  0.034027477 0.006533191
 
 ```
 
@@ -83,32 +83,35 @@ s~~s  0.0000000         0.023 -2.487868e-04    0.939   0.62234904 0.04767489
 
 ```r
 [1] "=================Optimal patterns==============="
-           se1 se2 se3 se4
-             0   1   1   0
-             0   1   0   1
-             0   0   1   1
-completers   0   0   0   0
+           BDI1 BDI2 BDI3 BDI4 BDI5 BDI6
+              0    0    1    1    1    0
+              0    0    1    1    0    1
+              0    0    1    0    1    1
+              0    0    0    1    1    1
+completers    0    0    0    0    0    0
 
 ```
 
 * The proportion of participants randomly assigned to each of the (missing) data patterns. Those proportions should add up to 1.
 
 ```r
+
 [1] "=================Optimal probs=================="
-[1] 0.266667 0.266667 0.266667 0.200000
+[1] 0.2 0.2 0.2 0.2 0.2
+
 ```
 
 * The number of participants actually randomely assigned to each of the (missing) data patterns.
 
 ```r
 [1] "=================Optimal ns===================="
-[1] 86 86 86 65
+[1] 90 90 90 90 90
 
 ```
 
 To view more details of the simulation results for the optimal PHPM design, we can extract the `simsem` output and use the `summary()` function as follows. It will output the model fit and parameter estimates over replications for the selected design. 
 
 ```{r,eval=FALSE}
-summary(wave.ex1$opt.output)
+summary(wave.lgm$opt.output)
 ```
 

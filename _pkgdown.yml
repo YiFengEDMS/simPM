@@ -14,32 +14,32 @@ reference:
       - '`MODIStsp_reset_options`'
       - '`install_MODIStsp_launcher`'
       - '`MODIStsp-package`'
-  - title: Internals
-    desc: ~
-    contents:
-      - '`MODIStsp_GUI`'
-      - '`MODIStsp_process`'
-      - '`MODIStsp_download`'
-      - '`MODIStsp_process_bands`'
-      - '`MODIStsp_process_indexes`'
-      - '`MODIStsp_process_QA_bits`'
-      - '`MODIStsp_read_xml`'
-      - '`MODIStsp_vrt_create`'
-      - '`bbox_from_file`'
-      - '`reproj_bbox`'
-      - '`load_opts`'
-      - '`get_mod_dirs`'
-      - '`get_mod_dates`'
-      - '`get_yeardates`'
-      - '`get_mod_filenames`'
-      - '`get_reqbands`'
-      - '`set_bandind_matrix`'
-      - '`process_message`'
-      - '`check_files_existence`'
-      - '`ask_permission`'
-      - '`check_proj4string`'
-      - '`load_prodopts`'
-      - '`split_nodata_values`'
+#  - title: Internals
+#    desc: ~
+#    contents:
+#      - '`MODIStsp_GUI`'
+#      - '`MODIStsp_process`'
+#      - '`MODIStsp_download`'
+#      - '`MODIStsp_process_bands`'
+#      - '`MODIStsp_process_indexes`'
+#      - '`MODIStsp_process_QA_bits`'
+#      - '`MODIStsp_read_xml`'
+#      - '`MODIStsp_vrt_create`'
+#      - '`bbox_from_file`'
+#      - '`reproj_bbox`'
+#      - '`load_opts`'
+#      - '`get_mod_dirs`'
+#      - '`get_mod_dates`'
+#      - '`get_yeardates`'
+#      - '`get_mod_filenames`'
+#      - '`get_reqbands`'
+#      - '`set_bandind_matrix`'
+#      - '`process_message`'
+#      - '`check_files_existence`'
+#      - '`ask_permission`'
+#      - '`check_proj4string`'
+#      - '`load_prodopts`'
+#      - '`split_nodata_values`'
       
 toc:
   depth: 3
@@ -55,12 +55,14 @@ navbar:
       menu:
       -  text: Installation
          href: articles/installation.html
-      -  text: An Example of PHPM with a Linear LGM
-         href: articles/Linear-Latent-Growth-Model.html
-      -  text: An Example of PHPM with a Second-order Linear LGM
-         href: articles/Second-Order-Latent-Growth-Model.html
+#      -  text: An Example of PHPM with a Linear LGM
+#         href: articles/Linear-Latent-Growth-Model.html
+#      -  text: An Example of PHPM with a Second-order Linear LGM
+#         href: articles/Second-Order-Latent-Growth-Model.html
       -  text: An Example of PHPM with an Autoregression and Cross-lagged Model
          href: articles/Autoregressive-Cross-Lagged-Model.html
+      -  text: An Example of PHPM with a Conditional Linear Latent Growth Model
+         href: articles/Conditional-Linear-Latent-Growth-Model.html         
       -  text: Wave-level PM designs
          href: articles/Wave-Level-PHPM.html
       -  text: Item-level PM designs
@@ -71,6 +73,9 @@ navbar:
          href: articles/Summary.html
       -  text: Plot the optimal design
          href: articles/PlotPM.html
+#    - icon: fa-pencil-square-o
+#      text: "Manuscripts"
+#      href: articles/manuscripts.html     
     - icon: fa-file-code-o
       text: "Functions"
       href: reference/index.html 

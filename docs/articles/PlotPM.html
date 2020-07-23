@@ -62,13 +62,10 @@
       <a href="../articles/installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Linear-Latent-Growth-Model.html">An Example of PHPM with a Linear LGM</a>
-    </li>
-    <li>
-      <a href="../articles/Second-Order-Latent-Growth-Model.html">An Example of PHPM with a Second-order Linear LGM</a>
-    </li>
-    <li>
       <a href="../articles/Autoregressive-Cross-Lagged-Model.html">An Example of PHPM with an Autoregression and Cross-lagged Model</a>
+    </li>
+    <li>
+      <a href="../articles/Conditional-Linear-Latent-Growth-Model.html">An Example of PHPM with a Conditional Linear Latent Growth Model</a>
     </li>
     <li>
       <a href="../articles/Wave-Level-PHPM.html">Wave-level PM designs</a>
@@ -152,19 +149,19 @@
 </h2>
 <p>Below is an example of the plot showing the missing data patterns for a wave-level PHPM design. It corresponds to the missing data pattern matrix in the output summary. By default, the plot will use red (<code>"firebrick"</code>) to indicate missingness and beige (<code>"antiquewhite1"</code>) to indicate complete data. In the plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is labeled by the missing data pattern.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.ex2, <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.lgm, <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
 <p><img src="PlotPM_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <p>We can change the color scheme of the plot by setting <code>col =</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.ex2, <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"gray96"</span>, <span class="st">"gray35"</span>), <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.lgm, <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"gray96"</span>, <span class="st">"gray35"</span>), <span class="dt">colbr =</span> <span class="st">"Greys"</span>, <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
 <p><img src="PlotPM_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>We can also turn off the wave label by using the <code>labels = FALSE</code> argument.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.ex2, <span class="dt">labels =</span> F, <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"gray96"</span>, <span class="st">"gray35"</span>), <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.lgm, <span class="dt">labels =</span> F, <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"gray96"</span>, <span class="st">"gray35"</span>), <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
 <p><img src="PlotPM_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>Below is an example of the plot showing the missing data patterns for a balanced item-level PHPM design. If we do not wish to include the number of participants assigned to each missing data pattern, we can turn it off by setting <code>row.names = FALSE</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(item.ex2, <span class="dt">row.names=</span>F, <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(item.ex3, <span class="dt">row.names=</span>F, <span class="dt">fontsize_col =</span> <span class="dv">15</span>)</a></code></pre></div>
 <p><img src="PlotPM_files/figure-html/unnamed-chunk-5-1.png" width="864"></p>
 <p>Below is an example of the plot showing the missing data patterns for an imbalanced item-level PHPM design (with forward assembly).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(forward.ex2)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(forward.lgm)</a></code></pre></div>
 <p><img src="PlotPM_files/figure-html/unnamed-chunk-6-1.png" width="864"></p>
 </div>
   </div>

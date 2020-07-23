@@ -3,13 +3,17 @@ pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   Autoregressive-Cross-Lagged-Model: Autoregressive-Cross-Lagged-Model.html
+  Conditional-Linear-Latent-Growth-Model: Conditional-Linear-Latent-Growth-Model.html
   faq: faq.html
   Forward-Assembly-PHPM: Forward-Assembly-PHPM.html
   installation: installation.html
   Item-Level-PHPM: Item-Level-PHPM.html
-  Linear-Latent-Growth-Model: Linear-Latent-Growth-Model.html
+  Forward-Assembly-PHPM: old/Forward-Assembly-PHPM.html
+  Item-Level-PHPM: old/Item-Level-PHPM.html
+  Linear-Latent-Growth-Model: old/Linear-Latent-Growth-Model.html
+  Second-Order-Latent-Growth-Model: old/Second-Order-Latent-Growth-Model.html
+  Wave-Level-PHPM: old/Wave-Level-PHPM.html
   PlotPM: PlotPM.html
-  Second-Order-Latent-Growth-Model: Second-Order-Latent-Growth-Model.html
   simpm: simpm.html
   Summary: Summary.html
   Wave-Level-PHPM: Wave-Level-PHPM.html

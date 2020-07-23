@@ -70,20 +70,26 @@ Below are some tutorials demonstrating the usage of `simPM`:
 1.  [Installation](articles/installation.html)
 2.  [Package
     manual](https://yifengedms.github.io/simPM/manual/simPM_0.0.0.9000.pdf)
-3.  [An example of PHPM with a linear
-    LGM](articles/Linear-Latent-Growth-Model.html)
-4.  [An example of PHPM with a second-order
-    LGM](articles/Second-Order-Latent-Growth-Model.html)
-5.  [An example of PHPM with an autoregression and cross-lagged
+3.  [An example of PHPM with an autoregression and cross-lagged
     model](articles/Autoregressive-Cross-Lagged-Model.html)
-6.  [Wave-level PM designs](articles/Wave-Level-PHPM.html)
-7.  [Item-level PM designs](articles/Item-Level-PHPM.html)
-8.  [Forward assembly](articles/Forward-Assembly-PHPM.html)
+4.  [An example of PHPM with a conditional linear
+    LGM](articles/Conditional-Linear-Latent-Growth-Model.html)
+    <!-- 1. [An example of PHPM with a second-order LGM](articles/Second-Order-Latent-Growth-Model.html) -->
+5.  [Wave-level PM designs](articles/Wave-Level-PHPM.html)
+6.  [Item-level PM designs](articles/Item-Level-PHPM.html)
+7.  [Forward assembly](articles/Forward-Assembly-PHPM.html)
     <!-- 1. [Attrition] -->
-9.  [Summarize the optimal design](articles/Summary.html)
-10. [Plot the optimal design](articles/PlotPM.html)
+8.  [Summarize the optimal design](articles/Summary.html)
+9.  [Plot the optimal design](articles/PlotPM.html)
 
 ## Citation
+
+Feng, Y. & Hancock, G. R. (in press). Oh %&$\#\!, they cut my funding:
+Using ‘post hoc’ planned missing data designs to salvage longitudinal
+research . *Child Development*.
+
+  - A pre-peer reviewed version of the article is available
+    [here](manuscript/Feng-and-Hancock-2020-prereview-main-text.pdf).
 
 Feng, Y. & Hancock, G. R. (2019). simPM: SIMulation-based power analysis
 for Planned Missing designs. R package version 0.0.0.9000.
