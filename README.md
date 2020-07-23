@@ -60,7 +60,7 @@ local machine, please run the following code
 ``` r
 install.packages("devtools")
 library(devtools)
-intall_github("YiFengEDMS/simPM")
+install_github("YiFengEDMS/simPM")
 ```
 
 ## Useful resources
@@ -84,12 +84,21 @@ Below are some tutorials demonstrating the usage of `simPM`:
 
 ## Citation
 
-Feng, Y. & Hancock, G. R. (in press). Oh %&$\#\!, they cut my funding:
+Feng, Y. & Hancock, G. R. (in press). Oh no\! They cut my funding\!
 Using ‘post hoc’ planned missing data designs to salvage longitudinal
 research . *Child Development*.
 
-  - A pre-peer reviewed version of the article is available
+Feng, Y., & Hancock, G. R. (2019, April). *Oh %&$\#\!, they cut my
+funding: Using planned missing data methods to salvage longitudinal
+research*. Paper presented at the annual meeting of the American
+Educational Research Association (AERA), Division D: Measurement &
+Research Methodology, Toronto, ON, Canada\*.
+
+  - *Note*: The full text of this working paper is available
     [here](manuscript/Feng-and-Hancock-2020-prereview-main-text.pdf).
+    The final form post peer review has been accepted for publication
+    and is currently in press in [Child
+    Development](https://srcd.onlinelibrary.wiley.com/journal/14678624).
 
 Feng, Y. & Hancock, G. R. (2019). simPM: SIMulation-based power analysis
 for Planned Missing designs. R package version 0.0.0.9000.
