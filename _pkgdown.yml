@@ -73,9 +73,9 @@ navbar:
          href: articles/Summary.html
       -  text: Plot the optimal design
          href: articles/PlotPM.html
-#    - icon: fa-pencil-square-o
-#      text: "Manuscripts"
-#      href: articles/manuscripts.html     
+    - icon: fa-pencil-square-o
+      text: "Manual"
+      href: manual/simPM_0.0.0.9000.pdf     
     - icon: fa-file-code-o
       text: "Functions"
       href: reference/index.html 

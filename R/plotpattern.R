@@ -31,7 +31,12 @@
 #' \dontrun{
 #' plotPM(wave.out)
 #' plotPM(indicator.out)
-#' plotPM(forward.out,labels=F,col=c("gray96","gray35"),fontsize_row=26,fontsize=18,fontsize_col=26)
+#' plotPM(forward.out,
+#' labels=F,
+#' col=c("gray96","gray35"),
+#' fontsize_row=26,
+#' fontsize=18,
+#' fontsize_col=26)
 #' }
 
 plotPM <- function(object,

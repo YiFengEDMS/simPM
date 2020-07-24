@@ -2,7 +2,7 @@
 #' 
 #'  \code{balance.miss} runs simulations using M\emph{plus}. It returns the search results for optimal balanced item-level PM designs. 
 #'
-#' @param design0.out An object returned by \code{\link[MplusAutomation]{r#'    eadModels}}. To obtain this object, the user need to have a Mplus 
+#' @param design0.out An object returned by \code{\link[MplusAutomation]{readModels}}. To obtain this object, the user need to have a Mplus 
 #'    output file which contains the \emph{a priori} power analysis 
 #'    results for this specific model assuming a complete data design 
 #'    (i.e., simulation-based power analysis for sample size planning). 
@@ -56,9 +56,9 @@
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
+#' @keywords internal
 #' @export balance.miss
 #' @examples
-
 
 balance.miss <- function(
   VNAMES,

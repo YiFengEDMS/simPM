@@ -11,16 +11,17 @@ simPM(popModel, analyzeModel, design0.out = NULL, VarNAMES, Time,
   seed = 1234, engine = "l", methods = "wave")
 }
 \arguments{
-\item{popModel}{The data generation model (population model) specified #'    using lavaan script.}
+\item{popModel}{The data generation model (population model) specified using lavaan script.}
 
-\item{analyzeModel}{The analysis model, specified using lavaan script. #'    The analysis model can be different from the population model.}
+\item{analyzeModel}{The analysis model, specified using lavaan script. The analysis model can be different from the population model.}
 
-\item{design0.out}{An object returned by \code{\link[MplusAutomation]{r#'    eadModels}}. To obtain this object, the user need to have a Mplus 
-output file which contains the \emph{a priori} power analysis 
-results for this specific model assuming a complete data design 
-(i.e., simulation-based power analysis for sample size planning). 
-In principle, \emph{a priori} power analysis is supposed to be 
-conducted before the study began.}
+\item{design0.out}{An object returned by \code{\link[MplusAutomation]{readModels}}. 
+To obtain this object, the user need to have a Mplus 
+   output file which contains the \emph{a priori} power analysis 
+   results for this specific model assuming a complete data design 
+   (i.e., simulation-based power analysis for sample size planning). 
+   In principle, \emph{a priori} power analysis is supposed to be 
+   conducted before the study began.}
 
 \item{VarNAMES}{A character vector containing the names of the observed
 variables. The variable names must be ordered chronologically, by

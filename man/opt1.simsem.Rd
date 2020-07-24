@@ -9,9 +9,9 @@ opt1.simsem(popModel, analyzeModel, NAMES, distal.var, n, nreps, seed,
   complete.var = NULL)
 }
 \arguments{
-\item{popModel}{The data generation model (population model) specified #'    using lavaan script.}
+\item{popModel}{The data generation model (population model) specified using lavaan script.}
 
-\item{analyzeModel}{The analysis model, specified using lavaan script. #'    The analysis model can be different from the population model.}
+\item{analyzeModel}{The analysis model, specified using lavaan script. The analysis model can be different from the population model.}
 
 \item{NAMES}{A character vector containing the names of the observed
 variables. The variable names must be ordered chronologically, by

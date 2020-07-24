@@ -44,7 +44,7 @@ collection and provide complete data. This must be greater than 0.}
 in any of the following waves of data collection (i.e., drop from
 the longitudinal study). This value can be 0.}
 
-\item{design0.out}{An object returned by \code{\link[MplusAutomation]{r#'    eadModels}}. To obtain this object, the user need to have a Mplus 
+\item{design0.out}{An object returned by \code{\link[MplusAutomation]{readModels}}. To obtain this object, the user need to have a Mplus 
 output file which contains the \emph{a priori} power analysis 
 results for this specific model assuming a complete data design 
 (i.e., simulation-based power analysis for sample size planning). 
@@ -80,3 +80,4 @@ An object containing the information of the optimal
 \code{\link{simPM}} which is a warpper function for this
    function.
 }
+\keyword{internal}

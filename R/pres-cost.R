@@ -9,6 +9,7 @@
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
+#' @keywords internal
 #' @export pres.cost
 #' @examples
 

@@ -3,8 +3,8 @@
 #' 
 #'  \code{balance.miss.l} runs simulations using lavaan and simsem. It returns the search results for optimal balanced item-level PM designs. 
 #'  
-#' @param popModel The data generation model (population model) specified #'    using lavaan script.
-#' @param analyzeModel The analysis model, specified using lavaan script. #'    The analysis model can be different from the population model. 
+#' @param popModel The data generation model (population model) specified using lavaan script.
+#' @param analyzeModel The analysis model, specified using lavaan script. The analysis model can be different from the population model. 
 #' @param NAMES A character vector containing the names of the observed
 #'    variables. The variable names must be ordered chronologically, by
 #'    the time (wave) they are measured.

@@ -17,6 +17,7 @@
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
+#' @keywords internal
 #' @export wave.miss
 #' @examples
 

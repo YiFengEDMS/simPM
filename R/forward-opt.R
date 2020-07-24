@@ -16,6 +16,7 @@
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
+#' @keywords internal
 #' @export forward.opt
 #' @examples
 

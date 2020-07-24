@@ -3,7 +3,8 @@
 #' \code{simPM} runs Monte Carlo simulations and returns the search results for optimal PM designs. This is a wrapper function for all the available searching methods. 
 #' 
 #' @inheritParams balance.miss.l
-#' @param design0.out An object returned by \code{\link[MplusAutomation]{r#'    eadModels}}. To obtain this object, the user need to have a Mplus 
+#' @param design0.out An object returned by \code{\link[MplusAutomation]{readModels}}. 
+#' To obtain this object, the user need to have a Mplus 
 #'    output file which contains the \emph{a priori} power analysis 
 #'    results for this specific model assuming a complete data design 
 #'    (i.e., simulation-based power analysis for sample size planning). 
@@ -197,4 +198,4 @@ simPM <- function(
   return(output.w)
 }
 
-#summary.opt(re.ob)
+

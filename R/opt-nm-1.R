@@ -13,6 +13,7 @@
 #' @import MplusAutomation
 #' @import simsem
 #' @import lavaan
+#' @keywords internal
 #' @export opt.nm.1
 #' @examples
 
