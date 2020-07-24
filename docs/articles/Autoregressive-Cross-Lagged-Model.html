@@ -6,12 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>An example of PHPM with an autoregressive and cross-lagged model • simPM</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="An example of PHPM with an autoregressive and cross-lagged model">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="simPM">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -23,7 +24,7 @@
   gtag('config', 'UA-84499524-2');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,7 +119,12 @@
   <a href="https://github.com/YiFengEDMS/simPM">
     <span class="fa fa-github fa-lg"></span>
      
-    github
+  </a>
+</li>
+<li>
+  <a href="http://twitter.com/TheYiFeng">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
   </a>
 </li>
       </ul>
@@ -130,14 +136,15 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>An example of PHPM with an autoregressive and cross-lagged model</h1>
+      <h1 data-toc-skip>An example of PHPM with an autoregressive and cross-lagged model</h1>
                         <h4 class="author">Yi Feng &amp; Gregory R. Hancock</h4>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/YiFengEDMS/simPM/blob/master/vignettes/Autoregressive-Cross-Lagged-Model.Rmd"><code>vignettes/Autoregressive-Cross-Lagged-Model.Rmd</code></a></small>
       <div class="hidden name"><code>Autoregressive-Cross-Lagged-Model.Rmd</code></div>
 
     </div>
@@ -163,115 +170,63 @@ An autoregressive and cross-lagged model
 <a href="#spcify-the-population-and-analysis-model" class="anchor"></a><span style="color:seagreen"><strong>Spcify the Population and Analysis Model</strong></span>
 </h2>
 <p>Because <code>simPM</code> searches for an optimal design based on power analysis using Monte Carlo simulations, it is thus required to supply a population model and analysis model. The easiest way to specify the population model and analysis model is to use the <a href="http://lavaan.ugent.be/tutorial/syntax1.html"><code>lavaan</code> model syntax</a>. For this example, the population model is specified as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">popModel &lt;-<span class="st"> '</span></a>
-<a class="sourceLine" id="cb1-2" title="2"></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="st">#----------- path coefficients ------------#</span></a>
-<a class="sourceLine" id="cb1-4" title="4"></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="st">SelfPop2~0.609*SelfPop1+0.111*PeerPop1</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="st">SelfPop3~0.587*SelfPop2+0.053*PeerPop2</span></a>
-<a class="sourceLine" id="cb1-7" title="7"></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="st">PeerPop2~0.051*SelfPop1+0.647*PeerPop1+(-0.056)*Support1</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="st">PeerPop3~0.056*SelfPop2+0.679*PeerPop2+0.075*Support2</span></a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="st">Support2~0.468*Support1+0.124*PeerPop1</span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="st">Support3~0.280*Support2+0.132*PeerPop2</span></a>
-<a class="sourceLine" id="cb1-13" title="13"></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="st">#----------- residual covariance ----------#</span></a>
-<a class="sourceLine" id="cb1-15" title="15"></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="st">PeerPop1~~0.229*SelfPop1+0.064*Support1</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="st">SelfPop1~~0.007*Support1</span></a>
-<a class="sourceLine" id="cb1-18" title="18"></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="st">PeerPop2~~0.079*SelfPop2+(-0.036)*Support2</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="st">SelfPop2~~0.055*Support2</span></a>
-<a class="sourceLine" id="cb1-21" title="21"></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="st">PeerPop3~~0.052*SelfPop3+0.013*Support3</span></a>
-<a class="sourceLine" id="cb1-23" title="23"><span class="st">SelfPop3~~(-0.034)*Support3</span></a>
-<a class="sourceLine" id="cb1-24" title="24"></a>
-<a class="sourceLine" id="cb1-25" title="25"><span class="st">#---------------- means -------------------#</span></a>
-<a class="sourceLine" id="cb1-26" title="26"></a>
-<a class="sourceLine" id="cb1-27" title="27"><span class="st">PeerPop1~3.273*1</span></a>
-<a class="sourceLine" id="cb1-28" title="28"><span class="st">SelfPop1~0.048*1</span></a>
-<a class="sourceLine" id="cb1-29" title="29"><span class="st">Support1~2.905*1</span></a>
-<a class="sourceLine" id="cb1-30" title="30"></a>
-<a class="sourceLine" id="cb1-31" title="31"><span class="st">PeerPop2~1.247*1</span></a>
-<a class="sourceLine" id="cb1-32" title="32"><span class="st">SelfPop2~(-0.343)*1</span></a>
-<a class="sourceLine" id="cb1-33" title="33"><span class="st">Support2~1.193*1</span></a>
-<a class="sourceLine" id="cb1-34" title="34"></a>
-<a class="sourceLine" id="cb1-35" title="35"><span class="st">PeerPop3~0.814*1</span></a>
-<a class="sourceLine" id="cb1-36" title="36"><span class="st">SelfPop3~(-0.161)*1</span></a>
-<a class="sourceLine" id="cb1-37" title="37"><span class="st">Support3~1.451*1</span></a>
-<a class="sourceLine" id="cb1-38" title="38"></a>
-<a class="sourceLine" id="cb1-39" title="39"><span class="st">#--------------- variances ----------------#</span></a>
-<a class="sourceLine" id="cb1-40" title="40"></a>
-<a class="sourceLine" id="cb1-41" title="41"><span class="st">PeerPop1~~0.447*PeerPop1</span></a>
-<a class="sourceLine" id="cb1-42" title="42"><span class="st">SelfPop1~~1.010*SelfPop1</span></a>
-<a class="sourceLine" id="cb1-43" title="43"><span class="st">Support1~~0.540*Support1</span></a>
-<a class="sourceLine" id="cb1-44" title="44"></a>
-<a class="sourceLine" id="cb1-45" title="45"><span class="st">PeerPop2~~0.238*PeerPop2</span></a>
-<a class="sourceLine" id="cb1-46" title="46"><span class="st">SelfPop2~~0.607*SelfPop2</span></a>
-<a class="sourceLine" id="cb1-47" title="47"><span class="st">Support2~~0.432*Support2</span></a>
-<a class="sourceLine" id="cb1-48" title="48"></a>
-<a class="sourceLine" id="cb1-49" title="49"><span class="st">PeerPop3~~0.211*PeerPop3</span></a>
-<a class="sourceLine" id="cb1-50" title="50"><span class="st">SelfPop3~~0.380*SelfPop3</span></a>
-<a class="sourceLine" id="cb1-51" title="51"><span class="st">Support3~~0.424*Support3</span></a>
-<a class="sourceLine" id="cb1-52" title="52"></a>
-<a class="sourceLine" id="cb1-53" title="53"><span class="st">'</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">popModel</span> <span class="kw">&lt;-</span> <span class="st">[1050 chars quoted with ''']</span></pre></body></html></div>
 <p>The analysis model is specified as the same autoregressive and cross-lagged model but with freely estimated model parameters:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">analyzeModel &lt;-<span class="st"> '</span></a>
-<a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">#----------- path coefficients ------------#</span></a>
-<a class="sourceLine" id="cb2-4" title="4"></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="st">SelfPop2~SelfPop1+PeerPop1</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="st">SelfPop3~SelfPop2+PeerPop2</span></a>
-<a class="sourceLine" id="cb2-7" title="7"></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="st">PeerPop2~SelfPop1+PeerPop1+Support1</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="st">PeerPop3~SelfPop2+PeerPop2+Support2</span></a>
-<a class="sourceLine" id="cb2-10" title="10"></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="st">Support2~Support1+PeerPop1</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="st">Support3~Support2+PeerPop2</span></a>
-<a class="sourceLine" id="cb2-13" title="13"></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="st">#----------- residual covariance ----------#</span></a>
-<a class="sourceLine" id="cb2-15" title="15"></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="st">PeerPop1~~SelfPop1+Support1</span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="st">SelfPop1~~Support1</span></a>
-<a class="sourceLine" id="cb2-18" title="18"></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="st">PeerPop2~~SelfPop2+Support2</span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="st">SelfPop2~~Support2</span></a>
-<a class="sourceLine" id="cb2-21" title="21"></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="st">PeerPop3~~SelfPop3+Support3</span></a>
-<a class="sourceLine" id="cb2-23" title="23"><span class="st">SelfPop3~~Support3</span></a>
-<a class="sourceLine" id="cb2-24" title="24"></a>
-<a class="sourceLine" id="cb2-25" title="25"></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="st">#---------------- means -------------------#</span></a>
-<a class="sourceLine" id="cb2-27" title="27"></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="st">PeerPop1~1</span></a>
-<a class="sourceLine" id="cb2-29" title="29"><span class="st">SelfPop1~1</span></a>
-<a class="sourceLine" id="cb2-30" title="30"><span class="st">Support1~1</span></a>
-<a class="sourceLine" id="cb2-31" title="31"></a>
-<a class="sourceLine" id="cb2-32" title="32"><span class="st">PeerPop2~1</span></a>
-<a class="sourceLine" id="cb2-33" title="33"><span class="st">SelfPop2~1</span></a>
-<a class="sourceLine" id="cb2-34" title="34"><span class="st">Support2~1</span></a>
-<a class="sourceLine" id="cb2-35" title="35"></a>
-<a class="sourceLine" id="cb2-36" title="36"><span class="st">PeerPop3~1</span></a>
-<a class="sourceLine" id="cb2-37" title="37"><span class="st">SelfPop3~1</span></a>
-<a class="sourceLine" id="cb2-38" title="38"><span class="st">Support3~1</span></a>
-<a class="sourceLine" id="cb2-39" title="39"></a>
-<a class="sourceLine" id="cb2-40" title="40"></a>
-<a class="sourceLine" id="cb2-41" title="41"><span class="st">#--------------- variances ----------------#</span></a>
-<a class="sourceLine" id="cb2-42" title="42"></a>
-<a class="sourceLine" id="cb2-43" title="43"><span class="st">PeerPop1~~PeerPop1</span></a>
-<a class="sourceLine" id="cb2-44" title="44"><span class="st">SelfPop1~~SelfPop1</span></a>
-<a class="sourceLine" id="cb2-45" title="45"><span class="st">Support1~~Support1</span></a>
-<a class="sourceLine" id="cb2-46" title="46"></a>
-<a class="sourceLine" id="cb2-47" title="47"><span class="st">PeerPop2~~PeerPop2</span></a>
-<a class="sourceLine" id="cb2-48" title="48"><span class="st">SelfPop2~~SelfPop2</span></a>
-<a class="sourceLine" id="cb2-49" title="49"><span class="st">Support2~~Support2</span></a>
-<a class="sourceLine" id="cb2-50" title="50"></a>
-<a class="sourceLine" id="cb2-51" title="51"><span class="st">PeerPop3~~PeerPop3</span></a>
-<a class="sourceLine" id="cb2-52" title="52"><span class="st">SelfPop3~~SelfPop3</span></a>
-<a class="sourceLine" id="cb2-53" title="53"><span class="st">Support3~~Support3</span></a>
-<a class="sourceLine" id="cb2-54" title="54"></a>
-<a class="sourceLine" id="cb2-55" title="55"><span class="st">'</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">analyzeModel</span> <span class="kw">&lt;-</span> <span class="st">'
+
+#----------- path coefficients ------------#
+
+SelfPop2~SelfPop1+PeerPop1
+SelfPop3~SelfPop2+PeerPop2
+
+PeerPop2~SelfPop1+PeerPop1+Support1
+PeerPop3~SelfPop2+PeerPop2+Support2
+
+Support2~Support1+PeerPop1
+Support3~Support2+PeerPop2
+
+#----------- residual covariance ----------#
+
+PeerPop1~~SelfPop1+Support1
+SelfPop1~~Support1
+
+PeerPop2~~SelfPop2+Support2
+SelfPop2~~Support2
+
+PeerPop3~~SelfPop3+Support3
+SelfPop3~~Support3
+
+
+#---------------- means -------------------#
+
+PeerPop1~1
+SelfPop1~1
+Support1~1
+
+PeerPop2~1
+SelfPop2~1
+Support2~1
+
+PeerPop3~1
+SelfPop3~1
+Support3~1
+
+
+#--------------- variances ----------------#
+
+PeerPop1~~PeerPop1
+SelfPop1~~SelfPop1
+Support1~~Support1
+
+PeerPop2~~PeerPop2
+SelfPop2~~SelfPop2
+Support2~~Support2
+
+PeerPop3~~PeerPop3
+SelfPop3~~SelfPop3
+Support3~~Support3
+
+'</span></pre></body></html></div>
 </div>
 <div id="wave-level-phpm-designs" class="section level2">
 <h2 class="hasAnchor">
@@ -282,32 +237,31 @@ An autoregressive and cross-lagged model
 <a href="#search-for-an-optimal-wave-level-design" class="anchor"></a><a name="wave">1. Search for an Optimal Wave-level Design</a>
 </h3>
 <p>We can use the main function <code><a href="../reference/simPM.html">simPM()</a></code> to search for an optimal <a href="Wave-Level-PHPM.html">wave-level missing design</a>. For <code><a href="../reference/simPM.html">simPM()</a></code> to work properly, we need to supply the relevant information about this longitudinal study. By running the following code, <code>simPM</code> will automatically map out all the possible wave-level PHPM designs, run power analysis for each plausible design, and output the optimal design.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">wave.ex3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simPM.html">simPM</a></span>(<span class="dt">popModel =</span> popModel,                               <span class="co">#supply the population model using lavaan syntax</span></a>
-<a class="sourceLine" id="cb3-2" title="2">                  <span class="dt">analyzeModel =</span> analyzeModel,                       <span class="co">#supply the analysis model using lavaan syntax</span></a>
-<a class="sourceLine" id="cb3-3" title="3">                  <span class="dt">VarNAMES =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,</a>
-<a class="sourceLine" id="cb3-4" title="4">                               <span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,</a>
-<a class="sourceLine" id="cb3-5" title="5">                               <span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),    <span class="co">#the observed variable names, grouped in waves, in chronological order</span></a>
-<a class="sourceLine" id="cb3-6" title="6">                  <span class="dt">distal.var =</span> <span class="ot">NULL</span>,                                 <span class="co">#specify any distal variables that are not subject to planned missingness</span></a>
-<a class="sourceLine" id="cb3-7" title="7">                  <span class="dt">n =</span> <span class="dv">1000</span>,                                          <span class="co">#original sample size</span></a>
-<a class="sourceLine" id="cb3-8" title="8">                  <span class="dt">nreps =</span> <span class="dv">1000</span>,                                      <span class="co">#number of replications for Monte Carlo simulation</span></a>
-<a class="sourceLine" id="cb3-9" title="9">                  <span class="dt">seed =</span> <span class="dv">1234</span>,                                       <span class="co">#random seed</span></a>
-<a class="sourceLine" id="cb3-10" title="10">                  <span class="dt">Time =</span> <span class="dv">3</span>,                                          <span class="co">#total number of waves</span></a>
-<a class="sourceLine" id="cb3-11" title="11">                  <span class="dt">k =</span> <span class="dv">3</span>,                                             <span class="co">#number of observed variables collected at each wave</span></a>
-<a class="sourceLine" id="cb3-12" title="12">                  <span class="dt">Time.complete =</span> <span class="dv">1</span>,                                 <span class="co">#number of waves completed before funding cut occurs</span></a>
-<a class="sourceLine" id="cb3-13" title="13">                  <span class="dt">costmx =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>),                   <span class="co">#unit cost of each data point at the following waves</span></a>
-<a class="sourceLine" id="cb3-14" title="14">                  <span class="dt">pc =</span> <span class="fl">0.1</span>,                                          <span class="co">#percentage of participants to provide complete data after funding cut</span></a>
-<a class="sourceLine" id="cb3-15" title="15">                  <span class="dt">pd =</span> <span class="dv">0</span>,                                            <span class="co">#percentage of participants to provide no data after funding cut</span></a>
-<a class="sourceLine" id="cb3-16" title="16">                  <span class="dt">focal.param=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,</a>
-<a class="sourceLine" id="cb3-17" title="17">                                <span class="st">"Support2~PeerPop1"</span>,</a>
-<a class="sourceLine" id="cb3-18" title="18">                                <span class="st">"PeerPop3~SelfPop2"</span>,</a>
-<a class="sourceLine" id="cb3-19" title="19">                                <span class="st">"Support3~PeerPop2"</span>),                <span class="co">#specify the focal parameters, using lavaan syntax</span></a>
-<a class="sourceLine" id="cb3-20" title="20">                  <span class="dt">eval.budget =</span> T,                                   <span class="co">#whether or not there is a budget restriction</span></a>
-<a class="sourceLine" id="cb3-21" title="21">                  <span class="dt">rm.budget =</span> <span class="dv">45</span><span class="op">*</span><span class="dv">1000</span><span class="op">*</span><span class="fl">0.7</span>,                           <span class="co">#the amount of remaining available budget</span></a>
-<a class="sourceLine" id="cb3-22" title="22">                  <span class="dt">complete.wave =</span> <span class="ot">NULL</span>,                              <span class="co">#specify any future wave that need complete data to be collected</span></a>
-<a class="sourceLine" id="cb3-23" title="23">                  <span class="dt">engine =</span> <span class="st">"l"</span>,                                      <span class="co">#use lavaan and simsem to fit the models</span></a>
-<a class="sourceLine" id="cb3-24" title="24">                  <span class="dt">methods =</span> <span class="st">"wave"</span>                                    <span class="co">#type of PHPM designs under consideration, "wave" indicates wave-level missing</span></a>
-<a class="sourceLine" id="cb3-25" title="25">                  )</a>
-<a class="sourceLine" id="cb3-26" title="26"></a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">wave.ex3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simPM.html">simPM</a></span>(<span class="kw">popModel</span> <span class="kw">=</span> <span class="no">popModel</span>,                               <span class="co">#supply the population model using lavaan syntax</span>
+                  <span class="kw">analyzeModel</span> <span class="kw">=</span> <span class="no">analyzeModel</span>,                       <span class="co">#supply the analysis model using lavaan syntax</span>
+                  <span class="kw">VarNAMES</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,
+                               <span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,
+                               <span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),    <span class="co">#the observed variable names, grouped in waves, in chronological order</span>
+                  <span class="kw">distal.var</span> <span class="kw">=</span> <span class="kw">NULL</span>,                                 <span class="co">#specify any distal variables that are not subject to planned missingness</span>
+                  <span class="kw">n</span> <span class="kw">=</span> <span class="fl">1000</span>,                                          <span class="co">#original sample size</span>
+                  <span class="kw">nreps</span> <span class="kw">=</span> <span class="fl">1000</span>,                                      <span class="co">#number of replications for Monte Carlo simulation</span>
+                  <span class="kw">seed</span> <span class="kw">=</span> <span class="fl">1234</span>,                                       <span class="co">#random seed</span>
+                  <span class="kw">Time</span> <span class="kw">=</span> <span class="fl">3</span>,                                          <span class="co">#total number of waves</span>
+                  <span class="kw">k</span> <span class="kw">=</span> <span class="fl">3</span>,                                             <span class="co">#number of observed variables collected at each wave</span>
+                  <span class="kw">Time.complete</span> <span class="kw">=</span> <span class="fl">1</span>,                                 <span class="co">#number of waves completed before funding cut occurs</span>
+                  <span class="kw">costmx</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>),                   <span class="co">#unit cost of each data point at the following waves</span>
+                  <span class="kw">pc</span> <span class="kw">=</span> <span class="fl">0.1</span>,                                          <span class="co">#percentage of participants to provide complete data after funding cut</span>
+                  <span class="kw">pd</span> <span class="kw">=</span> <span class="fl">0</span>,                                            <span class="co">#percentage of participants to provide no data after funding cut</span>
+                  <span class="kw">focal.param</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,
+                                <span class="st">"Support2~PeerPop1"</span>,
+                                <span class="st">"PeerPop3~SelfPop2"</span>,
+                                <span class="st">"Support3~PeerPop2"</span>),                <span class="co">#specify the focal parameters, using lavaan syntax</span>
+                  <span class="kw">eval.budget</span> <span class="kw">=</span> <span class="no">T</span>,                                   <span class="co">#whether or not there is a budget restriction</span>
+                  <span class="kw">rm.budget</span> <span class="kw">=</span> <span class="fl">45</span>*<span class="fl">1000</span>*<span class="fl">0.7</span>,                           <span class="co">#the amount of remaining available budget</span>
+                  <span class="kw">complete.wave</span> <span class="kw">=</span> <span class="kw">NULL</span>,                              <span class="co">#specify any future wave that need complete data to be collected</span>
+                  <span class="kw">engine</span> <span class="kw">=</span> <span class="st">"l"</span>,                                      <span class="co">#use lavaan and simsem to fit the models</span>
+                  <span class="kw">methods</span> <span class="kw">=</span> <span class="st">"wave"</span>                                    <span class="co">#type of PHPM designs under consideration, "wave" indicates wave-level missing</span>
+                  )</pre></body></html></div>
 <p>More specifically:</p>
 <ul>
 <li>
@@ -349,46 +303,46 @@ An autoregressive and cross-lagged model
 <h3 class="hasAnchor">
 <a href="#summarize-the-result" class="anchor"></a>2. Summarize the Result</h3>
 <p>To <a href="Summary.html">view a summary of the results</a>, we can use the <code><a href="../reference/summary.simpm.html">summary.simpm()</a></code> function. It prints out the comparison among all the plausible wave-level missing designs (with regard to the parameter with the lowest empirical power), the optimal design that was selected, the details about the focal parameters for the selected optimal design, the missing data pattern for the selected optimal PHPM design, and the proportion as well as the number of participants assigned to each unqie missing data pattern.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.ex3)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">wave.ex3</span>)</pre></body></html></div>
 <p>For this example, there is only one possible wave-level PHPM design given the budget constraints. Therefore, the program has run simulations only for this one possible design. This design costs $24,750, which is below the reduced available budget.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">[<span class="dv">1</span>] <span class="st">"=================results summary================"</span></a>
-<a class="sourceLine" id="cb5-2" title="2">  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="dv">1</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.358</span>       <span class="dv">24750</span>          <span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-4" title="4">[<span class="dv">1</span>] <span class="st">"=================Optimal design================="</span></a>
-<a class="sourceLine" id="cb5-5" title="5">  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves</a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="dv">1</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.358</span>       <span class="dv">24750</span>          <span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r">[1] "=================results summary================"
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1                1  PeerPop3~SelfPop2              0.358       24750          1
+[1] "=================Optimal design================="
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.waves
+1                1  PeerPop3~SelfPop2              0.358       24750          1</pre></body></html></div>
 <p>With this design, 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the three unique missing data patterns (<span class="math inline">\(n=450\)</span> in each pattern).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal patterns==============="</span></a>
-<a class="sourceLine" id="cb6-2" title="2">           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3</a>
-<a class="sourceLine" id="cb6-3" title="3">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb6-4" title="4">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-5" title="5">completers        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb6-6" title="6">[<span class="dv">1</span>] <span class="st">"=================Optimal probs=================="</span></a>
-<a class="sourceLine" id="cb6-7" title="7">[<span class="dv">1</span>] <span class="fl">0.45</span> <span class="fl">0.45</span> <span class="fl">0.10</span></a>
-<a class="sourceLine" id="cb6-8" title="8">[<span class="dv">1</span>] <span class="st">"=================Optimal ns===================="</span></a>
-<a class="sourceLine" id="cb6-9" title="9">[<span class="dv">1</span>] <span class="dv">450</span> <span class="dv">450</span> <span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r">[1] "=================Optimal patterns==============="
+           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3
+                  0        0        0        1        1        1        0        0        0
+                  0        0        0        0        0        0        1        1        1
+completers        0        0        0        0        0        0        0        0        0
+[1] "=================Optimal probs=================="
+[1] 0.45 0.45 0.10
+[1] "=================Optimal ns===================="
+[1] 450 450 100</pre></body></html></div>
 <p>Over 1000 replications, this design yields poor statistical power for testing most of the focal parameters. The empirical power for testing <span class="math inline">\(b_{PS_1}\)</span> is 0.681 and 0.358 for testing <span class="math inline">\(b_{PS_2}\)</span>. The power is 0.834 for testing <span class="math inline">\(b_{TP_1}\)</span> and 0.642 for testing <span class="math inline">\(b_{TP_2}\)</span>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"></a>
-<a class="sourceLine" id="cb7-2" title="2">[<span class="dv">1</span>] <span class="st">"=================Optimal design for focal parameters================="</span></a>
-<a class="sourceLine" id="cb7-3" title="3">                  Estimate Average Estimate SD Average SE <span class="kw">Power</span> (Not equal <span class="dv">0</span>)    Std Est Std Est SD Std Ave SE Average Param  Average Bias</a>
-<a class="sourceLine" id="cb7-4" title="4">PeerPop2<span class="op">~</span>SelfPop1       <span class="fl">0.05015451</span>  <span class="fl">0.02113615</span> <span class="fl">0.02038431</span>               <span class="fl">0.681</span> <span class="fl">0.07585215</span> <span class="fl">0.03185897</span> <span class="fl">0.03076342</span>         <span class="fl">0.051</span> <span class="fl">-8.454893e-04</span></a>
-<a class="sourceLine" id="cb7-5" title="5">Support2<span class="op">~</span>PeerPop1       <span class="fl">0.12303069</span>  <span class="fl">0.04152845</span> <span class="fl">0.04179084</span>               <span class="fl">0.834</span> <span class="fl">0.10939710</span> <span class="fl">0.03665247</span> <span class="fl">0.03692004</span>         <span class="fl">0.124</span> <span class="fl">-9.693051e-04</span></a>
-<a class="sourceLine" id="cb7-6" title="6">PeerPop3<span class="op">~</span>SelfPop2       <span class="fl">0.05607364</span>  <span class="fl">0.03602006</span> <span class="fl">0.03485226</span>               <span class="fl">0.358</span> <span class="fl">0.08512223</span> <span class="fl">0.05447372</span> <span class="fl">0.05276132</span>         <span class="fl">0.056</span>  <span class="fl">7.363818e-05</span></a>
-<a class="sourceLine" id="cb7-7" title="7">Support3<span class="op">~</span>PeerPop2       <span class="fl">0.13345178</span>  <span class="fl">0.05734917</span> <span class="fl">0.05745153</span>               <span class="fl">0.642</span> <span class="fl">0.12809893</span> <span class="fl">0.05467605</span> <span class="fl">0.05477553</span>         <span class="fl">0.132</span>  <span class="fl">1.451783e-03</span></a>
-<a class="sourceLine" id="cb7-8" title="8">                  Coverage Average FMI1    SD FMI1</a>
-<a class="sourceLine" id="cb7-9" title="9">PeerPop2<span class="op">~</span>SelfPop1    <span class="fl">0.936</span>    <span class="fl">0.3647029</span> <span class="fl">0.02633273</span></a>
-<a class="sourceLine" id="cb7-10" title="10">Support2<span class="op">~</span>PeerPop1    <span class="fl">0.955</span>    <span class="fl">0.4380497</span> <span class="fl">0.02350980</span></a>
-<a class="sourceLine" id="cb7-11" title="11">PeerPop3<span class="op">~</span>SelfPop2    <span class="fl">0.936</span>    <span class="fl">0.8057133</span> <span class="fl">0.01852440</span></a>
-<a class="sourceLine" id="cb7-12" title="12">Support3<span class="op">~</span>PeerPop2    <span class="fl">0.951</span>    <span class="fl">0.7088486</span> <span class="fl">0.02283863</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r">
+[1] "=================Optimal design for focal parameters================="
+                  Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD Std Ave SE Average Param  Average Bias
+PeerPop2~SelfPop1       0.05015451  0.02113615 0.02038431               0.681 0.07585215 0.03185897 0.03076342         0.051 -8.454893e-04
+Support2~PeerPop1       0.12303069  0.04152845 0.04179084               0.834 0.10939710 0.03665247 0.03692004         0.124 -9.693051e-04
+PeerPop3~SelfPop2       0.05607364  0.03602006 0.03485226               0.358 0.08512223 0.05447372 0.05276132         0.056  7.363818e-05
+Support3~PeerPop2       0.13345178  0.05734917 0.05745153               0.642 0.12809893 0.05467605 0.05477553         0.132  1.451783e-03
+                  Coverage Average FMI1    SD FMI1
+PeerPop2~SelfPop1    0.936    0.3647029 0.02633273
+Support2~PeerPop1    0.955    0.4380497 0.02350980
+PeerPop3~SelfPop2    0.936    0.8057133 0.01852440
+Support3~PeerPop2    0.951    0.7088486 0.02283863</pre></body></html></div>
 <!--&nbsp;-->
 <p>To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(wave.ex3<span class="op">$</span>opt.output)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">wave.ex3</span>$<span class="no">opt.output</span>)</pre></body></html></div>
 </div>
 <div id="visualize-the-optimal-design" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualize-the-optimal-design" class="anchor"></a>3. Visualize the Optimal Design</h3>
 <p>To <a href="PlotPM.html">visualize the missing data patterns of the optimal PHPM design</a>, we can use the <code><a href="../reference/plotPM.html">plotPM()</a></code> function. It will plot the missing data pattern matrix so people can have a more intuitive understanding of the optimal design that was selected. In this plot, each row represents a unique missing data pattern. Each column represents an observed variable. The number of participants assigned to each missing data pattern is also labeled.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(wave.ex3, <span class="dt">fontsize_col =</span> <span class="dv">15</span>, <span class="dt">angle_col =</span> <span class="dv">90</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/plotPM.html">plotPM</a></span>(<span class="no">wave.ex3</span>, <span class="kw">fontsize_col</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">angle_col</span> <span class="kw">=</span> <span class="fl">90</span>)</pre></body></html></div>
 <p><img src="Autoregressive-Cross-Lagged-Model_files/figure-html/unnamed-chunk-7-1.png" width="864"></p>
 </div>
 </div>
@@ -400,27 +354,27 @@ An autoregressive and cross-lagged model
 <h3 class="hasAnchor">
 <a href="#item" class="anchor"></a>1. Search for an Optimal Item-level Design</h3>
 <p>We can also use the function <code><a href="../reference/simPM.html">simPM()</a></code> to search for an optimal <a href="Item-Level-PHPM.html">item-level missing design</a>. The code to search for optimal item-level PHPM designs is very similar to the code to search for optimal wave-level PHPM designs. The minor differences in the code are followed with comments.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">item.ex3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simPM.html">simPM</a></span>(</a>
-<a class="sourceLine" id="cb10-2" title="2">  popModel,</a>
-<a class="sourceLine" id="cb10-3" title="3">  analyzeModel,</a>
-<a class="sourceLine" id="cb10-4" title="4">  <span class="dt">VarNAMES=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,<span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,<span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),</a>
-<a class="sourceLine" id="cb10-5" title="5">  <span class="dt">distal.var =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb10-6" title="6">  <span class="dt">n=</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb10-7" title="7">  <span class="dt">nreps=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb10-8" title="8">  <span class="dt">seed=</span><span class="dv">12345</span>,</a>
-<a class="sourceLine" id="cb10-9" title="9">  <span class="dt">Time=</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb10-10" title="10">  <span class="dt">k=</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb10-11" title="11">  <span class="dt">Time.complete=</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb10-12" title="12">  <span class="dt">costmx=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">10</span>), </a>
-<a class="sourceLine" id="cb10-13" title="13">  <span class="dt">pc=</span><span class="fl">0.1</span>,</a>
-<a class="sourceLine" id="cb10-14" title="14">  <span class="dt">pd=</span><span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb10-15" title="15">  <span class="dt">focal.param=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,<span class="st">"Support2~PeerPop1"</span>,<span class="st">"PeerPop3~SelfPop2"</span>,<span class="st">"Support3~PeerPop2"</span>),</a>
-<a class="sourceLine" id="cb10-16" title="16">  <span class="dt">eval.budget=</span>T,          </a>
-<a class="sourceLine" id="cb10-17" title="17">  <span class="dt">rm.budget=</span>31500L,        <span class="co"># remaining available budget 45*1000*0.7</span></a>
-<a class="sourceLine" id="cb10-18" title="18">  <span class="dt">complete.var=</span><span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb10-19" title="19">  <span class="dt">engine=</span><span class="st">"l"</span>,</a>
-<a class="sourceLine" id="cb10-20" title="20">  <span class="dt">methods=</span><span class="st">"item"</span></a>
-<a class="sourceLine" id="cb10-21" title="21">)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">item.ex3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simPM.html">simPM</a></span>(
+  <span class="no">popModel</span>,
+  <span class="no">analyzeModel</span>,
+  <span class="kw">VarNAMES</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,<span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,<span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),
+  <span class="kw">distal.var</span> <span class="kw">=</span> <span class="kw">NULL</span>,
+  <span class="kw">n</span><span class="kw">=</span><span class="fl">1000</span>,
+  <span class="kw">nreps</span><span class="kw">=</span><span class="fl">10</span>,
+  <span class="kw">seed</span><span class="kw">=</span><span class="fl">12345</span>,
+  <span class="kw">Time</span><span class="kw">=</span><span class="fl">3</span>,
+  <span class="kw">k</span><span class="kw">=</span><span class="fl">3</span>,
+  <span class="kw">Time.complete</span><span class="kw">=</span><span class="fl">1</span>,
+  <span class="kw">costmx</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>),
+  <span class="kw">pc</span><span class="kw">=</span><span class="fl">0.1</span>,
+  <span class="kw">pd</span><span class="kw">=</span><span class="fl">0</span>,
+  <span class="kw">focal.param</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,<span class="st">"Support2~PeerPop1"</span>,<span class="st">"PeerPop3~SelfPop2"</span>,<span class="st">"Support3~PeerPop2"</span>),
+  <span class="kw">eval.budget</span><span class="kw">=</span><span class="no">T</span>,
+  <span class="kw">rm.budget</span><span class="kw">=</span><span class="fl">31500L</span>,        <span class="co"># remaining available budget 45*1000*0.7</span>
+  <span class="kw">complete.var</span><span class="kw">=</span><span class="kw">NULL</span>,
+  <span class="kw">engine</span><span class="kw">=</span><span class="st">"l"</span>,
+  <span class="kw">methods</span><span class="kw">=</span><span class="st">"item"</span>
+)</pre></body></html></div>
 <p>While most of the arguments are the same as in the case of <a href="#wave">wave-level missing designs</a>, there are two arguments that are a little bit different in the context of item-level missing designs:</p>
 <ul>
 <li>
@@ -432,63 +386,63 @@ An autoregressive and cross-lagged model
 <div id="summarize-the-result-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summarize-the-result-1" class="anchor"></a>2. Summarize the Result</h3>
-<p>Similarly, to <a href="Summary.html">view a summary of the results</a>, we can use the <code><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary()</a></code> function.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(item.ex3)</a></code></pre></div>
+<p>Similarly, to <a href="Summary.html">view a summary of the results</a>, we can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function.</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">item.ex3</span>)</pre></body></html></div>
 <p>For this example, given the budget constraints, there are four plausible item-level PHPM designs (with missingness balanced across the patterns). The program thus has run simulations for all the four plausible designs and made comparisons across the designs. The optimal design among the 4 balanced item-level missing designs will cost $31,500, which is equal to the reduced available budget.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">[<span class="dv">1</span>] <span class="st">"=================results summary================"</span></a>
-<a class="sourceLine" id="cb12-2" title="2">  convergence.rate weakest.param.name weakest.para.power cost.design miss.point</a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="dv">1</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.721</span>       <span class="dv">31500</span>          <span class="dv">2</span></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="dv">2</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.523</span>       <span class="dv">24750</span>          <span class="dv">3</span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="dv">3</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.361</span>       <span class="dv">18000</span>          <span class="dv">4</span></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="dv">4</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.257</span>       <span class="dv">11250</span>          <span class="dv">5</span></a>
-<a class="sourceLine" id="cb12-7" title="7">[<span class="dv">1</span>] <span class="st">"=================Optimal design================="</span></a>
-<a class="sourceLine" id="cb12-8" title="8">  convergence.rate weakest.param.name weakest.para.power cost.design miss.point</a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="dv">1</span>                <span class="dv">1</span>  PeerPop3<span class="op">~</span>SelfPop2              <span class="fl">0.721</span>       <span class="dv">31500</span>          <span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r">[1] "=================results summary================"
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.point
+1                1  PeerPop3~SelfPop2              0.721       31500          2
+2                1  PeerPop3~SelfPop2              0.523       24750          3
+3                1  PeerPop3~SelfPop2              0.361       18000          4
+4                1  PeerPop3~SelfPop2              0.257       11250          5
+[1] "=================Optimal design================="
+  convergence.rate weakest.param.name weakest.para.power cost.design miss.point
+1                1  PeerPop3~SelfPop2              0.721       31500          2</pre></body></html></div>
 <p>With this design, 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the 15 unique missing data patterns (<span class="math inline">\(n=60\)</span> in each pattern). In each missing data pattern, the participants are assigned to miss four observed indicators (items) in the future waves of data collection (e.g., self-perceived popularity at wave 2 and peer-perceived popularity at wave 3).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal patterns==============="</span></a>
-<a class="sourceLine" id="cb13-2" title="2">           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3</a>
-<a class="sourceLine" id="cb13-3" title="3">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-4" title="4">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-5" title="5">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-6" title="6">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-7" title="7">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-8" title="8">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-9" title="9">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-10" title="10">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-11" title="11">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-12" title="12">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-13" title="13">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-14" title="14">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-15" title="15">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-16" title="16">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-17" title="17">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-18" title="18">completers        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb13-19" title="19">[<span class="dv">1</span>] <span class="st">"=================Optimal probs=================="</span></a>
-<a class="sourceLine" id="cb13-20" title="20"> [<span class="dv">1</span>] <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.06</span> <span class="fl">0.10</span></a>
-<a class="sourceLine" id="cb13-21" title="21">[<span class="dv">1</span>] <span class="st">"=================Optimal ns===================="</span></a>
-<a class="sourceLine" id="cb13-22" title="22"> [<span class="dv">1</span>]  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span>  <span class="dv">60</span> <span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r">[1] "=================Optimal patterns==============="
+           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3
+                  0        0        0        1        1        0        0        0        0
+                  0        0        0        1        0        1        0        0        0
+                  0        0        0        1        0        0        1        0        0
+                  0        0        0        1        0        0        0        1        0
+                  0        0        0        1        0        0        0        0        1
+                  0        0        0        0        1        1        0        0        0
+                  0        0        0        0        1        0        1        0        0
+                  0        0        0        0        1        0        0        1        0
+                  0        0        0        0        1        0        0        0        1
+                  0        0        0        0        0        1        1        0        0
+                  0        0        0        0        0        1        0        1        0
+                  0        0        0        0        0        1        0        0        1
+                  0        0        0        0        0        0        1        1        0
+                  0        0        0        0        0        0        1        0        1
+                  0        0        0        0        0        0        0        1        1
+completers        0        0        0        0        0        0        0        0        0
+[1] "=================Optimal probs=================="
+ [1] 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.10
+[1] "=================Optimal ns===================="
+ [1]  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60 100</pre></body></html></div>
 <p>Over 1000 replications, this design yields an empirical power of 0.786 for testing the path coefficient <span class="math inline">\(b_{PS_1}\)</span>, 0.721 for testing the path coefficient <span class="math inline">\(b_{PS_2}\)</span>, 0.917 for testing the path coefficient <span class="math inline">\(b_{TS_1}\)</span>, and 0.890 for testing the path coefficient <span class="math inline">\(b_{TS_2}\)</span>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"></a>
-<a class="sourceLine" id="cb14-2" title="2">[<span class="dv">1</span>] <span class="st">"=================Optimal design for focal parameters================="</span></a>
-<a class="sourceLine" id="cb14-3" title="3">                  Estimate Average Estimate SD Average SE <span class="kw">Power</span> (Not equal <span class="dv">0</span>)    Std Est Std Est SD Std Ave SE Average Param  Average Bias</a>
-<a class="sourceLine" id="cb14-4" title="4">PeerPop2<span class="op">~</span>SelfPop1       <span class="fl">0.05055570</span>  <span class="fl">0.01874772</span> <span class="fl">0.01847418</span>               <span class="fl">0.786</span> <span class="fl">0.07640485</span> <span class="fl">0.02824061</span> <span class="fl">0.02788479</span>         <span class="fl">0.051</span> <span class="fl">-0.0004443034</span></a>
-<a class="sourceLine" id="cb14-5" title="5">Support2<span class="op">~</span>PeerPop1       <span class="fl">0.12345953</span>  <span class="fl">0.03710990</span> <span class="fl">0.03693612</span>               <span class="fl">0.917</span> <span class="fl">0.10985168</span> <span class="fl">0.03249985</span> <span class="fl">0.03269727</span>         <span class="fl">0.124</span> <span class="fl">-0.0005404742</span></a>
-<a class="sourceLine" id="cb14-6" title="6">PeerPop3<span class="op">~</span>SelfPop2       <span class="fl">0.05675102</span>  <span class="fl">0.02228946</span> <span class="fl">0.02215252</span>               <span class="fl">0.721</span> <span class="fl">0.08639815</span> <span class="fl">0.03395195</span> <span class="fl">0.03365353</span>         <span class="fl">0.056</span>  <span class="fl">0.0007510192</span></a>
-<a class="sourceLine" id="cb14-7" title="7">Support3<span class="op">~</span>PeerPop2       <span class="fl">0.13073982</span>  <span class="fl">0.04158240</span> <span class="fl">0.04079068</span>               <span class="fl">0.890</span> <span class="fl">0.12585197</span> <span class="fl">0.03996419</span> <span class="fl">0.03892887</span>         <span class="fl">0.132</span> <span class="fl">-0.0012601844</span></a>
-<a class="sourceLine" id="cb14-8" title="8">                  Coverage Average FMI1    SD FMI1</a>
-<a class="sourceLine" id="cb14-9" title="9">PeerPop2<span class="op">~</span>SelfPop1    <span class="fl">0.943</span>    <span class="fl">0.2266084</span> <span class="fl">0.01766973</span></a>
-<a class="sourceLine" id="cb14-10" title="10">Support2<span class="op">~</span>PeerPop1    <span class="fl">0.953</span>    <span class="fl">0.2816413</span> <span class="fl">0.02098447</span></a>
-<a class="sourceLine" id="cb14-11" title="11">PeerPop3<span class="op">~</span>SelfPop2    <span class="fl">0.939</span>    <span class="fl">0.5163652</span> <span class="fl">0.02112441</span></a>
-<a class="sourceLine" id="cb14-12" title="12">Support3<span class="op">~</span>PeerPop2    <span class="fl">0.940</span>    <span class="fl">0.4224801</span> <span class="fl">0.02196725</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r">
+[1] "=================Optimal design for focal parameters================="
+                  Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD Std Ave SE Average Param  Average Bias
+PeerPop2~SelfPop1       0.05055570  0.01874772 0.01847418               0.786 0.07640485 0.02824061 0.02788479         0.051 -0.0004443034
+Support2~PeerPop1       0.12345953  0.03710990 0.03693612               0.917 0.10985168 0.03249985 0.03269727         0.124 -0.0005404742
+PeerPop3~SelfPop2       0.05675102  0.02228946 0.02215252               0.721 0.08639815 0.03395195 0.03365353         0.056  0.0007510192
+Support3~PeerPop2       0.13073982  0.04158240 0.04079068               0.890 0.12585197 0.03996419 0.03892887         0.132 -0.0012601844
+                  Coverage Average FMI1    SD FMI1
+PeerPop2~SelfPop1    0.943    0.2266084 0.01766973
+Support2~PeerPop1    0.953    0.2816413 0.02098447
+PeerPop3~SelfPop2    0.939    0.5163652 0.02112441
+Support3~PeerPop2    0.940    0.4224801 0.02196725</pre></body></html></div>
 <!--&nbsp;-->
 <p>To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(item.ex3<span class="op">$</span>opt.output)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">item.ex3</span>$<span class="no">opt.output</span>)</pre></body></html></div>
 </div>
 <div id="visualize-the-optimal-design-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualize-the-optimal-design-1" class="anchor"></a>3. Visualize the Optimal Design</h3>
 <p>Similarly, to <a href="PlotPM.html">visualize the missing data patterns of the optimal PHPM design</a>, we can use the <code><a href="../reference/plotPM.html">plotPM()</a></code> function. As shown in the plot, …</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(item.ex3, <span class="dt">fontsize_col =</span> <span class="dv">15</span>, <span class="dt">angle_col =</span> <span class="dv">90</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/plotPM.html">plotPM</a></span>(<span class="no">item.ex3</span>, <span class="kw">fontsize_col</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">angle_col</span> <span class="kw">=</span> <span class="fl">90</span>)</pre></body></html></div>
 <p><img src="Autoregressive-Cross-Lagged-Model_files/figure-html/unnamed-chunk-11-1.png" width="864"></p>
 </div>
 </div>
@@ -500,28 +454,28 @@ An autoregressive and cross-lagged model
 <h3 class="hasAnchor">
 <a href="#search-for-an-optimal-item-level-design-via-forward-assembly" class="anchor"></a>1. Search for an Optimal Item-level Design via Forward Assembly</h3>
 <p>We can also use the function <code><a href="../reference/simPM.html">simPM()</a></code> to search for an optimal <a href="Forward-Assembly-PHPM.html">item-level missing design via forward assembly</a>. We only need to change a few arguments within the <code><a href="../reference/simPM.html">simPM()</a></code> function in order to do forward assembly.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">forward.ex3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simPM.html">simPM</a></span>(</a>
-<a class="sourceLine" id="cb17-2" title="2">  popModel,</a>
-<a class="sourceLine" id="cb17-3" title="3">  analyzeModel,</a>
-<a class="sourceLine" id="cb17-4" title="4">  <span class="dt">VarNAMES=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,<span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,<span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),</a>
-<a class="sourceLine" id="cb17-5" title="5">  <span class="dt">distal.var =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb17-6" title="6">  <span class="dt">n=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb17-7" title="7">  <span class="dt">nreps=</span><span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb17-8" title="8">  <span class="dt">seed=</span><span class="dv">12345</span>,</a>
-<a class="sourceLine" id="cb17-9" title="9">  <span class="dt">Time=</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb17-10" title="10">  <span class="dt">k=</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb17-11" title="11">  <span class="dt">max.mk=</span><span class="dv">3</span>, </a>
-<a class="sourceLine" id="cb17-12" title="12">  <span class="dt">Time.complete=</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb17-13" title="13">  <span class="dt">costmx=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">10</span>), </a>
-<a class="sourceLine" id="cb17-14" title="14">  <span class="dt">pc=</span><span class="fl">0.1</span>,</a>
-<a class="sourceLine" id="cb17-15" title="15">  <span class="dt">pd=</span><span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb17-16" title="16">  <span class="dt">focal.param=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,<span class="st">"Support2~PeerPop1"</span>,<span class="st">"PeerPop3~SelfPop2"</span>,<span class="st">"Support3~PeerPop2"</span>),</a>
-<a class="sourceLine" id="cb17-17" title="17">  <span class="dt">eval.budget=</span>T,          </a>
-<a class="sourceLine" id="cb17-18" title="18">  <span class="dt">rm.budget=</span>31500L,        </a>
-<a class="sourceLine" id="cb17-19" title="19">  <span class="dt">complete.var=</span><span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb17-20" title="20">  <span class="dt">engine=</span><span class="st">"l"</span>,</a>
-<a class="sourceLine" id="cb17-21" title="21">  <span class="dt">methods=</span><span class="st">"forward"</span></a>
-<a class="sourceLine" id="cb17-22" title="22">)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">forward.ex3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simPM.html">simPM</a></span>(
+  <span class="no">popModel</span>,
+  <span class="no">analyzeModel</span>,
+  <span class="kw">VarNAMES</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PeerPop1"</span>,<span class="st">"SelfPop1"</span>,<span class="st">"Support1"</span>,<span class="st">"PeerPop2"</span>,<span class="st">"SelfPop2"</span>,<span class="st">"Support2"</span>,<span class="st">"PeerPop3"</span>,<span class="st">"SelfPop3"</span>,<span class="st">"Support3"</span>),
+  <span class="kw">distal.var</span> <span class="kw">=</span> <span class="kw">NULL</span>,
+  <span class="kw">n</span><span class="kw">=</span><span class="fl">10</span>,
+  <span class="kw">nreps</span><span class="kw">=</span><span class="fl">1000</span>,
+  <span class="kw">seed</span><span class="kw">=</span><span class="fl">12345</span>,
+  <span class="kw">Time</span><span class="kw">=</span><span class="fl">3</span>,
+  <span class="kw">k</span><span class="kw">=</span><span class="fl">3</span>,
+  <span class="kw">max.mk</span><span class="kw">=</span><span class="fl">3</span>,
+  <span class="kw">Time.complete</span><span class="kw">=</span><span class="fl">1</span>,
+  <span class="kw">costmx</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>),
+  <span class="kw">pc</span><span class="kw">=</span><span class="fl">0.1</span>,
+  <span class="kw">pd</span><span class="kw">=</span><span class="fl">0</span>,
+  <span class="kw">focal.param</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PeerPop2~SelfPop1"</span>,<span class="st">"Support2~PeerPop1"</span>,<span class="st">"PeerPop3~SelfPop2"</span>,<span class="st">"Support3~PeerPop2"</span>),
+  <span class="kw">eval.budget</span><span class="kw">=</span><span class="no">T</span>,
+  <span class="kw">rm.budget</span><span class="kw">=</span><span class="fl">31500L</span>,
+  <span class="kw">complete.var</span><span class="kw">=</span><span class="kw">NULL</span>,
+  <span class="kw">engine</span><span class="kw">=</span><span class="st">"l"</span>,
+  <span class="kw">methods</span><span class="kw">=</span><span class="st">"forward"</span>
+)</pre></body></html></div>
 <p>While most of the arguments remains the same as in balanced item-level missing designs, here are a few arguments that are different and thus we offer a summary below:</p>
 <ul>
 <li>
@@ -533,100 +487,80 @@ An autoregressive and cross-lagged model
 <div id="summarize-the-result-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summarize-the-result-2" class="anchor"></a>2. Summarize the Result</h3>
-<p>Similarly, to <a href="Summary.html">view a summary of the results</a>, we can use the <code><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary()</a></code> function.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(forward.ex3)</a></code></pre></div>
+<p>Similarly, to <a href="Summary.html">view a summary of the results</a>, we can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function.</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">forward.ex3</span>)</pre></body></html></div>
 <p>Based on the output, this optimal design costs $30,000, which is below the reduced available budget.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal design================="</span></a>
-<a class="sourceLine" id="cb19-2" title="2">   convergence.rate weakest.param.name weakest.para.power cost.design miss.num miss.var1 miss.var2 miss.var3 sim.seq miss.loc1</a>
-<a class="sourceLine" id="cb19-3" title="3"><span class="dv">16</span>                <span class="dv">1</span>  PeerPop2<span class="op">~</span>SelfPop1              <span class="fl">0.885</span>       <span class="dv">30000</span>        <span class="dv">3</span>  SelfPop2  SelfPop3  Support3      <span class="dv">16</span>         <span class="dv">5</span></a>
-<a class="sourceLine" id="cb19-4" title="4">   miss.loc2 miss.loc3</a>
-<a class="sourceLine" id="cb19-5" title="5"><span class="dv">16</span>         <span class="dv">8</span>         <span class="dv">9</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><html><body><pre class="r">[1] "=================Optimal design================="
+   convergence.rate weakest.param.name weakest.para.power cost.design miss.num miss.var1 miss.var2 miss.var3 sim.seq miss.loc1
+16                1  PeerPop2~SelfPop1              0.885       30000        3  SelfPop2  SelfPop3  Support3      16         5
+   miss.loc2 miss.loc3
+16         8         9</pre></body></html></div>
 <p>With this design, 10% of the participants are assigned to provide complete data across all the future waves of data collection. The rest 90% of the participants are randomly assigned to one of the three unique missing data patterns (<span class="math inline">\(n=300\)</span> in each pattern).</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">[<span class="dv">1</span>] <span class="st">"=================Optimal patterns==============="</span></a>
-<a class="sourceLine" id="cb20-2" title="2">           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3</a>
-<a class="sourceLine" id="cb20-3" title="3">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">1</span></a>
-<a class="sourceLine" id="cb20-4" title="4">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb20-5" title="5">                  <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">1</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb20-6" title="6">completers        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span>        <span class="dv">0</span></a>
-<a class="sourceLine" id="cb20-7" title="7">[<span class="dv">1</span>] <span class="st">"=================Optimal probs=================="</span></a>
-<a class="sourceLine" id="cb20-8" title="8">[<span class="dv">1</span>] <span class="fl">0.3</span> <span class="fl">0.3</span> <span class="fl">0.3</span> <span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb20-9" title="9">[<span class="dv">1</span>] <span class="st">"=================Optimal ns===================="</span></a>
-<a class="sourceLine" id="cb20-10" title="10">[<span class="dv">1</span>] <span class="dv">300</span> <span class="dv">300</span> <span class="dv">300</span> <span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r">[1] "=================Optimal patterns==============="
+           PeerPop1 SelfPop1 Support1 PeerPop2 SelfPop2 Support2 PeerPop3 SelfPop3 Support3
+                  0        0        0        0        1        0        0        1        1
+                  0        0        0        0        0        1        0        1        0
+                  0        0        0        0        0        0        0        1        0
+completers        0        0        0        0        0        0        0        0        0
+[1] "=================Optimal probs=================="
+[1] 0.3 0.3 0.3 0.1
+[1] "=================Optimal ns===================="
+[1] 300 300 300 100</pre></body></html></div>
 <p>Over 1000 replications, this design yields an empirical power of 0.885 for testing the path coefficient <span class="math inline">\(b_{PS_1}\)</span>, 0.914 for testing the path coefficient <span class="math inline">\(b_{PS_2}\)</span>, 0.906 for testing the path coefficient <span class="math inline">\(b_{TS_1}\)</span>, and 0.937 for testing the path coefficient <span class="math inline">\(b_{TS_2}\)</span>. With this PHPM design, the statistical power is satisfactory for testing each of the focal parameters.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"></a>
-<a class="sourceLine" id="cb21-2" title="2">[<span class="dv">1</span>] <span class="st">"=================Optimal design for focal parameters================="</span></a>
-<a class="sourceLine" id="cb21-3" title="3">                  Estimate Average Estimate SD Average SE <span class="kw">Power</span> (Not equal <span class="dv">0</span>)    Std Est Std Est SD Std Ave SE Average Param</a>
-<a class="sourceLine" id="cb21-4" title="4">PeerPop2<span class="op">~</span>SelfPop1        <span class="fl">0.0509315</span>  <span class="fl">0.01593366</span> <span class="fl">0.01625888</span>               <span class="fl">0.885</span> <span class="fl">0.07715693</span> <span class="fl">0.02407530</span> <span class="fl">0.02460888</span>         <span class="fl">0.051</span></a>
-<a class="sourceLine" id="cb21-5" title="5">Support2<span class="op">~</span>PeerPop1        <span class="fl">0.1225502</span>  <span class="fl">0.03691843</span> <span class="fl">0.03681819</span>               <span class="fl">0.906</span> <span class="fl">0.10899450</span> <span class="fl">0.03257593</span> <span class="fl">0.03257226</span>         <span class="fl">0.124</span></a>
-<a class="sourceLine" id="cb21-6" title="6">PeerPop3<span class="op">~</span>SelfPop2        <span class="fl">0.0568749</span>  <span class="fl">0.01686760</span> <span class="fl">0.01728927</span>               <span class="fl">0.914</span> <span class="fl">0.08652626</span> <span class="fl">0.02558155</span> <span class="fl">0.02628572</span>         <span class="fl">0.056</span></a>
-<a class="sourceLine" id="cb21-7" title="7">Support3<span class="op">~</span>PeerPop2        <span class="fl">0.1313719</span>  <span class="fl">0.03780042</span> <span class="fl">0.03793717</span>               <span class="fl">0.937</span> <span class="fl">0.12610467</span> <span class="fl">0.03596546</span> <span class="fl">0.03609359</span>         <span class="fl">0.132</span></a>
-<a class="sourceLine" id="cb21-8" title="8">                   Average Bias Coverage Average FMI1     SD FMI1</a>
-<a class="sourceLine" id="cb21-9" title="9">PeerPop2<span class="op">~</span>SelfPop1 <span class="fl">-6.849557e-05</span>    <span class="fl">0.951</span>  <span class="fl">0.004906487</span> <span class="fl">0.002715199</span></a>
-<a class="sourceLine" id="cb21-10" title="10">Support2<span class="op">~</span>PeerPop1 <span class="fl">-1.449846e-03</span>    <span class="fl">0.937</span>  <span class="fl">0.275855979</span> <span class="fl">0.020332822</span></a>
-<a class="sourceLine" id="cb21-11" title="11">PeerPop3<span class="op">~</span>SelfPop2  <span class="fl">8.748955e-04</span>    <span class="fl">0.947</span>  <span class="fl">0.202017999</span> <span class="fl">0.015647460</span></a>
-<a class="sourceLine" id="cb21-12" title="12">Support3<span class="op">~</span>PeerPop2 <span class="fl">-6.281368e-04</span>    <span class="fl">0.951</span>  <span class="fl">0.330559605</span> <span class="fl">0.020608104</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><html><body><pre class="r">
+[1] "=================Optimal design for focal parameters================="
+                  Estimate Average Estimate SD Average SE Power (Not equal 0)    Std Est Std Est SD Std Ave SE Average Param
+PeerPop2~SelfPop1        0.0509315  0.01593366 0.01625888               0.885 0.07715693 0.02407530 0.02460888         0.051
+Support2~PeerPop1        0.1225502  0.03691843 0.03681819               0.906 0.10899450 0.03257593 0.03257226         0.124
+PeerPop3~SelfPop2        0.0568749  0.01686760 0.01728927               0.914 0.08652626 0.02558155 0.02628572         0.056
+Support3~PeerPop2        0.1313719  0.03780042 0.03793717               0.937 0.12610467 0.03596546 0.03609359         0.132
+                   Average Bias Coverage Average FMI1     SD FMI1
+PeerPop2~SelfPop1 -6.849557e-05    0.951  0.004906487 0.002715199
+Support2~PeerPop1 -1.449846e-03    0.937  0.275855979 0.020332822
+PeerPop3~SelfPop2  8.748955e-04    0.947  0.202017999 0.015647460
+Support3~PeerPop2 -6.281368e-04    0.951  0.330559605 0.020608104</pre></body></html></div>
 <!--&nbsp;-->
 <p>To view more details of the optimal PHPM design, we can use the following code, which will print out the detailed model fitting results over the replications.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(forward.ex3<span class="op">$</span>opt.output)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">forward.ex3</span>$<span class="no">opt.output</span>)</pre></body></html></div>
 </div>
 <div id="visualize-the-optimal-design-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualize-the-optimal-design-2" class="anchor"></a>3. Visualize the Optimal Design</h3>
 <p>Similarly, to <a href="PlotPM.html">visualize the missing data patterns of the optimal PHPM design</a>, we can use the <code><a href="../reference/plotPM.html">plotPM()</a></code> function. As shown in the plot, …</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="../reference/plotPM.html">plotPM</a></span>(forward.ex3, <span class="dt">fontsize_col =</span> <span class="dv">15</span>, <span class="dt">angle_col =</span> <span class="dv">90</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="../reference/plotPM.html">plotPM</a></span>(<span class="no">forward.ex3</span>, <span class="kw">fontsize_col</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">angle_col</span> <span class="kw">=</span> <span class="fl">90</span>)</pre></body></html></div>
 <p><img src="Autoregressive-Cross-Lagged-Model_files/figure-html/unnamed-chunk-15-1.png" width="864"></p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#research-scenario"><span style="color:seagreen"><strong>Research Scenario</strong></span></a></li>
-      <li><a href="#spcify-the-population-and-analysis-model"><span style="color:seagreen"><strong>Spcify the Population and Analysis Model</strong></span></a></li>
-      <li>
-<a href="#wave-level-phpm-designs"><span style="color:seagreen"><strong>Wave-level PHPM Designs</strong></span></a><ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#search-for-an-optimal-wave-level-design"></a><a name="wave" href="NA">1. Search for an Optimal Wave-level Design</a>
-</li>
-      <li><a href="#summarize-the-result">2. Summarize the Result</a></li>
-      <li><a href="#visualize-the-optimal-design">3. Visualize the Optimal Design</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#balanced-item-level-phpm-designs"><span style="color:seagreen"><strong>Balanced Item-level PHPM Designs</strong></span></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#item">1. Search for an Optimal Item-level Design</a></li>
-      <li><a href="#summarize-the-result-1">2. Summarize the Result</a></li>
-      <li><a href="#visualize-the-optimal-design-1">3. Visualize the Optimal Design</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#item-level-phpm-designs-via-forward-assembly"><span style="color:seagreen"><strong>Item-level PHPM Designs via Forward Assembly</strong></span></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#search-for-an-optimal-item-level-design-via-forward-assembly">1. Search for an Optimal Item-level Design via Forward Assembly</a></li>
-      <li><a href="#summarize-the-result-2">2. Summarize the Result</a></li>
-      <li><a href="#visualize-the-optimal-design-2">3. Visualize the Optimal Design</a></li>
-      </ul>
-</li>
-      </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
-  <p>Developed by Yi Feng, Gregory R. Hancock.</p>
+  <p>Package simPM© developed by Yi Feng &amp; Gregory R. Hancock</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+
+
+<div class="twitter-YF" align="right">
+<a href="https://twitter.com/TheYiFeng?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @TheYiFeng</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+ 
+
+<a href="https://twitter.com/GregoryRHancock?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @GregoryRHancock</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

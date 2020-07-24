@@ -3,17 +3,19 @@ template:
   params:
     bootswatch: flatly
     ganalytics: UA-84499524-2
+  path: "inst/pkgdown"
 reference:
   - title: Exported Functions
     desc: ~
     contents:
-      - '`MODIStsp`'
-      - '`MODIStsp_extract`'
-      - '`MODIStsp_addindex`'
-      - '`MODIStsp_resetindexes`'
-      - '`MODIStsp_reset_options`'
-      - '`install_MODIStsp_launcher`'
-      - '`MODIStsp-package`'
+      - '`balance.miss.l`'
+      - '`forward.opt.simsem`'
+      - '`opt1.simsem`'
+      - '`plotPM`'
+      - '`pres.design`'
+      - '`simPM`'
+      - '`summary.simpm`'
+      - '`wave.miss.l`'
 #  - title: Internals
 #    desc: ~
 #    contents:
@@ -87,6 +89,6 @@ navbar:
       href: articles/faq.html
   right:
     - icon: fa-github fa-lg
-      text: "github"
       href: https://github.com/YiFengEDMS/simPM  
-      
+    - icon: "fab fa-twitter fa-lg"
+      href: http://twitter.com/TheYiFeng
